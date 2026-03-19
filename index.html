@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Joao Victor Creste</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:wght@300;400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#0b0c0e; --surface:#111316; --faint:#161920; --border:#22262d;
+  --text:#e8e4dc; --sub:#b0aba2; --muted:#6b6f77; --dim:#3a3e47;
+  --accent:#c8a96e; --adim:rgba(200,169,110,.10); --abright:rgba(200,169,110,.25);
+  --green:#3d9970; --gdim:rgba(61,153,112,.10);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --mono:'DM Mono',monospace;
+  --sans:'Outfit',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden}
+
+nav{position:fixed;inset:0 0 auto;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:rgba(11,12,14,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--serif);font-size:1rem;font-weight:400;letter-spacing:.06em;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:1.2rem;list-style:none}
+.nav-links a{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+
+#hero{height:100vh;min-height:600px;display:grid;grid-template-columns:1fr 1fr;padding-top:72px;position:relative;overflow:hidden}
+.hero-vline{position:absolute;left:50%;top:8%;bottom:8%;width:1px;background:linear-gradient(to bottom,transparent,var(--border) 20%,var(--border) 80%,transparent)}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem 5rem 6rem;z-index:1}
+.hero-eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem}
+.hero-name{font-family:var(--serif);font-size:clamp(3rem,4.5vw,5.2rem);font-weight:300;line-height:1.04;color:var(--text);margin-bottom:1.4rem}
+.hero-name em{font-style:italic;color:var(--accent)}
+.hero-tagline{font-family:var(--serif);font-size:1.2rem;font-weight:300;font-style:italic;color:var(--muted);line-height:1.65;max-width:480px;margin-bottom:3rem}
+.hero-cta{display:flex;gap:.9rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;padding:.72rem 1.55rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;border:none;background:none;cursor:pointer}
+.btn-primary{background:var(--accent);color:#0b0c0e;font-weight:400}
+.btn-primary:hover{background:#d9bc86}
+.btn-ghost{border:1px solid var(--border);color:var(--muted)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.hero-right{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;height:100%}
+.hero-graphic{width:80%;max-width:460px;opacity:1}
+.hero-stats{grid-column:1/-1;display:flex;flex-direction:row;justify-content:space-around;align-items:flex-end;padding:0 4rem 2rem;border-top:1px solid var(--border)}
+.stat-val{font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--accent);line-height:1;text-align:right}
+.stat-lbl{font-family:var(--mono);font-size:.55rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);text-align:right}
+
+section{position:relative;z-index:1}
+.si{max-width:1160px;margin:0 auto;padding:7rem 3rem}
+.s-tag{font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem;display:flex;align-items:center;gap:.9rem}
+.s-tag::after{content:'';width:48px;height:1px;background:var(--accent);opacity:.4}
+.s-title{font-family:var(--serif);font-size:clamp(1.9rem,3.2vw,3rem);font-weight:300;line-height:1.15;margin-bottom:3.5rem;color:var(--text)}
+.s-title em{font-style:italic;color:var(--accent)}
+
+/* ── ABOUT ── */
+#about{border-top:1px solid var(--border);background:var(--surface)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.about-text p{color:var(--sub);font-size:1rem;line-height:1.88;margin-bottom:1.35rem}
+.about-text p strong{color:var(--text);font-weight:500}
+
+/* languages — clean list, no borders */
+.lang-list{margin-top:2.8rem;display:flex;flex-direction:column;gap:0}
+.lang-item{display:flex;justify-content:space-between;align-items:baseline;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.lang-item:last-child{border-bottom:none}
+.lang-name{font-family:var(--serif);font-size:1.05rem;font-weight:300;color:var(--text)}
+.lang-lvl{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+
+/* sidebar — no boxes, just labelled prose lists */
+.sidebar{display:flex;flex-direction:column;gap:2.4rem}
+.skill-group{}
+.skill-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem;display:flex;align-items:center;gap:.7rem}
+.skill-lbl::after{content:'';flex:1;height:1px;background:var(--accent);opacity:.2}
+.skill-list{font-family:var(--serif);font-size:1rem;font-weight:300;color:var(--sub);line-height:1.8}
+.skill-list.domain{color:var(--green)}
+
+/* map card — no border, just the SVG */
+.map-wrap{margin-top:2.4rem}
+.map-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem;display:flex;align-items:center;gap:.7rem}
+.map-lbl::after{content:'';flex:1;height:1px;background:var(--accent);opacity:.2}
+.map-location{font-family:var(--serif);font-size:1rem;font-weight:300;color:var(--text);margin-bottom:.2rem}
+.map-sub{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;color:var(--muted)}
+
+#experience{border-top:1px solid var(--border)}
+.tl{position:relative;padding-left:2rem}
+.tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),var(--border))}
+.tl-item{position:relative;padding:0 0 3.5rem 2.5rem}
+.tl-dot{position:absolute;left:-.44rem;top:.38rem;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.tl-dot.h{background:var(--bg);border-color:var(--dim)}
+.tl-meta{display:flex;align-items:baseline;gap:.9rem;margin-bottom:.4rem;flex-wrap:wrap}
+.tl-period{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.tl-loc{font-family:var(--mono);font-size:.6rem;color:var(--muted)}
+.tl-role{font-family:var(--serif);font-size:1.4rem;font-weight:400;color:var(--text);line-height:1.2;margin-bottom:.18rem}
+.tl-co{font-family:var(--sans);font-size:.83rem;color:var(--muted);margin-bottom:.9rem}
+.tl-bullets{list-style:none;display:flex;flex-direction:column;gap:.42rem}
+.tl-bullets li{font-size:.9rem;color:#8e8a83;padding-left:1rem;position:relative;line-height:1.6}
+.tl-bullets li::before{content:'—';position:absolute;left:0;color:var(--dim);font-size:.68rem;top:.1rem}
+
+#deals{border-top:1px solid var(--border);background:var(--surface)}
+.deals-intro{max-width:680px;font-size:.97rem;color:var(--muted);line-height:1.78;margin-bottom:3rem}
+.deals-intro strong{color:var(--text);font-weight:500}
+.stat-bar{display:flex;border:1px solid var(--border);background:var(--faint);margin-bottom:3.5rem}
+.sb-item{flex:1;padding:1.4rem 1.8rem;border-right:1px solid var(--border)}
+.sb-item:last-child{border-right:none}
+.sb-val{font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--accent);line-height:1;margin-bottom:.28rem}
+.sb-lbl{font-family:var(--mono);font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.deal{border:1px solid var(--border);background:var(--faint);margin-bottom:2rem;transition:background .2s}
+.deal:hover{background:#13161a}
+.deal-hd{display:flex;align-items:center;gap:1.5rem;padding:1.5rem 2rem;border-bottom:1px solid var(--border)}
+.deal-icon{flex-shrink:0;width:50px;height:50px;border:1px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center}
+.deal-icon svg{width:26px;height:26px;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.deal-icon.wind svg{stroke:var(--green)}
+.deal-icon.solar svg{stroke:var(--accent)}
+.deal-title{flex:1}
+.deal-badge{display:inline-block;font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .5rem;margin-bottom:.38rem}
+.deal-badge.wind{border:1px solid rgba(61,153,112,.28);color:var(--green);background:var(--gdim)}
+.deal-badge.solar{border:1px solid var(--abright);color:var(--accent);background:var(--adim)}
+.deal-name{font-family:var(--serif);font-size:1.6rem;font-weight:400;color:var(--text);line-height:1.1;margin-bottom:.18rem}
+.deal-loc{font-family:var(--mono);font-size:.59rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.deal-right{display:flex;flex-direction:column;align-items:flex-end;gap:.28rem;flex-shrink:0}
+.deal-mw{font-family:var(--serif);font-size:1.55rem;font-weight:300;color:var(--accent);line-height:1}
+.deal-status{display:inline-flex;align-items:center;gap:.38rem;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
+.deal-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block}
+.deal-comm{font-family:var(--mono);font-size:.57rem;color:var(--muted)}
+.deal-body{display:grid;grid-template-columns:270px 1fr}
+.deal-metrics{padding:1.6rem 1.8rem;border-right:1px solid var(--border)}
+.dm{display:flex;justify-content:space-between;align-items:baseline;gap:.9rem;padding:.48rem 0;border-bottom:1px solid var(--border)}
+.dm:last-child{border-bottom:none}
+.dm-k{font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);flex-shrink:0}
+.dm-v{font-family:var(--mono);font-size:.66rem;color:var(--text);text-align:right;line-height:1.4}
+.deal-narr{padding:1.6rem 2.2rem;display:flex;flex-direction:column;gap:1.5rem}
+.narr-lbl{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.48rem}
+.narr-body{font-size:.88rem;color:#8e8a83;line-height:1.74}
+.narr-list{list-style:none;display:flex;flex-direction:column;gap:.42rem}
+.narr-list li{font-size:.86rem;color:#8e8a83;padding-left:1rem;position:relative;line-height:1.55}
+.narr-list li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:.62rem;top:.2rem;opacity:.7}
+.deal-fn{font-family:var(--mono);font-size:.55rem;color:var(--dim);margin-top:.8rem}
+
+/* ── COVERAGE ── */
+#coverage{border-top:1px solid var(--border);background:var(--surface)}
+.cov-intro{max-width:660px;font-size:.97rem;color:var(--muted);line-height:1.78;margin-bottom:3.5rem}
+.cov-intro strong{color:var(--text);font-weight:500}
+.cov-table{display:flex;flex-direction:column;gap:0}
+.cov-row{display:grid;grid-template-columns:200px 1fr;gap:3rem;padding:2.2rem 0;border-bottom:1px solid rgba(255,255,255,.05);align-items:start}
+.cov-row:last-child{border-bottom:none}
+.cov-sector{}
+.cov-sname{font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--text);margin-bottom:.35rem;line-height:1.2}
+.cov-sdesc{font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);line-height:1.6}
+.cov-scount{font-family:var(--mono);font-size:.55rem;color:var(--accent);margin-top:.5rem}
+.cov-names{display:flex;flex-wrap:wrap;gap:.2rem .8rem;padding-top:.3rem}
+.co-name{font-family:var(--serif);font-style:italic;font-size:1.05rem;font-weight:300;color:var(--sub);transition:color .2s;cursor:default}
+.co-name::after{content:' ·';color:var(--dim);font-style:normal}
+.co-name:last-child::after{content:''}
+.co-name:hover{color:var(--accent)}
+
+/* ── EDUCATION ── */
+#education{border-top:1px solid var(--border)}
+.edu-list{display:flex;flex-direction:column;gap:0}
+.edu-entry{display:grid;grid-template-columns:180px 1fr;gap:3rem;padding:2.8rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.edu-entry:last-child{border-bottom:none}
+.edu-left{padding-top:.2rem}
+.edu-period{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
+.edu-where{font-family:var(--sans);font-size:.82rem;color:var(--muted);font-weight:300;line-height:1.5}
+.edu-right{}
+.edu-deg{font-family:var(--serif);font-size:1.5rem;font-weight:400;color:var(--text);line-height:1.2;margin-bottom:.3rem}
+.edu-school{font-family:var(--sans);font-size:.9rem;color:var(--sub);margin-bottom:.6rem}
+.edu-note{font-family:var(--serif);font-size:.9rem;color:var(--muted);font-style:italic;line-height:1.6}
+
+/* ── PORTFOLIO MANAGEMENT ── */
+#portfolio{border-top:1px solid var(--border)}
+.pm-intro{max-width:640px;font-size:.97rem;color:var(--muted);line-height:1.78;margin-bottom:4rem}
+.pm-intro strong{color:var(--text);font-weight:500}
+.pm-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.pm-visual-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem;display:flex;align-items:center;gap:.7rem}
+.pm-visual-label::after{content:'';flex:1;height:1px;background:var(--accent);opacity:.2}
+.aum-block{margin-bottom:3rem}
+.aum-number{font-family:var(--serif);font-size:4.5rem;font-weight:300;color:var(--accent);line-height:1;letter-spacing:-.02em}
+.aum-sub{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.4rem}
+.aum-families{font-family:var(--serif);font-size:1.05rem;font-weight:300;font-style:italic;color:var(--sub);margin-top:.35rem}
+.alloc-cols{display:grid;grid-template-columns:1fr 36px 1fr;align-items:center}
+.bar-block{display:flex;flex-direction:column}
+.bar-lbl-top{font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--text);line-height:1;margin-bottom:.4rem;text-align:center}
+.bar-sublbl{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);text-align:center;margin-bottom:.9rem}
+.vbar{display:flex;flex-direction:column;gap:2px;height:140px;width:100%}
+.vseg{width:100%}
+.vseg.eq{background:var(--accent)}
+.vseg.de{background:var(--green)}
+.vseg.alt{background:#4a7fa5}
+.bar-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;height:140px;gap:.3rem}
+.bar-arrow-line{width:1px;flex:1;background:rgba(255,255,255,.07)}
+.bar-arrow-txt{font-family:var(--mono);font-size:.48rem;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);writing-mode:vertical-rl;white-space:nowrap}
+.alloc-legend{display:flex;flex-direction:column;gap:.65rem;margin-top:1.8rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.05)}
+.alloc-item{display:flex;align-items:center;gap:.8rem}
+.alloc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.alloc-name{font-family:var(--serif);font-size:1rem;font-weight:300;color:var(--text)}
+.alloc-desc{font-family:var(--mono);font-size:.52rem;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);margin-top:.1rem}
+.alloc-caption{font-family:var(--serif);font-size:.95rem;font-style:italic;color:var(--muted);margin-top:1.4rem;line-height:1.6}
+.pm-story{display:flex;flex-direction:column;gap:2.2rem}
+.story-num{font-family:var(--serif);font-size:3rem;font-weight:300;color:var(--accent);opacity:.2;line-height:1;margin-bottom:.55rem}
+.story-ttl{font-family:var(--serif);font-size:1.25rem;font-weight:400;color:var(--text);margin-bottom:.5rem;line-height:1.25}
+.story-body{font-size:.9rem;color:var(--sub);line-height:1.78}
+.story-div{width:100%;height:1px;background:rgba(255,255,255,.05)}
+
+/* ── FOCUS ── */
+#focus{border-top:1px solid var(--border);background:var(--surface)}
+.focus-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:4rem}
+.focus-col{}
+.focus-num{font-family:var(--serif);font-size:4rem;font-weight:300;color:var(--accent);opacity:.25;line-height:1;margin-bottom:1.2rem;letter-spacing:-.02em}
+.focus-ttl{font-family:var(--serif);font-size:1.35rem;font-weight:400;color:var(--text);margin-bottom:1rem;line-height:1.25}
+.focus-desc{font-size:.9rem;color:var(--sub);line-height:1.78}
+
+/* ── PROJECTS ── */
+#projects{border-top:1px solid var(--border)}
+.proj-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:4rem}
+.proj-col{padding-top:1rem;border-top:1px solid var(--accent);border-top-width:2px}
+.proj-kicker{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem;margin-top:.7rem}
+.proj-name{font-family:var(--serif);font-size:1.5rem;font-weight:400;color:var(--text);margin-bottom:.8rem;line-height:1.18}
+.proj-desc{font-size:.9rem;color:var(--sub);line-height:1.76;margin-bottom:1rem}
+.proj-tags{font-family:var(--serif);font-size:.88rem;font-style:italic;color:var(--muted)}
+
+#contact{border-top:1px solid var(--border)}
+.contact-wrap{max-width:780px;margin:0 auto;padding:8rem 3rem;text-align:center}
+.contact-ttl{font-family:var(--serif);font-size:clamp(2rem,3.8vw,3.5rem);font-weight:300;line-height:1.18;margin-bottom:1.1rem}
+.contact-ttl em{font-style:italic;color:var(--accent)}
+.contact-sub{font-size:.97rem;color:var(--muted);max-width:460px;margin:0 auto 2.8rem;line-height:1.72}
+.contact-links{display:flex;justify-content:center;gap:.9rem;flex-wrap:wrap}
+.c-link{display:inline-flex;align-items:center;gap:.45rem;padding:.68rem 1.45rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid var(--border);color:var(--muted);transition:all .2s}
+.c-link:hover{border-color:var(--accent);color:var(--accent)}
+
+footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align-items:center;justify-content:space-between}
+.ft-name{font-family:var(--serif);font-size:.88rem;color:var(--muted)}
+.ft-note{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+
+@media(max-width:960px){
+  nav{padding:1.1rem 1.5rem}
+  #hero{grid-template-columns:1fr} .hero-right,.hero-vline{display:none}
+  .hero-left{padding:4.5rem 1.8rem 4rem}
+  .si{padding:5rem 1.8rem}
+  .about-grid,.pm-grid{grid-template-columns:1fr;gap:3rem}
+  .deal-body{grid-template-columns:1fr}
+  .deal-metrics{border-right:none;border-bottom:1px solid var(--border)}
+  .edu-entry{grid-template-columns:1fr;gap:1rem}
+  .focus-cols,.proj-cols{grid-template-columns:1fr;gap:3rem}
+  .cov-row{grid-template-columns:1fr;gap:1rem}
+  .stat-bar{flex-wrap:wrap} .sb-item{flex:1 1 45%}
+  footer{flex-direction:column;gap:.5rem;text-align:center}
+}
+@media(max-width:600px){
+  .nav-links li:nth-child(n+5){display:none}
+  .sb-item{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--border)}
+}
+
+
+.lang-switcher{display:flex;align-items:center;gap:.5rem;margin-left:1.8rem}
+.lang-btn{background:none;border:none;cursor:pointer;font-size:1.15rem;padding:.15rem .2rem;opacity:.35;transition:opacity .2s;line-height:1}
+.lang-btn:hover{opacity:.75}
+.lang-btn.active{opacity:1}
+</style>
+</head>
+<body>
+
+<nav>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <a href="#hero" class="nav-logo">Joao Victor Creste</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="en" title="English">🇺🇸</button>
+      <button class="lang-btn" data-lang="fr" title="Français">🇫🇷</button>
+      <button class="lang-btn" data-lang="pt" title="Português">🇧🇷</button>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav.profile">Profile</a></li>
+    <li><a href="#education" data-i18n="nav.education">Education</a></li>
+    <li><a href="#experience" data-i18n="nav.career">Career</a></li>
+    <li><a href="#deals" data-i18n="nav.ma">M&amp;A</a></li>
+    <li><a href="#coverage" data-i18n="nav.coverage">Capital Markets</a></li>
+    <li><a href="#portfolio" data-i18n="nav.pm">PM</a></li>
+    <li><a href="#focus" data-i18n="nav.focus">Focus</a></li>
+    <li><a href="#projects" data-i18n="nav.projects">More things I've built</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+  </ul>
+
+</nav>
+
+<section id="hero">
+  <div class="hero-vline"></div>
+  <div class="hero-left">
+    <p class="hero-eyebrow" data-i18n="hero.eyebrow">Engineer · Financier · Energy Advocate</p>
+    <h1 class="hero-name">Joao Victor<br><em>Creste</em></h1>
+    <p class="hero-tagline">Electrical engineer by education. Financier by experience. Convinced that the <strong>energy transition is the defining challenge of our generation</strong> — and that meeting it requires integrating deep technical knowledge, financial discipline, and the analytical power of data and AI.</p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary" data-i18n="hero.btn1">View Experience</a>
+      <a href="#contact" class="btn btn-ghost" data-i18n="hero.btn2">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <svg class="hero-graphic" viewBox="-20 0 500 475" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="cA"><circle cx="230" cy="168" r="145"/></clipPath>
+        <clipPath id="cB"><circle cx="322" cy="308" r="145"/></clipPath>
+        <clipPath id="cC"><circle cx="138" cy="308" r="145"/></clipPath>
+        <clipPath id="cAB">
+          <circle cx="322" cy="308" r="145" clip-path="url(#cA)"/>
+        </clipPath>
+      </defs>
+
+      <!-- Circle fills — very subtle so labels stay readable -->
+      <circle cx="230" cy="168" r="145" fill="rgba(255,255,255,.03)"/>
+      <circle cx="322" cy="308" r="145" fill="rgba(255,255,255,.03)"/>
+      <circle cx="138" cy="308" r="145" fill="rgba(255,255,255,.03)"/>
+
+      <!-- Circle outlines — bright enough to see clearly -->
+      <circle cx="230" cy="168" r="145" fill="none" stroke="#4a5160" stroke-width="1.5"/>
+      <circle cx="322" cy="308" r="145" fill="none" stroke="#4a5160" stroke-width="1.5"/>
+      <circle cx="138" cy="308" r="145" fill="none" stroke="#4a5160" stroke-width="1.5"/>
+
+      <!-- Triple intersection fill — green, clearly visible -->
+      <circle cx="138" cy="308" r="145" fill="#3d9970" opacity=".18" clip-path="url(#cAB)"/>
+      <circle cx="138" cy="308" r="145" fill="none" stroke="#3d9970" stroke-width="1.5" opacity=".7" clip-path="url(#cAB)"/>
+
+      <!-- Central dot -->
+      <circle cx="230" cy="261" r="5.5" fill="#3d9970" opacity="1"/>
+      <circle cx="230" cy="261" r="14" fill="none" stroke="#3d9970" stroke-width="1" opacity=".4"/>
+      <circle cx="230" cy="261" r="22" fill="none" stroke="#3d9970" stroke-width=".5" opacity=".18"/>
+
+      <!-- ENERGY label -->
+      <text x="230" y="112"
+        font-family="'DM Mono',monospace" font-size="15" font-weight="400"
+        fill="#e8e4dc" opacity="1" text-anchor="middle" letter-spacing="4">ENERGY</text>
+
+      <!-- FINANCE label -->
+      <text x="350" y="365"
+        font-family="'DM Mono',monospace" font-size="15" font-weight="400"
+        fill="#e8e4dc" opacity="1" text-anchor="middle" letter-spacing="4">FINANCE</text>
+
+      <!-- TECHNOLOGY label -->
+      <text x="110" y="365"
+        font-family="'DM Mono',monospace" font-size="15" font-weight="400"
+        fill="#e8e4dc" opacity="1" text-anchor="middle" letter-spacing="4">TECHNOLOGY</text>
+
+      <!-- WHERE I OPERATE label — larger and amber -->
+      <text x="230" y="282"
+        font-family="'DM Mono',monospace" font-size="11" font-weight="400"
+        fill="#3d9970" opacity="1" text-anchor="middle" letter-spacing="2.5">WHERE I OPERATE</text>
+    </svg>
+  </div>
+  <div class="hero-stats">
+    <div style="text-align:right"><div class="stat-val">5</div><div class="stat-lbl" data-i18n="hero.stat1">Countries · Studied &amp; worked</div></div>
+    <div style="text-align:right"><div class="stat-val">3</div><div class="stat-lbl" data-i18n="hero.stat2">M&amp;A deals closed</div></div>
+    <div style="text-align:right"><div class="stat-val">50+ GW</div><div class="stat-lbl" data-i18n="hero.stat3">Pipeline evaluated</div></div>
+    <div style="text-align:right"><div class="stat-val">$1B+</div><div class="stat-lbl" data-i18n="hero.stat4">AUM managed</div></div>
+    <div style="text-align:right"><div class="stat-val">20+</div><div class="stat-lbl" data-i18n="hero.stat5">Investment memos</div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="si">
+    <p class="s-tag" data-i18n="about.tag">Profile</p>
+    <h2 class="s-title">An unusual <em>intersection</em></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I am an Italian-Brazilian engineer educated in France and Brazil, currently completing an MBA at ESCP Business School across Paris and London. Raised in a family of academics, I have always been drawn to first-principles thinking — the habit of understanding not just <strong>what</strong> is happening, but <strong>why</strong> and <strong>what it implies</strong>.</p>
+        <p>My career has followed an unusual arc: from electrical engineering and applied research, to M&amp;A and greenfield development in renewable energy, to equity research covering high-growth technology companies, to portfolio management at a multi-family office. Each chapter has been different in function, but unified by a consistent pull toward the same three domains — energy, finance, and the analytical tools that connect them.</p>
+        <p>I am convinced that the <strong>energy transition is the defining challenge of our generation, and that it cannot be solved by engineers or financiers working in isolation.</strong> What it demands is people who understand both the technical complexity of energy systems and the financial logic that drives capital allocation — and who can harness data and AI to make better decisions under uncertainty. That convergence is where I want to operate.</p>
+        <p>Outside of work, I compose music — eight years of conservatory-level piano studies. I also build tools: <em>Forager</em>, an interactive mapping platform for solar, wind, and infrastructure assets, started as a side project and has since become a useful real-world instrument.</p>
+        <div class="lang-list">
+          <div class="lang-item"><span class="lang-name">Portuguese</span><span class="lang-lvl" data-i18n="lang.bilingual">Bilingual</span></div>
+          <div class="lang-item"><span class="lang-name">English</span><span class="lang-lvl" data-i18n="lang.bilingual">Bilingual</span></div>
+          <div class="lang-item"><span class="lang-name">French</span><span class="lang-lvl" data-i18n="lang.fluent">Fluent</span></div>
+          <div class="lang-item"><span class="lang-name">Italian</span><span class="lang-lvl" data-i18n="lang.fluent">Fluent</span></div>
+          <div class="lang-item"><span class="lang-name">Spanish</span><span class="lang-lvl" data-i18n="lang.intermediate">Intermediate</span></div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="skill-group">
+          <p class="skill-lbl" data-i18n="skills.technical">Technical Skills</p>
+          <p class="skill-list">Python, R, SQL, JavaScript, MATLAB, C++, VBA, GIS</p>
+        </div>
+        <div class="skill-group">
+          <p class="skill-lbl" data-i18n="skills.finance">Finance &amp; Markets</p>
+          <p class="skill-list">Bloomberg Terminal, Pitchbook, FactSet, Tableau, PowerBI</p>
+        </div>
+        <div class="skill-group">
+          <p class="skill-lbl" data-i18n="skills.ai">AI Skills</p>
+          <p class="skill-list">Prompt Engineering, Agentic AI, Supervised Learning, Unsupervised Learning</p>
+        </div>
+        <div class="skill-group">
+          <p class="skill-lbl" data-i18n="skills.domain">Domain Expertise</p>
+          <p class="skill-list domain">Energy Transition, Green Hydrogen, Solar / Wind M&amp;A, Infrastructure PE, Equity Research, Portfolio Management</p>
+        </div>
+        <div class="map-wrap">
+          <p class="map-lbl" data-i18n="about.based">Currently Based</p>
+          <svg viewBox="0 0 160 215" xmlns="http://www.w3.org/2000/svg" style="width:37.5%;display:block;margin:.6rem auto 0">
+            <defs>
+              <filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.038" numOctaves="3" result="noise" seed="5"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+            </defs>
+
+            <!-- Ireland — faint dashed, context only -->
+            <path d="M28,88 C26,86 23,85 22,88 C21,91 22,95 21,98 C20,101 18,103 18,107
+                     C18,111 20,114 20,118 C20,121 18,124 19,127 C20,130 23,131 24,134
+                     C25,137 24,141 26,143 C28,145 31,144 33,146 C35,145 36,142 37,139
+                     C38,136 40,134 40,131 C40,128 38,125 38,122 C38,119 40,116 39,113
+                     C38,110 35,108 34,105 C33,102 34,99 33,96 C32,93 30,91 28,88 Z"
+              fill="none" stroke="#222629" stroke-width="0.8" stroke-dasharray="2.5,2.5"
+              stroke-linejoin="round" filter="url(#sketchy)"/>
+
+            <!-- Northern Ireland -->
+            <path d="M52,82 C49,81 46,81 45,84 C44,87 45,90 44,93 C46,94 49,93 51,94 C53,93 53,90 54,87 C54,85 53,83 52,82 Z"
+              fill="none" stroke="#2e3340" stroke-width="1.1" stroke-linejoin="round"
+              filter="url(#sketchy)"/>
+
+            <!-- Great Britain — sketched outline -->
+            <path d="
+              M88,6
+              C85,7 81,8 78,10 C75,12 74,15 72,18
+              C70,21 67,22 65,25 C63,28 64,32 62,35
+              C60,38 57,39 56,43 C55,47 56,51 55,55
+              C53,59 50,61 49,65 C48,69 49,73 48,77
+              C47,81 44,84 44,88 C44,92 46,96 46,100
+              C46,104 44,107 44,111 C44,115 46,118 46,122
+              C46,126 44,129 45,132 C46,135 49,137 50,140
+              C51,143 50,147 52,149 C54,151 57,150 60,152
+              C62,153 63,156 66,157 C69,158 72,156 75,157
+              C78,158 79,161 82,161 C85,161 87,158 90,158
+              C93,158 95,160 98,159 C101,158 102,155 104,153
+              C106,151 109,150 110,147 C111,144 109,141 110,138
+              C111,135 114,133 114,129 C114,125 112,122 112,118
+              C112,114 114,111 113,107 C112,103 109,101 108,97
+              C107,93 108,90 107,86 C106,82 103,80 102,76
+              C101,72 102,68 100,65 C98,62 95,61 93,58
+              C91,55 91,51 89,48 C87,45 84,44 83,41
+              C82,38 83,34 81,31 C79,28 76,27 75,24
+              C74,21 75,17 73,15 C71,13 68,13 67,10
+              C70,8 79,6 88,6 Z"
+              fill="none" stroke="#3a3e47" stroke-width="1.4"
+              stroke-linejoin="round" stroke-linecap="round"
+              filter="url(#sketchy)"/>
+
+            <!-- London pin — green -->
+            <circle cx="96" cy="128" r="3.8" fill="#3d9970" opacity=".95"/>
+            <circle cx="96" cy="128" r="7.5" fill="none" stroke="#3d9970" stroke-width=".9" opacity=".4"/>
+            <circle cx="96" cy="128" r="12" fill="none" stroke="#3d9970" stroke-width=".5" opacity=".18"/>
+
+            <!-- London label -->
+            <text x="106" y="132" font-family="'DM Mono',monospace" font-size="8.5"
+              fill="#3d9970" opacity=".92" letter-spacing="1.2">London</text>
+
+            <!-- Bottom label -->
+            <text x="80" y="204" font-family="'DM Mono',monospace" font-size="6.8"
+              fill="#3a3e47" letter-spacing="1" text-anchor="middle">ELIGIBLE · EU &amp; UK</text>
+          </svg>
+        </div>
+        <div class="map-wrap" style="margin-top:2.4rem">
+          <p class="map-lbl" data-i18n="about.been">Where I have been</p>
+          <svg viewBox="60 55 780 430" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;margin-top:.8rem">
+            <defs>
+              <filter id="sk2" x="-2%" y="-2%" width="104%" height="104%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" result="noise" seed="8"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+            </defs>
+
+            <!-- South America -->
+            <path d="M295,160 C292,155 287,152 283,154 C279,156 278,162 274,165 C270,168 265,167 262,171 C259,175 260,182 257,187 C254,192 248,194 246,200 C244,206 247,213 245,219 C243,225 237,228 236,235 C235,242 239,249 238,256 C237,263 231,268 231,275 C231,282 237,288 237,295 C237,302 231,307 232,314 C233,321 240,325 241,332 C242,339 237,345 238,352 C239,359 246,363 247,370 C248,377 243,383 245,390 C247,397 255,400 256,407 C257,414 252,420 254,427 C256,434 264,436 265,443 C266,450 261,457 263,464 L285,470 C290,464 294,457 298,450 C302,443 304,435 307,428 C310,421 315,416 317,409 C319,402 317,394 319,387 C321,380 327,375 328,368 C329,361 325,354 326,347 C327,340 333,335 333,328 C333,321 327,315 328,308 C329,301 336,297 336,290 C336,283 330,277 331,270 C332,263 339,259 339,252 C339,245 333,240 334,233 C335,226 342,222 341,215 C340,208 333,205 332,198 C331,191 336,185 334,178 C332,171 325,169 323,162 C321,155 324,147 321,141 C318,135 311,133 308,128 C305,123 306,115 302,111 C299,107 294,108 291,105 C288,102 288,96 285,93 C283,91 280,95 279,99 C278,103 280,108 279,113 C278,118 274,121 274,126 C274,131 277,136 277,141 C277,146 274,151 274,156 C274,159 277,161 280,162 Z"
+              fill="none" stroke="#2a2f38" stroke-width="1" stroke-linejoin="round" filter="url(#sk2)"/>
+
+            <!-- Europe -->
+            <path d="M650,80 C648,77 644,75 641,77 C638,79 638,84 635,87 C632,90 628,90 626,94 C624,98 626,104 623,108 C620,112 615,113 613,118 C611,123 613,130 610,134 C607,138 602,139 600,144 C598,149 600,156 597,160 C594,164 589,165 587,170 C585,175 587,182 584,186 C581,190 576,191 574,196 C572,201 574,208 571,212 C568,216 563,217 561,222 C559,227 561,234 558,238 C555,242 550,242 548,247 C546,252 548,259 545,263 L600,263 C603,258 605,252 609,248 C613,244 619,243 622,238 C625,233 624,226 628,222 C632,218 638,218 641,213 C644,208 643,201 647,197 C651,193 657,193 660,188 C663,183 662,176 666,172 C670,168 676,168 679,163 C682,158 681,151 685,147 C689,143 695,143 698,138 C701,133 700,126 703,122 C706,118 712,118 714,113 C716,108 714,101 717,97 C720,93 726,93 728,88 C730,83 728,76 730,72 L700,68 C697,72 694,76 690,79 C686,82 681,82 677,85 C673,88 671,94 667,96 C663,98 658,96 655,99 C652,102 652,108 649,110 C647,112 644,110 642,107 C640,104 641,99 639,96 C637,93 634,92 632,90 Z"
+              fill="none" stroke="#2a2f38" stroke-width="1" stroke-linejoin="round" filter="url(#sk2)"/>
+
+            <!-- UK -->
+            <path d="M598,95 C595,90 591,88 588,91 C585,94 586,101 583,105 C580,109 576,110 574,115 C572,120 574,127 571,131 C568,135 563,136 561,141 C559,146 561,153 558,157 C555,161 550,162 549,167 C548,172 551,178 549,183 C547,188 542,190 541,195 C540,200 543,206 541,211 C539,216 534,218 534,223 C534,228 539,232 538,237 C537,242 532,245 532,250 L550,252 C553,247 555,241 558,236 C561,231 566,228 568,223 C570,218 568,211 571,207 C574,203 580,203 582,198 C584,193 582,186 585,182 C588,178 594,178 596,173 C598,168 596,161 599,157 C602,153 608,153 610,148 C612,143 610,136 613,132 C616,128 622,128 624,123 C626,118 624,111 626,107 C628,103 633,102 634,97 C635,92 632,86 629,83 C626,80 621,81 618,84 C615,87 615,93 612,95 C609,97 605,95 602,98 Z"
+              fill="none" stroke="#2a2f38" stroke-width="1" stroke-linejoin="round" filter="url(#sk2)"/>
+
+            <!-- Italy -->
+            <path d="M685,140 C683,136 679,135 677,138 C675,141 676,147 673,151 C670,155 665,156 664,161 C663,166 666,172 664,177 C662,182 657,184 656,189 C655,194 658,200 656,205 C654,210 649,212 648,217 C647,222 650,228 648,233 C646,238 641,240 641,245 C641,250 646,254 645,259 C644,264 639,267 639,272 C639,277 644,280 644,285 L660,283 C662,278 663,272 666,267 C669,262 674,260 676,255 C678,250 676,243 679,239 C682,235 688,235 690,230 C692,225 690,218 693,214 C696,210 702,210 704,205 C706,200 704,193 707,189 C710,185 716,185 718,180 C720,175 718,168 720,164 C722,160 727,159 728,154 C729,149 727,142 728,137 L710,133 C708,138 706,143 702,146 C698,149 693,148 690,151 C687,154 687,160 684,162 C681,164 677,162 675,159 C673,156 674,150 672,147 Z"
+              fill="none" stroke="#2a2f38" stroke-width="1" stroke-linejoin="round" filter="url(#sk2)"/>
+
+            <!-- Netherlands -->
+            <path d="M638,107 C636,104 632,103 630,106 C628,109 629,115 626,118 C623,121 619,121 618,125 C617,129 619,135 617,139 C615,143 610,144 609,148 L625,150 C627,145 629,140 633,137 C637,134 643,134 645,129 C647,124 645,117 647,113 C649,109 654,109 655,104 C656,99 653,93 650,91 C647,89 643,92 641,95 C639,98 639,104 638,107 Z"
+              fill="none" stroke="#2a2f38" stroke-width="1" stroke-linejoin="round" filter="url(#sk2)"/>
+
+            <!-- Africa faint -->
+            <path d="M640,270 C637,267 633,267 631,270 C629,273 630,279 628,283 C626,287 621,289 620,294 C619,299 622,305 620,310 C618,315 613,317 612,323 C611,329 614,335 613,341 C612,347 607,351 607,357 C607,363 612,368 611,374 C610,380 605,384 605,390 C605,396 610,400 610,406 C610,412 605,416 606,422 C607,428 613,431 614,437 C615,443 610,448 611,454 C612,460 618,463 619,469 L655,470 C658,464 660,457 663,451 C666,445 671,441 673,435 C675,429 673,422 675,416 C677,410 683,407 684,401 C685,395 683,388 685,382 C687,376 693,373 694,367 C695,361 692,354 693,348 C694,342 700,339 700,333 C700,327 695,322 695,316 C695,310 700,306 700,300 C700,294 695,289 695,283 C695,277 700,273 700,267 L660,264 C657,268 655,273 651,276 C647,279 642,279 640,283 C638,287 639,293 637,296 Z"
+              fill="none" stroke="#232830" stroke-width="0.8" stroke-linejoin="round" filter="url(#sk2)"/>
+
+            <!-- North America faint -->
+            <path d="M80,80 C83,76 88,74 92,76 C96,78 97,84 101,87 C105,90 111,89 114,93 C117,97 116,104 120,108 C124,112 130,113 133,118 C136,123 134,131 138,135 C142,139 148,139 151,144 C154,149 152,157 156,161 C160,165 166,165 169,170 C172,175 170,183 174,187 C178,191 184,191 187,196 C190,201 188,209 192,213 C196,217 202,217 205,222 C208,227 206,235 210,239 C214,243 220,243 222,248 C224,253 222,261 226,265 L270,268 C272,263 273,257 276,252 C279,247 284,244 286,239 C288,234 287,227 290,222 C293,217 299,215 301,210 C303,205 301,198 304,193 C307,188 313,187 315,182 C317,177 315,170 318,165 C321,160 327,159 329,154 C331,149 329,142 332,137 C335,132 341,131 342,126 C343,121 341,114 343,109 C345,104 351,103 352,98 C353,93 350,87 348,83 C346,79 341,79 338,76 C335,73 335,68 331,66 L220,60 C218,64 215,68 211,71 C207,74 202,74 198,77 C194,80 192,86 188,88 C184,90 179,88 175,91 C171,94 171,100 167,102 C163,104 158,102 155,105 C152,108 152,114 149,116 C146,118 142,116 139,119 C136,122 137,128 134,130 C131,132 127,130 124,133 C121,136 122,142 119,145 C116,148 111,148 109,152 C107,156 109,162 107,166 C105,170 100,171 98,175 C96,179 98,185 96,189 C94,193 89,194 88,198 L95,203 C98,198 100,192 104,189 C108,186 114,186 116,181 C118,176 116,169 119,165 C122,161 128,161 130,156 C132,151 130,144 133,140 C136,136 142,136 144,131 C146,126 144,119 147,115 C150,111 156,111 158,106 C160,101 158,94 161,90 C164,86 170,86 172,81 Z"
+              fill="none" stroke="#232830" stroke-width="0.8" stroke-linejoin="round" filter="url(#sk2)"/>
+
+            <!-- São Paulo -->
+            <circle cx="288" cy="382" r="14" fill="#c8a96e" opacity=".06"/>
+            <circle cx="288" cy="382" r="8"  fill="#c8a96e" opacity=".15"/>
+            <circle cx="288" cy="382" r="3.5" fill="#c8a96e" opacity=".95"/>
+
+            <!-- Natal -->
+            <circle cx="342" cy="275" r="12" fill="#c8a96e" opacity=".06"/>
+            <circle cx="342" cy="275" r="7"  fill="#c8a96e" opacity=".15"/>
+            <circle cx="342" cy="275" r="3"  fill="#c8a96e" opacity=".95"/>
+
+            <!-- London -->
+            <circle cx="582" cy="148" r="13" fill="#c8a96e" opacity=".06"/>
+            <circle cx="582" cy="148" r="7.5" fill="#c8a96e" opacity=".15"/>
+            <circle cx="582" cy="148" r="3.2" fill="#c8a96e" opacity=".95"/>
+
+            <!-- Paris -->
+            <circle cx="618" cy="163" r="13" fill="#c8a96e" opacity=".06"/>
+            <circle cx="618" cy="163" r="7.5" fill="#c8a96e" opacity=".15"/>
+            <circle cx="618" cy="163" r="3.2" fill="#c8a96e" opacity=".95"/>
+
+            <!-- Eindhoven -->
+            <circle cx="635" cy="143" r="11" fill="#c8a96e" opacity=".06"/>
+            <circle cx="635" cy="143" r="6.5" fill="#c8a96e" opacity=".15"/>
+            <circle cx="635" cy="143" r="2.8" fill="#c8a96e" opacity=".95"/>
+
+            <!-- Bassano del Grappa -->
+            <circle cx="668" cy="162" r="11" fill="#c8a96e" opacity=".06"/>
+            <circle cx="668" cy="162" r="6.5" fill="#c8a96e" opacity=".15"/>
+            <circle cx="668" cy="162" r="2.8" fill="#c8a96e" opacity=".95"/>
+
+          </svg>
+          <p style="font-family:var(--serif);font-size:1rem;font-weight:300;color:var(--sub);line-height:2;margin-top:1rem;text-align:center">Brazil &nbsp;·&nbsp; France &nbsp;·&nbsp; Netherlands &nbsp;·&nbsp; Italy &nbsp;·&nbsp; United Kingdom</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="si">
+    <p class="s-tag" data-i18n="edu.tag">Academic Formation</p>
+    <h2 class="s-title">Built on <em>rigour</em></h2>
+    <div class="edu-list">
+
+      <div class="edu-entry">
+        <div class="edu-left">
+          <p class="edu-period">2025 — Present</p>
+          <p class="edu-where">ESCP Business School<br>Paris &amp; London</p>
+        </div>
+        <div class="edu-right">
+          <p class="edu-deg">MBA in International Management</p>
+          <p class="edu-school">Finance, Strategy &amp; Organisation, Economics, Accounting, Leadership</p>
+          <p class="edu-note">Entrepreneurship track — developing frameworks for sustainable finance and energy-sector ventures.</p>
+        </div>
+      </div>
+
+      <div class="edu-entry">
+        <div class="edu-left">
+          <p class="edu-period">2014 — 2017</p>
+          <p class="edu-where">École Centrale Paris<br>(CentraleSupélec) · France</p>
+        </div>
+        <div class="edu-right">
+          <p class="edu-deg">MSc Engineering &mdash; <em style="font-style:italic;color:var(--muted)">Diplôme d'Ingénieur</em></p>
+          <p class="edu-school">Mathematics, Control Systems, Applied Physics</p>
+          <p class="edu-note">Thesis: Energy Monitoring Systems for Hybrid Solar Panels.</p>
+        </div>
+      </div>
+
+      <div class="edu-entry">
+        <div class="edu-left">
+          <p class="edu-period">2012 — 2017</p>
+          <p class="edu-where">Escola Politécnica<br>da USP · São Paulo</p>
+        </div>
+        <div class="edu-right">
+          <p class="edu-deg">BSc Electrical Engineering &mdash; <em style="font-style:italic;color:var(--muted)">Automation &amp; Control</em></p>
+          <p class="edu-school">Control Systems, Optimisation, Signal Processing</p>
+          <p class="edu-note">Thesis: Coordination of EV Charging using Reinforcement Learning.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="si">
+    <p class="s-tag" data-i18n="exp.tag">Career</p>
+    <h2 class="s-title">Where I have <em>been</em></h2>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta"><span class="tl-period">2025 — Present</span><span class="tl-loc">Paris &amp; London</span></div>
+        <div class="tl-role">MBA in International Management</div>
+        <div class="tl-co">ESCP Business School</div>
+        <ul class="tl-bullets">
+          <li>Full-time programme across Paris and London campuses covering Finance, Strategy, Economics, Accounting, and Leadership.</li>
+          <li>Entrepreneurship track; developing frameworks for sustainable finance and energy-sector ventures.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot h"></div>
+        <div class="tl-meta"><span class="tl-period">Jan — Apr 2025</span><span class="tl-loc">Oxford, UK</span></div>
+        <div class="tl-role">Business Development Consultant</div>
+        <div class="tl-co">Independent — British PE Fund mandate</div>
+        <ul class="tl-bullets">
+          <li>Led all business development initiatives in Brazil with a strategic focus on large-scale green hydrogen production.</li>
+          <li>Developed a full due diligence framework that diverged materially from the remote team's initial perspective after engaging local legal counsel and environmental licensing specialists.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot h"></div>
+        <div class="tl-meta"><span class="tl-period">May 2023 — Dec 2024</span><span class="tl-loc">São Paulo, Brazil</span></div>
+        <div class="tl-role">Portfolio Manager — Offshore Investments</div>
+        <div class="tl-co">est GP — Multi Family Office (~$1B AUM)</div>
+        <ul class="tl-bullets">
+          <li>Led strategic asset allocation and tactical positioning for the offshore book, representing 30%+ of total AUM.</li>
+          <li>Built an evaluation framework covering 2,000+ ETFs, mutual funds, and hedge funds using custom programming tools.</li>
+          <li>Implemented strategic portfolios for <strong>70+ families</strong> and more than $300M in assets.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot h"></div>
+        <div class="tl-meta"><span class="tl-period">Jan 2021 — Nov 2022</span><span class="tl-loc">São Paulo, Brazil</span></div>
+        <div class="tl-role">Equity Research Analyst — Global Equities</div>
+        <div class="tl-co">Kapitalo Investimentos</div>
+        <ul class="tl-bullets">
+          <li>Covered technology and high-growth companies for a long-biased portfolio of stocks, indices, and corporate bonds.</li>
+          <li>Built and managed a long-only portfolio of 10 companies using a first-principles methodology: biographies, channel checks, customer calls, management meetings — then valuation.</li>
+          <li>Site visit to Tesla's California Gigafactory; investor relations meetings with executive leadership.</li>
+          <li>Led internal data research: ETF/index decomposition, bottom-up earnings reviews, country risk premium comparatives.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot h"></div>
+        <div class="tl-meta"><span class="tl-period">May 2018 — Dec 2020</span><span class="tl-loc">São Paulo, Brazil</span></div>
+        <div class="tl-role">M&amp;A and Business Development Manager</div>
+        <div class="tl-co">Eren Groupe (now Total Eren / TotalEnergies)</div>
+        <ul class="tl-bullets">
+          <li>Responsible for prospection, acquisition, and greenfield project development for a leading French independent power producer active in solar and wind.</li>
+          <li>Created an internal project database covering 50+ GW of evaluated opportunities — first of its kind across all Total Eren country operations.</li>
+          <li>Led the first two wind acquisitions with bilateral PPAs for Total Eren in Brazil, managing the full transaction lifecycle from NBO through shareholders' agreements.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="deals">
+  <div class="si">
+    <p class="s-tag" data-i18n="deals.tag">M&amp;A Projects</p>
+    <h2 class="s-title">Deals, <em>end-to-end</em></h2>
+    <p class="deals-intro">In my M&amp;A buy-side experience, I was directly involved in the origination, negotiation, and closing of three renewable energy projects in Brazil — two wind acquisitions and one solar complex. All three assets are now operational, collectively representing <strong>~BRL 1.2 billion</strong> in total investment.</p>
+    <div class="stat-bar">
+      <div class="sb-item"><div class="sb-val">3</div><div class="sb-lbl" data-i18n="deals.stat1">Projects closed &amp; operational</div></div>
+      <div class="sb-item"><div class="sb-val">251.8 MW</div><div class="sb-lbl" data-i18n="deals.stat2">Combined installed capacity</div></div>
+      <div class="sb-item"><div class="sb-val">~$232M</div><div class="sb-lbl" data-i18n="deals.stat3">Combined total investment (USD)</div></div>
+      <div class="sb-item"><div class="sb-val">20 yr</div><div class="sb-lbl" data-i18n="deals.stat4">PPA tenors across all assets</div></div>
+    </div>
+
+    <div class="deal">
+      <div class="deal-hd">
+        <div class="deal-icon wind">
+          <svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+            <line x1="13" y1="14" x2="13" y2="24"/>
+            <circle cx="13" cy="13" r="1.4" fill="#3d9970" stroke="none"/>
+            <path d="M12.2 11.8 C11 8.8 8.8 7 6.8 5"/>
+            <path d="M14.2 13.4 C16.8 12.4 19.2 12.8 22 12.2"/>
+            <path d="M12 14.2 C10.2 16.4 9.8 19.2 9.2 22"/>
+          </svg>
+        </div>
+        <div class="deal-title">
+          <div class="deal-badge wind">Wind · Acquisition</div>
+          <div class="deal-name">Terra Santa Wind Farm</div>
+          <div class="deal-loc">Rio Grande do Norte · Brazil</div>
+        </div>
+        <div class="deal-right">
+          <div class="deal-mw">92.3 MW</div>
+          <span class="deal-status">Operational</span>
+          <span class="deal-comm">Commissioned Feb 2022</span>
+        </div>
+      </div>
+      <div class="deal-body">
+        <div class="deal-metrics">
+          <div class="dm"><span class="dm-k">Capacity</span><span class="dm-v">92.3 MW</span></div>
+          <div class="dm"><span class="dm-k">Turbines</span><span class="dm-v">17 × Siemens Gamesa SG 3.55-132</span></div>
+          <div class="dm"><span class="dm-k">Offtaker</span><span class="dm-v">Cemig GT · 20-yr private PPA</span></div>
+          <div class="dm"><span class="dm-k">Total Investment</span><span class="dm-v">BRL 829M (~USD 154M)*</span></div>
+          <div class="dm"><span class="dm-k">Ownership</span><span class="dm-v">Total Eren 90% / Vila Energia 10%</span></div>
+          <div class="dm"><span class="dm-k">Commissioned</span><span class="dm-v">February 2022</span></div>
+        </div>
+        <div class="deal-narr">
+          <div>
+            <p class="narr-lbl" data-i18n="deals.overview">Transaction Overview</p>
+            <p class="narr-body">Terra Santa was Total Eren's first wind asset in Brazil, developed in partnership with Vila Energia Renovável. Structured with a bilateral 20-year private PPA with Cemig GT — a creditworthy state-owned offtaker — the project provided long-term revenue visibility for project finance. Construction began late 2019; commercial operation commenced February 2022, marking a pivotal diversification of Total Eren's Brazilian portfolio beyond solar.</p>
+          </div>
+          <div>
+            <p class="narr-lbl" data-i18n="deals.myrole">My Role</p>
+            <ul class="narr-list">
+              <li>Originated the opportunity within the 50+ GW pipeline database I built for Total Eren Brazil and recommended the acquisition to Paris.</li>
+              <li>Led bilateral PPA negotiation and all transaction documentation from NBO through binding MOU to shareholders' and shares purchase agreements.</li>
+              <li>Coordinated due diligence workstreams with legal, technical, and financial advisors across French and Brazilian teams.</li>
+              <li>Represented Total Eren in partner negotiations with Vila Energia to establish the 90/10 joint ownership structure.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="deal">
+      <div class="deal-hd">
+        <div class="deal-icon wind">
+          <svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+            <line x1="13" y1="14" x2="13" y2="24"/>
+            <circle cx="13" cy="13" r="1.4" fill="#3d9970" stroke="none"/>
+            <path d="M12.2 11.8 C11 8.8 8.8 7 6.8 5"/>
+            <path d="M14.2 13.4 C16.8 12.4 19.2 12.8 22 12.2"/>
+            <path d="M12 14.2 C10.2 16.4 9.8 19.2 9.2 22"/>
+          </svg>
+        </div>
+        <div class="deal-title">
+          <div class="deal-badge wind">Wind · Acquisition</div>
+          <div class="deal-name">Maral Wind Farm</div>
+          <div class="deal-loc">Areia Branca, Rio Grande do Norte · Brazil</div>
+        </div>
+        <div class="deal-right">
+          <div class="deal-mw">67.5 MW</div>
+          <span class="deal-status">Operational</span>
+          <span class="deal-comm">Commissioned 2021</span>
+        </div>
+      </div>
+      <div class="deal-body">
+        <div class="deal-metrics">
+          <div class="dm"><span class="dm-k">Capacity</span><span class="dm-v">67.5 MW (Filgueira I + II)</span></div>
+          <div class="dm"><span class="dm-k">Structure</span><span class="dm-v">Two SPEs · EOL Maral I &amp; II</span></div>
+          <div class="dm"><span class="dm-k">Offtaker</span><span class="dm-v">Cemig GT · 20-yr private PPA</span></div>
+          <div class="dm"><span class="dm-k">Vendor</span><span class="dm-v">Voltalia SA (EPA: VLTSA)</span></div>
+          <div class="dm"><span class="dm-k">Ownership</span><span class="dm-v">Total Eren 100%</span></div>
+          <div class="dm"><span class="dm-k">Regulatory</span><span class="dm-v">CADE cleared · no restrictions</span></div>
+        </div>
+        <div class="deal-narr">
+          <div>
+            <p class="narr-lbl">Transaction Overview</p>
+            <p class="narr-body">The Maral acquisition involved the purchase of two wind project SPEs from the Brazilian unit of Voltalia SA, a publicly listed French renewable energy developer. At the time of acquisition both projects had yet to break ground — a pre-construction buy-side deal requiring robust technical and regulatory diligence. Cleared without restrictions by CADE. Both phases entered operation in 2021 under a 20-year private PPA with Cemig GT, Total Eren holding 100% ownership.</p>
+          </div>
+          <div>
+            <p class="narr-lbl">My Role</p>
+            <ul class="narr-list">
+              <li>Identified Maral within the proprietary pipeline database and recommended it to Paris as a strategic pre-construction entry into wind.</li>
+              <li>Led buy-side negotiation with Voltalia Brazil from initial NBO through final shares purchase and shareholders' agreements.</li>
+              <li>Managed CADE regulatory filing coordination with external legal counsel, ensuring a clean unconditional clearance.</li>
+              <li>Structured the 100% ownership approach, assessing and rejecting partnership options to maintain full control for Total Eren.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="deal">
+      <div class="deal-hd">
+        <div class="deal-icon solar">
+          <svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="6" width="22" height="13" rx=".4"/>
+            <line x1="9.3" y1="6" x2="9.3" y2="19"/>
+            <line x1="16.7" y1="6" x2="16.7" y2="19"/>
+            <line x1="2" y1="12.5" x2="24" y2="12.5"/>
+            <line x1="13" y1="19" x2="13" y2="23"/>
+            <line x1="9.5" y1="23" x2="16.5" y2="23"/>
+          </svg>
+        </div>
+        <div class="deal-title">
+          <div class="deal-badge solar">Solar · Development</div>
+          <div class="deal-name">Dracena Solar Complex</div>
+          <div class="deal-loc">Dracena Municipality, São Paulo · Brazil</div>
+        </div>
+        <div class="deal-right">
+          <div class="deal-mw">90 MW</div>
+          <span class="deal-status">Operational</span>
+          <span class="deal-comm">Operational since Aug 2019</span>
+        </div>
+      </div>
+      <div class="deal-body">
+        <div class="deal-metrics">
+          <div class="dm"><span class="dm-k">Capacity</span><span class="dm-v">90 MW (3 × 30 MW units)</span></div>
+          <div class="dm"><span class="dm-k">Offtake</span><span class="dm-v">CCEE · 20-yr PPA (reserve auction 2014)</span></div>
+          <div class="dm"><span class="dm-k">Total Investment</span><span class="dm-v">BRL 350M (~USD 78M)</span></div>
+          <div class="dm"><span class="dm-k">Project Finance</span><span class="dm-v">BRL 280M · 17-yr infra debentures</span></div>
+          <div class="dm"><span class="dm-k">Debt Investor</span><span class="dm-v">Kinea Investimentos (100%)</span></div>
+          <div class="dm"><span class="dm-k">Impact</span><span class="dm-v">Powers ~83,000 Brazilian homes</span></div>
+        </div>
+        <div class="deal-narr">
+          <div>
+            <p class="narr-lbl">Transaction Overview</p>
+            <p class="narr-body">Dracena is a 90 MW solar photovoltaic complex comprising three 30 MW units in São Paulo State — one of Total Eren's foundational Brazilian assets and the platform from which wind expansion was pursued. The project secured a 20-year PPA through Brazil's federal reserve energy auction (ANEEL, 2014). Project finance achieved via BRL 280M in long-term infrastructure debentures subscribed in full by Kinea Investimentos, with BNP and XP Investimentos as financial advisors.</p>
+          </div>
+          <div>
+            <p class="narr-lbl">My Role</p>
+            <ul class="narr-list">
+              <li>Supported business development and project delivery during construction and ramp-up, working directly under the Managing Director of Total Eren Brazil.</li>
+              <li>Contributed to the internal project database that benchmarked Dracena against the broader solar pipeline, informing capital allocation decisions.</li>
+              <li>Coordinated with local teams, contractors, and regulators during the transition to commercial operation, tracking KPIs and reporting to Paris headquarters.</li>
+            </ul>
+            <p class="deal-fn">* BRL 829M covers Terra Santa and Maral combined, per Total Eren public announcement (Feb 2022).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="coverage">
+  <div class="si">
+    <p class="s-tag" data-i18n="cov.tag">Equity Research Coverage</p>
+    <h2 class="s-title">Companies I <em>studied</em></h2>
+    <p class="cov-intro">As an equity analyst, I covered the US technology sector with a focus on high-growth, disruptive businesses. My research methodology went <strong>beyond standard DCF modelling</strong> — I read founder biographies, ran channel checks with customers, engaged directly with management teams, and built thesis-driven memos from first principles. The portfolio I managed held <strong>10 positions drawn from this 30+ company universe</strong>. A few examples of complete investment opportunities include:</p>
+
+    <div class="cov-table">
+
+      <div class="cov-row">
+        <div class="cov-sector">
+          <div class="cov-sname">Enterprise SaaS</div>
+          <div class="cov-sdesc">CRM · HR · Procurement · Comms · eSign · Support · Automation</div>
+        </div>
+        <div class="cov-names">
+          <div class="co-name">Adobe</div>
+          <div class="co-name">Coupa</div>
+          <div class="co-name">Docebo</div>
+          <div class="co-name">DocuSign</div>
+          <div class="co-name">Monday.com</div>
+          <div class="co-name">RingCentral</div>
+          <div class="co-name">Salesforce</div>
+          <div class="co-name">ServiceNow</div>
+          <div class="co-name">Twilio</div>
+          <div class="co-name">UiPath</div>
+          <div class="co-name">Workday</div>
+          <div class="co-name">Zendesk</div>
+        </div>
+      </div>
+
+      <div class="cov-row">
+        <div class="cov-sector">
+          <div class="cov-sname">Cloud &amp; Data Infrastructure</div>
+          <div class="cov-sdesc">Data warehousing · Observability · DevOps · Databases</div>
+        </div>
+        <div class="cov-names">
+          <div class="co-name">Datadog</div>
+          <div class="co-name">Dynatrace</div>
+          <div class="co-name">GitLab</div>
+          <div class="co-name">MongoDB</div>
+          <div class="co-name">Snowflake</div>
+        </div>
+      </div>
+
+      <div class="cov-row">
+        <div class="cov-sector">
+          <div class="cov-sname">Fintech &amp; Crypto</div>
+          <div class="cov-sdesc">Consumer finance · Digital assets · Tax &amp; accounting</div>
+        </div>
+        <div class="cov-names">
+          <div class="co-name">Coinbase</div>
+          <div class="co-name">Intuit</div>
+          <div class="co-name">Robinhood</div>
+        </div>
+      </div>
+
+      <div class="cov-row">
+        <div class="cov-sector">
+          <div class="cov-sname">Cybersecurity</div>
+          <div class="cov-sdesc">Endpoint protection · AI-driven threat intelligence</div>
+        </div>
+        <div class="cov-names">
+          <div class="co-name">CrowdStrike</div>
+          <div class="co-name">SentinelOne</div>
+        </div>
+      </div>
+
+      <div class="cov-row">
+        <div class="cov-sector">
+          <div class="cov-sname">Commerce &amp; Marketplace</div>
+          <div class="cov-sdesc">E-commerce infrastructure · Proptech platforms</div>
+        </div>
+        <div class="cov-names">
+          <div class="co-name">Shopify</div>
+          <div class="co-name">Zillow</div>
+        </div>
+      </div>
+
+      <div class="cov-row">
+        <div class="cov-sector">
+          <div class="cov-sname">Emerging &amp; Thematic</div>
+          <div class="cov-sdesc">EV · AI platforms · AgTech · Healthtech · IoT · Gaming · EDA</div>
+        </div>
+        <div class="cov-names">
+          <div class="co-name">Aerofarms</div>
+          <div class="co-name">C3.ai</div>
+          <div class="co-name">OneMedical</div>
+          <div class="co-name">Samsara</div>
+          <div class="co-name">Synopsys</div>
+          <div class="co-name">Tesla</div>
+          <div class="co-name">Unity Software</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="si">
+    <p class="s-tag" data-i18n="pm.tag">Portfolio Management</p>
+    <h2 class="s-title">Capital at <em>work</em></h2>
+    <p class="pm-intro">As portfolio manager of a MFO, I was responsible for the offshore investment book — designing and managing portfolios for 70+ families across global equities, fixed income, and alternative assets in the US and Europe.</p>
+
+    <div class="pm-grid">
+
+      <!-- Left: AUM + Allocation visual -->
+      <div>
+        <p class="pm-visual-label" data-i18n="pm.aum">Capital Under Management</p>
+        <div class="aum-block">
+          <div class="aum-number">$300M+</div>
+          <div class="aum-sub" data-i18n="pm.aumsub">Offshore AUM · Directly Managed</div>
+          <div class="aum-families">Across 70+ families and wealth structures</div>
+        </div>
+
+        <p class="pm-visual-label" data-i18n="pm.alloclbl">Asset Allocation Approach</p>
+        <div class="alloc-cols">
+          <div class="bar-block">
+            <div class="bar-lbl-top">40/60</div>
+            <div class="bar-sublbl" data-i18n="pm.conservative">Conservative</div>
+            <div class="vbar">
+              <div class="vseg alt" style="height:10%"></div>
+              <div class="vseg de"  style="height:50%"></div>
+              <div class="vseg eq"  style="height:40%"></div>
+            </div>
+          </div>
+          <div class="bar-arrow">
+            <div class="bar-arrow-line"></div>
+            <div class="bar-arrow-txt" data-i18n="pm.range">range</div>
+            <div class="bar-arrow-line"></div>
+          </div>
+          <div class="bar-block">
+            <div class="bar-lbl-top">60/40</div>
+            <div class="bar-sublbl" data-i18n="pm.growth">Growth</div>
+            <div class="vbar">
+              <div class="vseg alt" style="height:10%"></div>
+              <div class="vseg de"  style="height:30%"></div>
+              <div class="vseg eq"  style="height:60%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="alloc-legend">
+          <div class="alloc-item">
+            <div class="alloc-dot" style="background:var(--accent)"></div>
+            <div><div class="alloc-name" data-i18n="pm.equities">Equities</div><div class="alloc-desc">Global stocks · ETFs · Factor strategies</div></div>
+          </div>
+          <div class="alloc-item">
+            <div class="alloc-dot" style="background:var(--green)"></div>
+            <div><div class="alloc-name" data-i18n="pm.fi">Fixed Income</div><div class="alloc-desc">Sovereign · Corporate · EM Debt</div></div>
+          </div>
+          <div class="alloc-item">
+            <div class="alloc-dot" style="background:#4a7fa5"></div>
+            <div><div class="alloc-name" data-i18n="pm.alt">Alternatives</div><div class="alloc-desc">Hedge funds · Private credit · Real assets</div></div>
+          </div>
+        </div>
+        <p class="alloc-caption">Each portfolio was tailored to the family's risk profile, liquidity needs, and time horizon — typically ranging between a 40/60 and 60/40 equity-to-fixed income balance, with alternatives allocated according to sophistication and appetite.</p>
+      </div>
+
+      <!-- Right: Two highlights -->
+      <div class="pm-story">
+        <div class="story-item">
+          <div class="story-num">01</div>
+          <div class="story-ttl" data-i18n="pm.story1.ttl">Built the analytical framework from scratch</div>
+          <p class="story-body">The offshore book had no systematic evaluation infrastructure when I joined. I designed and coded a proprietary screening tool covering 2,000+ ETFs, mutual funds, and hedge funds — combining quantitative scoring (risk-adjusted returns, drawdown, factor exposures) with qualitative diligence. What had been a manual, judgment-driven process became a <strong>data-driven framework that could be consistently applied across the entire book</strong>.</p>
+        </div>
+        <div class="story-div"></div>
+        <div class="story-item">
+          <div class="story-num">02</div>
+          <div class="story-ttl" data-i18n="pm.story2.ttl">Deployed strategic portfolios at scale</div>
+          <p class="story-body">Using the framework, I implemented tailored strategic portfolios for each family — calibrated to their risk profile, liquidity needs, currency exposure, and time horizon. Beyond strategic allocation, I managed tactical positioning in response to market conditions, adjusting weights across equities, fixed income, and alternatives across <strong>$300M+ in offshore capital serving 70+ families</strong>.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="focus">
+  <div class="si">
+    <p class="s-tag" data-i18n="focus.tag">What I care about</p>
+    <h2 class="s-title">Three domains, <em>one thesis</em></h2>
+    <div class="focus-cols">
+      <div class="focus-col">
+        <div class="focus-num">I</div>
+        <div class="focus-ttl" data-i18n="focus.1.ttl">Energy Transition</div>
+        <p class="focus-desc">The energy transition is the defining infrastructure challenge of our generation — a full rewiring of how the world produces and consumes energy. I have worked across its value chain: closing renewable energy M&A in Brazil, assessing green hydrogen feasibility, and studying the capital structures that make large-scale clean energy projects bankable.</p>
+      </div>
+      <div class="focus-col">
+        <div class="focus-num">II</div>
+        <div class="focus-ttl" data-i18n="focus.2.ttl">Technology &amp; AI</div>
+        <p class="focus-desc">I covered 30+ high-growth technology companies as an equity analyst, and I have built data tools — from GIS mapping platforms to automated fund screening systems — that convert raw information into decisions. AI will not replace decision-makers, but the decision-makers of tomorrow will be the ones who know how to work with it.</p>
+      </div>
+      <div class="focus-col">
+        <div class="focus-num">III</div>
+        <div class="focus-ttl" data-i18n="focus.3.ttl">Finance &amp; Capital Allocation</div>
+        <p class="focus-desc">Capital determines which technologies get built and which transitions happen. I have been on both sides — allocating capital across global markets as a portfolio manager, and deploying it into real assets as an M&A practitioner. Finance is not a support function for the energy transition; it is a core driver of it.</p>
+      </div>
+    </div>
+    <div style="margin-top:4rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,.06);max-width:780px">
+      <p style="font-family:var(--serif);font-size:1.35rem;font-weight:300;font-style:italic;color:var(--sub);line-height:1.8">To tackle the energy transition in a world shaped by AI, we must bring together technical and financial knowledge to make the right decisions. Will the decision-makers be AIs? No — but the people behind them will be the ones who understand both the complexity of energy systems and the logic of capital. That is the convergence I am building toward.</p>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="si">
+    <p class="s-tag" data-i18n="proj.tag">Ventures &amp; Side Projects</p>
+    <h2 class="s-title">Things I <em>built</em></h2>
+    <div class="proj-cols">
+      <div class="proj-col">
+        <p class="proj-kicker" data-i18n="proj.brasa.kicker">Community · Co-founded in Paris</p>
+        <h3 class="proj-name">BRASA Europe</h3>
+        <p class="proj-desc">BRASA — the Brazilian Student Association — is a network connecting Brazilian students and young professionals across top universities and cities worldwide. I co-founded the European chapter in Paris, building a community from scratch for Brazilians studying and working across Europe. The network spans multiple cities and serves as a platform for professional exchange, mentorship, and cross-border connection.</p>
+        <p class="proj-tags">Co-founder, Paris, Community Building, Brazilian Diaspora</p>
+      </div>
+      <div class="proj-col">
+        <p class="proj-kicker" data-i18n="proj.forager.kicker">Infrastructure Intelligence Tool</p>
+        <h3 class="proj-name">Forager</h3>
+        <p class="proj-desc">An interactive mapping platform for solar, wind, and infrastructure assets. Born from a data-science approach I pioneered at Total Eren — where mapping 50+ GW of renewable opportunities in Brazil transformed M&amp;A pipeline quality — Forager generalises that methodology into a usable product. Still live; added material value in subsequent roles.</p>
+        <p class="proj-tags">GIS, JavaScript, Renewable Energy, M&amp;A</p>
+        <a href="https://joaocreste.github.io/forager/" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.9rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;opacity:.8;transition:opacity .2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.8'">↗ View Forager</a>
+      </div>
+      <div class="proj-col">
+        <p class="proj-kicker" data-i18n="proj.music.kicker">Music · Personal Practice</p>
+        <h3 class="proj-name">A Lot of Music</h3>
+        <p class="proj-desc">I have studied piano for eight years at conservatory level — an education in precision, patience, and the discipline of building something complex over a long period of time. I still play regularly and compose my own pieces. Music is not a side interest; it is the counterweight to everything analytical in my life, and the place where I think most freely.</p>
+        <p class="proj-tags">Piano, Composition, Conservatory, 8 Years</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-wrap">
+    <p class="s-tag" style="justify-content:center" data-i18n="nav.contact">Contact</p>
+    <h2 class="contact-ttl">Let's start a <em>conversation</em></h2>
+    <p class="contact-sub">Open to conversations about infrastructure PE, energy transition, research collaboration, and entrepreneurial ventures. Based in London, operating internationally.</p>
+    <div class="contact-links">
+      <a href="/cdn-cgi/l/email-protection#e08a8f818fce839285939485a0858495ce85938390ce8595" class="c-link">✉ Email</a>
+      <a href="https://www.linkedin.com/in/joaocreste/" target="_blank" class="c-link">↗ LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="ft-name">Joao Victor Creste</span>
+  <span class="ft-note">London · Paris · São Paulo</span>
+</footer>
+
+
+<script>
+const I18N = {
+en: {
+  "nav.profile":"Profile","nav.education":"Education","nav.career":"Career",
+  "nav.ma":"M&A","nav.coverage":"Capital Markets","nav.pm":"PM",
+  "nav.focus":"Focus","nav.projects":"More things I've built","nav.contact":"Contact",
+  "hero.eyebrow":"Engineer · Financier · Energy Advocate",
+  "hero.btn1":"View Experience","hero.btn2":"Get in Touch",
+  "hero.stat1":"Countries · Studied & worked","hero.stat2":"M&A deals closed",
+  "hero.stat3":"Pipeline evaluated","hero.stat4":"AUM managed","hero.stat5":"Investment memos",
+  "about.tag":"Profile","about.based":"Currently Based","about.been":"Where I have been",
+  "lang.bilingual":"Bilingual","lang.fluent":"Fluent","lang.intermediate":"Intermediate",
+  "skills.technical":"Technical Skills","skills.finance":"Finance & Markets",
+  "skills.ai":"AI Skills","skills.domain":"Domain Expertise",
+  "edu.tag":"Academic Formation",
+  "exp.tag":"Career",
+  "deals.tag":"M&A Projects","deals.stat1":"Projects closed & operational",
+  "deals.stat2":"Combined installed capacity","deals.stat3":"Combined total investment (USD)",
+  "deals.stat4":"PPA tenors across all assets","deals.overview":"Transaction Overview","deals.myrole":"My Role",
+  "cov.tag":"Equity Research Coverage",
+  "pm.tag":"Portfolio Management","pm.aum":"Capital Under Management",
+  "pm.aumsub":"Offshore AUM · Directly Managed","pm.alloclbl":"Asset Allocation Approach",
+  "pm.conservative":"Conservative","pm.range":"range","pm.growth":"Growth",
+  "pm.equities":"Equities","pm.fi":"Fixed Income","pm.alt":"Alternatives",
+  "pm.story1.ttl":"Built the analytical framework from scratch",
+  "pm.story2.ttl":"Deployed strategic portfolios at scale",
+  "focus.tag":"What I care about","focus.thesis.tag":"The thesis",
+  "focus.1.ttl":"Energy Transition","focus.2.ttl":"Technology & AI",
+  "focus.3.ttl":"Finance & Capital Allocation",
+  "proj.tag":"Ventures & Side Projects",
+  "proj.brasa.kicker":"Community · Co-founded in Paris",
+  "proj.forager.kicker":"Infrastructure Intelligence Tool",
+  "proj.music.kicker":"Music · Personal Practice",
+},
+fr: {
+  "nav.profile":"Profil","nav.education":"Formation","nav.career":"Parcours",
+  "nav.ma":"M&A","nav.coverage":"Marchés de Capitaux","nav.pm":"Gestion Port.",
+  "nav.focus":"Convictions","nav.projects":"Ce que j'ai construit","nav.contact":"Contact",
+  "hero.eyebrow":"Ingénieur · Financier · Défenseur de l'Énergie",
+  "hero.btn1":"Voir le Parcours","hero.btn2":"Me Contacter",
+  "hero.stat1":"Pays · Études & travail","hero.stat2":"Transactions M&A conclues",
+  "hero.stat3":"Pipeline évalué","hero.stat4":"AUM géré","hero.stat5":"Mémos d'investissement",
+  "about.tag":"Profil","about.based":"Basé à","about.been":"Où j'ai été",
+  "lang.bilingual":"Bilingue","lang.fluent":"Courant","lang.intermediate":"Intermédiaire",
+  "skills.technical":"Compétences Techniques","skills.finance":"Finance & Marchés",
+  "skills.ai":"Compétences IA","skills.domain":"Expertise Sectorielle",
+  "edu.tag":"Formation Académique",
+  "exp.tag":"Parcours",
+  "deals.tag":"Projets M&A","deals.stat1":"Projets clôturés & opérationnels",
+  "deals.stat2":"Capacité installée cumulée","deals.stat3":"Investissement total combiné (USD)",
+  "deals.stat4":"Durées PPA sur tous les actifs","deals.overview":"Aperçu de la Transaction","deals.myrole":"Mon Rôle",
+  "cov.tag":"Couverture Recherche Actions",
+  "pm.tag":"Gestion de Portefeuille","pm.aum":"Capital Sous Gestion",
+  "pm.aumsub":"AUM Offshore · Géré Directement","pm.alloclbl":"Approche d'Allocation d'Actifs",
+  "pm.conservative":"Conservateur","pm.range":"plage","pm.growth":"Croissance",
+  "pm.equities":"Actions","pm.fi":"Obligations","pm.alt":"Alternatifs",
+  "pm.story1.ttl":"Framework analytique construit de zéro",
+  "pm.story2.ttl":"Portefeuilles stratégiques déployés à grande échelle",
+  "focus.tag":"Ce qui me passionne","focus.thesis.tag":"La thèse",
+  "focus.1.ttl":"Transition Énergétique","focus.2.ttl":"Technologie & IA",
+  "focus.3.ttl":"Finance & Allocation du Capital",
+  "proj.tag":"Projets & Initiatives",
+  "proj.brasa.kicker":"Communauté · Co-fondé à Paris",
+  "proj.forager.kicker":"Outil d'Intelligence Infrastructure",
+  "proj.music.kicker":"Musique · Pratique Personnelle",
+},
+pt: {
+  "nav.profile":"Perfil","nav.education":"Formação","nav.career":"Carreira",
+  "nav.ma":"M&A","nav.coverage":"Mercados de Capitais","nav.pm":"Gest. Port.",
+  "nav.focus":"Convicções","nav.projects":"O que construí","nav.contact":"Contato",
+  "hero.eyebrow":"Engenheiro · Financista · Defensor da Energia",
+  "hero.btn1":"Ver Experiência","hero.btn2":"Entrar em Contato",
+  "hero.stat1":"Países · Estudou & trabalhou","hero.stat2":"Transações M&A fechadas",
+  "hero.stat3":"Pipeline avaliado","hero.stat4":"AUM gerido","hero.stat5":"Memos de investimento",
+  "about.tag":"Perfil","about.based":"Baseado em","about.been":"Onde já estive",
+  "lang.bilingual":"Bilíngue","lang.fluent":"Fluente","lang.intermediate":"Intermediário",
+  "skills.technical":"Habilidades Técnicas","skills.finance":"Finanças & Mercados",
+  "skills.ai":"Habilidades em IA","skills.domain":"Expertise de Domínio",
+  "edu.tag":"Formação Acadêmica",
+  "exp.tag":"Carreira",
+  "deals.tag":"Projetos de M&A","deals.stat1":"Projetos fechados & operacionais",
+  "deals.stat2":"Capacidade instalada combinada","deals.stat3":"Investimento total combinado (USD)",
+  "deals.stat4":"Prazos de PPA em todos os ativos","deals.overview":"Visão Geral da Transação","deals.myrole":"Meu Papel",
+  "cov.tag":"Cobertura de Research de Ações",
+  "pm.tag":"Gestão de Portfólio","pm.aum":"Capital Sob Gestão",
+  "pm.aumsub":"AUM Offshore · Gerido Diretamente","pm.alloclbl":"Abordagem de Alocação de Ativos",
+  "pm.conservative":"Conservador","pm.range":"faixa","pm.growth":"Crescimento",
+  "pm.equities":"Ações","pm.fi":"Renda Fixa","pm.alt":"Alternativos",
+  "pm.story1.ttl":"Framework analítico construído do zero",
+  "pm.story2.ttl":"Portfólios estratégicos implantados em escala",
+  "focus.tag":"O que me move","focus.thesis.tag":"A tese",
+  "focus.1.ttl":"Transição Energética","focus.2.ttl":"Tecnologia & IA",
+  "focus.3.ttl":"Finanças & Alocação de Capital",
+  "proj.tag":"Projetos & Iniciativas",
+  "proj.brasa.kicker":"Comunidade · Co-fundado em Paris",
+  "proj.forager.kicker":"Ferramenta de Inteligência em Infraestrutura",
+  "proj.music.kicker":"Música · Prática Pessoal",
+}
+};
+
+// Long-form html translations
+const HTML_EN = {
+  "hero.tagline": "Electrical engineer by education. Financier by experience. Convinced that the <strong>energy transition is the defining challenge of our generation</strong> — and that meeting it requires integrating deep technical knowledge, financial discipline, and the analytical power of data and AI.",
+  "about.title": "An unusual <em>intersection</em>",
+  "about.p1": "I am an Italian-Brazilian engineer educated in France and Brazil, currently completing an MBA at ESCP Business School across Paris and London. Raised in a family of academics, I have always been drawn to first-principles thinking — the habit of understanding not just <strong>what</strong> is happening, but <strong>why</strong> and <strong>what it implies</strong>.",
+  "about.p2": "My career has followed an unusual arc: from electrical engineering and applied research, to M&A and greenfield development in renewable energy, to equity research covering high-growth technology companies, to portfolio management at a multi-family office. Each chapter has been different in function, but unified by a consistent pull toward the same three domains — energy, finance, and the analytical tools that connect them.",
+  "about.p3": "I am convinced that the <strong>energy transition is the defining challenge of our generation, and that it cannot be solved by engineers or financiers working in isolation.</strong> What it demands is people who understand both the technical complexity of energy systems and the financial logic that drives capital allocation — and who can harness data and AI to make better decisions under uncertainty. That convergence is where I want to operate.",
+  "about.p4": "Outside of work, I compose music — eight years of conservatory-level piano studies. I also build tools: <em>Forager</em>, an interactive mapping platform for solar, wind, and infrastructure assets, started as a side project and has since become a useful real-world instrument.",
+  "edu.title": "Built on <em>rigour</em>",
+  "exp.title": "Where I have <em>been</em>",
+  "deals.title": "Deals, <em>end-to-end</em>",
+  "deals.intro": "In my M&A buy-side experience, I was directly involved in the origination, negotiation, and closing of three renewable energy projects in Brazil — two wind acquisitions and one solar complex. All three assets are now operational, collectively representing <strong>~BRL 1.2 billion</strong> in total investment.",
+  "cov.title": "Companies I <em>studied</em>",
+  "cov.intro": "As an equity analyst, I covered the US technology sector with a focus on high-growth, disruptive businesses. My research methodology went <strong>beyond standard DCF modelling</strong> — I read founder biographies, ran channel checks with customers, engaged directly with management teams, and built thesis-driven memos from first principles. The portfolio I managed held <strong>10 positions drawn from this 30+ company universe</strong>. A few examples of complete investment opportunities include:",
+  "pm.title": "Capital at <em>work</em>",
+  "pm.intro": "As portfolio manager of a MFO, I was responsible for the offshore investment book — designing and managing portfolios for <strong>70+ families</strong> across global equities, fixed income, and alternative assets in the US and Europe.",
+  "pm.families": "Across 70+ families and wealth structures",
+  "pm.story1.body": "The offshore book had no systematic evaluation infrastructure when I joined. I designed and coded a proprietary screening tool covering 2,000+ ETFs, mutual funds, and hedge funds — combining quantitative scoring (risk-adjusted returns, drawdown, factor exposures) with qualitative diligence. What had been a manual, judgment-driven process became a <strong>data-driven framework that could be consistently applied across the entire book</strong>.",
+  "pm.story2.body": "Using the framework, I implemented tailored strategic portfolios for each family — calibrated to their risk profile, liquidity needs, currency exposure, and time horizon. Beyond strategic allocation, I managed tactical positioning in response to market conditions, adjusting weights across equities, fixed income, and alternatives across <strong>$300M+ in offshore capital serving 70+ families</strong>.",
+  "pm.alloc.caption": "Each portfolio was tailored to the family's risk profile, liquidity needs, and time horizon — typically ranging between a 40/60 and 60/40 equity-to-fixed income balance, with alternatives allocated according to sophistication and appetite.",
+  "focus.title": "Three domains, <em>one thesis</em>",
+  "focus.1.desc": "The energy transition is the defining infrastructure challenge of our generation — a full rewiring of how the world produces and consumes energy. I have worked across its value chain: closing renewable energy M&A in Brazil, assessing green hydrogen feasibility, and studying the capital structures that make large-scale clean energy projects bankable.",
+  "focus.2.desc": "I covered 30+ high-growth technology companies as an equity analyst, and I have built data tools — from GIS mapping platforms to automated fund screening systems — that convert raw information into decisions. AI will not replace decision-makers, but the decision-makers of tomorrow will be the ones who know how to work with it.",
+  "focus.3.desc": "Capital determines which technologies get built and which transitions happen. I have been on both sides — allocating capital across global markets as a portfolio manager, and deploying it into real assets as an M&A practitioner. Finance is not a support function for the energy transition; it is a core driver of it.",
+  "focus.thesis": "To tackle the energy transition in a world shaped by AI, we must bring together technical and financial knowledge to make the right decisions. Will the decision-makers be AIs? No — but the people behind them will be the ones who understand both the complexity of energy systems and the logic of capital. That is the convergence I am building toward.",
+  "proj.title": "Things I <em>built</em>",
+  "proj.brasa.desc": "BRASA — the Brazilian Student Association — is a network connecting Brazilian students and young professionals across top universities and cities worldwide. I co-founded the European chapter in Paris, building a community from scratch for Brazilians studying and working across Europe.",
+  "proj.forager.desc": "An interactive mapping platform for solar, wind, and infrastructure assets. Born from a data-science approach I pioneered at Total Eren — where mapping 50+ GW of renewable opportunities in Brazil transformed M&A pipeline quality — Forager generalises that methodology into a usable product. Still live; added material value in subsequent roles.",
+  "proj.music.desc": "I have studied piano for eight years at conservatory level — an education in precision, patience, and the discipline of building something complex over a long period of time. I still play regularly and compose my own pieces. Music is not a side interest; it is the counterweight to everything analytical in my life.",
+  "contact.title": "Let's start a <em>conversation</em>",
+  "contact.sub": "Open to conversations about infrastructure PE, energy transition, research collaboration, and entrepreneurial ventures. Based in London, operating internationally.",
+};
+
+const HTML_FR = {
+  "hero.tagline": "Ingénieur électricien par formation. Financier par expérience. Convaincu que la <strong>transition énergétique est le défi fondamental de notre génération</strong> — et que le relever exige d'intégrer une expertise technique approfondie, une discipline financière rigoureuse, et la puissance analytique des données et de l'IA.",
+  "about.title": "Une <em>intersection</em> singulière",
+  "about.p1": "Je suis un ingénieur italo-brésilien formé en France et au Brésil, actuellement en MBA à l'ESCP Business School entre Paris et Londres. Élevé dans une famille d'universitaires, j'ai toujours été attiré par la pensée de premier principe — l'habitude de comprendre non seulement <strong>ce qui</strong> se passe, mais <strong>pourquoi</strong> et <strong>ce que cela implique</strong>.",
+  "about.p2": "Mon parcours a suivi une trajectoire singulière : du génie électrique et de la recherche appliquée, au M&A et au développement greenfield dans les énergies renouvelables, à la recherche actions sur les entreprises technologiques à forte croissance, jusqu'à la gestion de portefeuille dans un multi-family office. Chaque chapitre a été différent dans sa fonction, mais tous unifiés par une même attraction — l'énergie, la finance, et les outils analytiques qui les relient.",
+  "about.p3": "Je suis convaincu que la <strong>transition énergétique est le défi fondamental de notre génération, et qu'il ne peut être résolu ni par des ingénieurs ni par des financiers travaillant en silo.</strong> Ce qu'il exige, ce sont des personnes qui comprennent à la fois la complexité technique des systèmes énergétiques et la logique financière qui oriente l'allocation du capital — et qui savent exploiter les données et l'IA pour décider dans l'incertitude. C'est cette convergence là où je veux opérer.",
+  "about.p4": "En dehors du travail, je compose de la musique — huit années d'études de piano au conservatoire. Je développe aussi des outils : <em>Forager</em>, une plateforme cartographique interactive pour les actifs solaires, éoliens et d'infrastructure.",
+  "edu.title": "Construit sur la <em>rigueur</em>",
+  "exp.title": "Là où j'ai <em>été</em>",
+  "deals.title": "Transactions, <em>de bout en bout</em>",
+  "deals.intro": "Dans mon expérience M&A en buy-side, j'ai été directement impliqué dans l'origination, la négociation et la clôture de trois projets d'énergie renouvelable au Brésil — deux acquisitions éoliennes et un complexe solaire. Les trois actifs sont opérationnels, représentant collectivement <strong>~1,2 milliard BRL</strong> d'investissement total.",
+  "cov.title": "Entreprises que j'ai <em>analysées</em>",
+  "cov.intro": "En tant qu'analyste actions, j'ai couvert le secteur technologique américain avec un focus sur les entreprises à forte croissance et disruptives. Ma méthodologie allait <strong>au-delà du DCF standard</strong> — lectures de biographies, vérifications terrain, rencontres avec les directions. Le portefeuille géré comptait <strong>10 positions tirées de cet univers de 30+ entreprises</strong>. Quelques exemples :",
+  "pm.title": "Capital en <em>action</em>",
+  "pm.intro": "En tant que gestionnaire de portefeuille d'un MFO, j'étais responsable du livre d'investissement offshore — concevant et gérant des portefeuilles pour <strong>70+ familles</strong> en actions mondiales, obligations et actifs alternatifs aux États-Unis et en Europe.",
+  "pm.families": "Pour 70+ familles et structures patrimoniales",
+  "pm.story1.body": "Le portefeuille offshore ne disposait d'aucune infrastructure d'évaluation systématique à mon arrivée. J'ai conçu et codé un outil de sélection propriétaire couvrant 2 000+ ETFs, fonds et hedge funds. Ce qui était manuel est devenu un <strong>cadre data-driven applicable de manière cohérente à l'ensemble du portefeuille</strong>.",
+  "pm.story2.body": "J'ai mis en œuvre des portefeuilles stratégiques personnalisés pour chaque famille, calibrés selon leur profil de risque, liquidité et horizon temporel. Au-delà de l'allocation stratégique, j'ai géré le positionnement tactique sur <strong>plus de 300 millions USD d'actifs offshore pour 70+ familles</strong>.",
+  "pm.alloc.caption": "Chaque portefeuille était personnalisé selon le profil de risque, les besoins de liquidité et l'horizon temporel — oscillant généralement entre 40/60 et 60/40 actions-obligations, avec une allocation aux alternatifs selon sophistication et appétit.",
+  "focus.title": "Trois domaines, <em>une thèse</em>",
+  "focus.1.desc": "La transition énergétique est le défi infrastructure fondamental de notre génération — un recâblage complet de la façon dont le monde produit et consomme l'énergie. J'ai travaillé sur l'ensemble de sa chaîne de valeur : M&A renouvelable au Brésil, faisabilité hydrogène vert, structures de financement de projets.",
+  "focus.2.desc": "J'ai couvert 30+ entreprises technologiques à forte croissance en tant qu'analyste, et j'ai construit des outils data — de plateformes SIG à des systèmes automatisés de sélection de fonds. L'IA ne remplacera pas les décideurs, mais les décideurs de demain seront ceux qui savent travailler avec elle.",
+  "focus.3.desc": "Le capital détermine quelles technologies sont construites et quelles transitions ont lieu. J'ai été des deux côtés — allocataire de capital sur les marchés mondiaux et déployeur d'actifs réels en M&A. La finance n'est pas un support pour la transition énergétique ; elle en est un moteur essentiel.",
+  "focus.thesis": "Pour relever le défi de la transition énergétique dans un monde façonné par l'IA, nous devons réunir expertise technique et financière pour prendre les bonnes décisions. Les décideurs seront-ils des IA ? Non — mais les personnes derrière elles seront celles qui comprennent à la fois la complexité des systèmes énergétiques et la logique du capital. C'est cette convergence que je construis.",
+  "proj.title": "Ce que j'ai <em>construit</em>",
+  "proj.brasa.desc": "BRASA — la Brazilian Student Association — connecte étudiants et jeunes professionnels brésiliens dans les meilleures universités et villes du monde. J'ai co-fondé le chapitre européen à Paris, construisant une communauté de zéro pour les Brésiliens en Europe.",
+  "proj.forager.desc": "Une plateforme de cartographie interactive pour actifs solaires, éoliens et d'infrastructure. Née d'une approche data-science initiée chez Total Eren, Forager généralise cette méthodologie en produit utilisable. Toujours en ligne.",
+  "proj.music.desc": "J'ai étudié le piano pendant huit ans au conservatoire — formation en précision et patience. Je joue et compose encore régulièrement. La musique est le contrepoids de tout ce qui est analytique dans ma vie.",
+  "contact.title": "Commençons une <em>conversation</em>",
+  "contact.sub": "Ouvert aux conversations sur le PE en infrastructure, la transition énergétique, la collaboration en recherche et les projets entrepreneuriaux. Basé à Londres, portée internationale.",
+};
+
+const HTML_PT = {
+  "hero.tagline": "Engenheiro elétrico por formação. Financista por experiência. Convicto de que a <strong>transição energética é o desafio definidor da nossa geração</strong> — e que enfrentá-lo exige integrar conhecimento técnico profundo, disciplina financeira e o poder analítico dos dados e da IA.",
+  "about.title": "Uma <em>interseção</em> incomum",
+  "about.p1": "Sou um engenheiro ítalo-brasileiro formado na França e no Brasil, atualmente cursando um MBA na ESCP Business School entre Paris e Londres. Criado em uma família de acadêmicos, sempre fui atraído pelo pensamento de primeiros princípios — o hábito de entender não apenas <strong>o que</strong> está acontecendo, mas <strong>por que</strong> e <strong>o que isso implica</strong>.",
+  "about.p2": "Minha carreira seguiu um arco incomum: da engenharia elétrica e pesquisa aplicada, ao M&A e desenvolvimento greenfield em energias renováveis, à análise de ações em empresas de tecnologia de alto crescimento, até a gestão de portfólio em um multi-family office. Cada capítulo foi diferente em função, mas todos unificados por uma atração constante pelos mesmos três domínios — energia, finanças e as ferramentas analíticas que os conectam.",
+  "about.p3": "Estou convicto de que a <strong>transição energética é o desafio fundamental da nossa geração, e que ele não pode ser resolvido por engenheiros ou financistas trabalhando isolados.</strong> O que ele exige são pessoas que compreendam tanto a complexidade técnica dos sistemas energéticos quanto a lógica financeira que orienta a alocação de capital — e que saibam usar dados e IA para tomar melhores decisões sob incerteza. É nessa convergência que quero atuar.",
+  "about.p4": "Fora do trabalho, componho música — oito anos de estudos de piano em nível de conservatório. Também desenvolvo ferramentas: <em>Forager</em>, uma plataforma de mapeamento interativo para ativos solares, eólicos e de infraestrutura.",
+  "edu.title": "Construído sobre o <em>rigor</em>",
+  "exp.title": "Onde já <em>estive</em>",
+  "deals.title": "Transações, <em>de ponta a ponta</em>",
+  "deals.intro": "Na minha experiência de M&A buy-side, estive diretamente envolvido na originação, negociação e fechamento de três projetos de energia renovável no Brasil — duas aquisições eólicas e um complexo solar. Os três ativos estão operacionais, representando coletivamente <strong>~BRL 1,2 bilhão</strong> em investimento total.",
+  "cov.title": "Empresas que <em>estudei</em>",
+  "cov.intro": "Como analista de ações, cobri o setor de tecnologia americano com foco em empresas de alto crescimento e disruptivas. Minha metodologia foi <strong>além do DCF padrão</strong> — li biografias de fundadores, fiz channel checks, me reuni com equipes de gestão. O portfólio gerenciado tinha <strong>10 posições desse universo de 30+ empresas</strong>. Alguns exemplos:",
+  "pm.title": "Capital em <em>ação</em>",
+  "pm.intro": "Como gestor de portfólio de um MFO, era responsável pelo livro de investimentos offshore — desenhando e gerenciando portfólios para <strong>70+ famílias</strong> em ações globais, renda fixa e ativos alternativos nos EUA e Europa.",
+  "pm.families": "Para 70+ famílias e estruturas patrimoniais",
+  "pm.story1.body": "O livro offshore não tinha infraestrutura de avaliação sistemática quando entrei. Desenhei e codifiquei uma ferramenta proprietária cobrindo 2.000+ ETFs, fundos e hedge funds. O que era manual se tornou um <strong>framework orientado por dados aplicável de forma consistente em todo o livro</strong>.",
+  "pm.story2.body": "Implementei portfólios estratégicos personalizados para cada família, calibrados por perfil de risco, liquidez e horizonte. Além da alocação estratégica, gerenciei o posicionamento tático em mais de <strong>US$ 300M em capital offshore para 70+ famílias</strong>.",
+  "pm.alloc.caption": "Cada portfólio era personalizado por perfil de risco, liquidez e horizonte — tipicamente variando entre 40/60 e 60/40 de ações para renda fixa, com alternativos conforme sofisticação e apetite.",
+  "focus.title": "Três domínios, <em>uma tese</em>",
+  "focus.1.desc": "A transição energética é o desafio de infraestrutura fundamental da nossa geração — uma reconfiguração completa de como o mundo produz e consome energia. Trabalhei em sua cadeia de valor: M&A renovável no Brasil, viabilidade de hidrogênio verde, estruturas de financiamento de projetos.",
+  "focus.2.desc": "Cobri 30+ empresas de tecnologia de alto crescimento como analista e construí ferramentas de dados — de plataformas GIS a sistemas automatizados de triagem de fundos. A IA não substituirá os tomadores de decisão, mas os de amanhã serão os que sabem trabalhar com ela.",
+  "focus.3.desc": "O capital determina quais tecnologias são construídas e quais transições acontecem. Estive nos dois lados — alocando capital nos mercados globais como gestor de portfólio e implantando em ativos reais como praticante de M&A. Finanças não é suporte para a transição energética; é um motor central dela.",
+  "focus.thesis": "Para enfrentar a transição energética num mundo moldado pela IA, precisamos reunir conhecimento técnico e financeiro para tomar as decisões certas. Os tomadores de decisão serão IAs? Não — mas as pessoas por trás delas serão as que entendem tanto a complexidade dos sistemas energéticos quanto a lógica do capital. É essa convergência que estou construindo.",
+  "proj.title": "O que eu <em>construí</em>",
+  "proj.brasa.desc": "BRASA — a Brazilian Student Association — conecta estudantes e jovens profissionais brasileiros nas melhores universidades e cidades do mundo. Cofundei o capítulo europeu em Paris, construindo uma comunidade do zero para brasileiros na Europa.",
+  "proj.forager.desc": "Uma plataforma de mapeamento interativo para ativos solares, eólicos e de infraestrutura. Nascida de uma abordagem de ciência de dados desenvolvida na Total Eren, o Forager generaliza essa metodologia em produto utilizável. Ainda em uso.",
+  "proj.music.desc": "Estudei piano por oito anos em nível de conservatório — formação em precisão e paciência. Ainda toco e componho regularmente. Música é o contrapeso de tudo que é analítico na minha vida.",
+  "contact.title": "Vamos começar uma <em>conversa</em>",
+  "contact.sub": "Aberto a conversas sobre PE em infraestrutura, transição energética, colaboração em pesquisa e projetos empreendedores. Baseado em Londres, atuando internacionalmente.",
+};
+
+// HTML-keyed elements selector map
+const HTML_SELECTORS = {
+  "hero.tagline":     {sel:".hero-tagline",        html:true},
+  "about.title":      {sel:"#about .s-title",       html:true},
+  "about.p1":         {sel:"#about .about-text p:nth-child(1)", html:true},
+  "about.p2":         {sel:"#about .about-text p:nth-child(2)", html:true},
+  "about.p3":         {sel:"#about .about-text p:nth-child(3)", html:true},
+  "about.p4":         {sel:"#about .about-text p:nth-child(4)", html:true},
+  "edu.title":        {sel:"#education .s-title",   html:true},
+  "exp.title":        {sel:"#experience .s-title",  html:true},
+  "deals.title":      {sel:"#deals .s-title",       html:true},
+  "deals.intro":      {sel:".deals-intro",          html:true},
+  "cov.title":        {sel:"#coverage .s-title",    html:true},
+  "cov.intro":        {sel:".cov-intro",            html:true},
+  "pm.title":         {sel:"#portfolio .s-title",   html:true},
+  "pm.intro":         {sel:".pm-intro",             html:true},
+  "pm.families":      {sel:".aum-families",         html:false},
+  "pm.story1.body":   {sel:".pm-story .story-item:first-child .story-body", html:true},
+  "pm.story2.body":   {sel:".pm-story .story-item:last-child .story-body",  html:true},
+  "pm.alloc.caption": {sel:".alloc-caption",        html:false},
+  "focus.title":      {sel:"#focus .s-title",       html:true},
+  "focus.1.desc":     {sel:".focus-col:nth-child(1) .focus-desc", html:false},
+  "focus.2.desc":     {sel:".focus-col:nth-child(2) .focus-desc", html:false},
+  "focus.3.desc":     {sel:".focus-col:nth-child(3) .focus-desc", html:false},
+  "focus.thesis":     {sel:"#focus .focus-cols + div p", html:false},
+  "proj.title":       {sel:"#projects .s-title",    html:true},
+  "proj.brasa.desc":  {sel:".proj-col:nth-child(1) .proj-desc", html:false},
+  "proj.forager.desc":{sel:".proj-col:nth-child(2) .proj-desc", html:false},
+  "proj.music.desc":  {sel:".proj-col:nth-child(3) .proj-desc", html:false},
+  "contact.title":    {sel:".contact-ttl",          html:true},
+  "contact.sub":      {sel:".contact-sub",          html:false},
+};
+
+function applyLang(lang) {
+  const t  = I18N[lang]  || I18N.en;
+  const th = lang==='fr' ? HTML_FR : lang==='pt' ? HTML_PT : HTML_EN;
+
+  // Simple text keys via data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (t[k] !== undefined) el.textContent = t[k];
+  });
+
+  // HTML keys via selector map
+  Object.keys(HTML_SELECTORS).forEach(k => {
+    const cfg = HTML_SELECTORS[k];
+    const val = th[k];
+    if (!val) return;
+    const el = document.querySelector(cfg.sel);
+    if (!el) return;
+    if (cfg.html) el.innerHTML = val;
+    else el.textContent = val;
+  });
+
+  // Flag buttons
+  document.querySelectorAll('.lang-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.lang === lang)
+  );
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+  localStorage.setItem('jc-lang', lang);
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn =>
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang))
+);
+
+applyLang(localStorage.getItem('jc-lang') || 'en');
+</script>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const secs = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  
+  const navObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector('.nav-links a[href="#'+e.target.id+'"]');
+        if(active) active.classList.add('active');
+      }
+    });
+  }, {threshold:0.3});
+  secs.forEach(s => navObs.observe(s));
+</script>
+
+</body>
+</html>
