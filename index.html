@@ -23,8 +23,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:
 
 nav{position:fixed;inset:0 0 auto;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:rgba(11,12,14,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:var(--serif);font-size:1rem;font-weight:400;letter-spacing:.06em;color:var(--text);text-decoration:none}
-.nav-links{display:flex;gap:1.2rem;list-style:none}
-.nav-links a{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links{display:flex;gap:.75rem;list-style:none}
+.nav-links a{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
 .nav-links a:hover,.nav-links a.active{color:var(--accent)}
 
 #hero{height:100vh;min-height:600px;display:grid;grid-template-columns:1fr 1fr;padding-top:72px;position:relative;overflow:hidden}
@@ -42,9 +42,9 @@ nav{position:fixed;inset:0 0 auto;z-index:100;display:flex;align-items:center;ju
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
 .hero-right{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;height:100%}
 .hero-graphic{width:80%;max-width:460px;opacity:1}
-.hero-stats{grid-column:1/-1;display:flex;flex-direction:row;justify-content:space-around;align-items:flex-end;padding:0 4rem 2rem;border-top:1px solid var(--border)}
-.stat-val{font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--accent);line-height:1;text-align:right}
-.stat-lbl{font-family:var(--mono);font-size:.55rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);text-align:right}
+.hero-stats{grid-column:1/-1;display:flex;flex-direction:row;justify-content:space-around;align-items:center;padding:0 4rem 1.2rem;padding-top:.8rem;border-top:1px solid var(--border)}
+.stat-val{font-family:var(--serif);font-size:1.95rem;font-weight:300;color:var(--accent);line-height:1;text-align:right}
+.stat-lbl{font-family:var(--mono);font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);text-align:right;margin-top:.25rem}
 
 section{position:relative;z-index:1}
 .si{max-width:1160px;margin:0 auto;padding:7rem 3rem}
@@ -153,6 +153,14 @@ section{position:relative;z-index:1}
 .co-name:last-child::after{content:''}
 .co-name:hover{color:var(--accent)}
 
+/* ── RESEARCH ── */
+#research{border-top:1px solid var(--border);background:var(--surface)}
+.research-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.research-card{padding-top:1.2rem;border-top:2px solid var(--accent)}
+.research-tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem;margin-top:.6rem;line-height:1.6}
+.research-title{font-family:var(--serif);font-size:1.25rem;font-weight:400;color:var(--text);line-height:1.3;margin-bottom:1rem}
+.research-body{font-size:.9rem;color:var(--sub);line-height:1.78}
+
 /* ── EDUCATION ── */
 #education{border-top:1px solid var(--border)}
 .edu-list{display:flex;flex-direction:column;gap:0}
@@ -237,6 +245,11 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
   .hero-left{padding:4.5rem 1.8rem 4rem}
   .si{padding:5rem 1.8rem}
   .about-grid,.pm-grid{grid-template-columns:1fr;gap:3rem}
+  .research-grid{grid-template-columns:1fr;gap:3rem}
+  .pm-pipeline{grid-template-columns:1fr;gap:1rem}
+  .pm-arrow{transform:rotate(90deg);padding:.4rem 0}
+  .pm-ba{grid-template-columns:1fr}
+  .pm-stats{grid-template-columns:1fr;gap:1rem}
   .deal-body{grid-template-columns:1fr}
   .deal-metrics{border-right:none;border-bottom:1px solid var(--border)}
   .edu-entry{grid-template-columns:1fr;gap:1rem}
@@ -244,53 +257,345 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
   .cov-row{grid-template-columns:1fr;gap:1rem}
   .stat-bar{flex-wrap:wrap} .sb-item{flex:1 1 45%}
   footer{flex-direction:column;gap:.5rem;text-align:center}
+  /* Hide desktop nav links, show hamburger */
+  .nav-links{display:none}
+  .nav-mobile-toggle{display:flex}
 }
 @media(max-width:600px){
-  .nav-links li:nth-child(n+5){display:none}
   .sb-item{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--border)}
+  .hero-stats{padding:0 1.5rem 2rem;gap:1.5rem;flex-wrap:wrap;justify-content:flex-start}
+  .hero-stats > div{flex:1 1 40%;text-align:left}
+}
+
+/* ── MOBILE NAV TOGGLE ── */
+.nav-mobile-toggle{
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:4px;
+  z-index:200;
+}
+.nav-mobile-toggle span{
+  display:block;
+  width:22px;
+  height:1px;
+  background:var(--muted);
+  transition:all .25s;
+  transform-origin:center;
+}
+.nav-mobile-toggle.open span:nth-child(1){transform:translateY(6px) rotate(45deg);background:var(--accent)}
+.nav-mobile-toggle.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-mobile-toggle.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);background:var(--accent)}
+
+/* ── MOBILE MENU ── */
+.mobile-menu{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(11,12,14,.97);
+  backdrop-filter:blur(20px);
+  z-index:99;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2.2rem;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  font-family:var(--serif);
+  font-size:2rem;
+  font-weight:300;
+  color:var(--sub);
+  text-decoration:none;
+  letter-spacing:.04em;
+  transition:color .2s;
+}
+.mobile-menu a:hover{color:var(--accent)}
+
+.contact-phones{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:1.8rem;
+  margin-top:1.4rem;
+  flex-wrap:wrap;
+}
+.phone-link{
+  display:inline-flex;
+  align-items:center;
+  gap:.75rem;
+  text-decoration:none;
+  transition:opacity .2s;
+}
+.phone-link:hover{opacity:.75}
+.phone-flag{
+  display:inline-flex;
+  align-items:center;
+  flex-shrink:0;
+}
+.phone-flag svg{
+  width:26px;
+  height:17px;
+  border-radius:2px;
+  opacity:.45;
+  display:block;
+}
+.phone-num{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.08em;
+  color:var(--sub);
+}
+.phone-divider{
+  width:1px;
+  height:18px;
+  background:var(--border);
+}
+
+/* ── CONTACT IMPROVEMENTS ── */
+.c-link-primary{
+  background:var(--accent);
+  color:#0b0c0e !important;
+  border-color:var(--accent) !important;
+}
+.c-link-primary:hover{background:#d9bc86;border-color:#d9bc86 !important}
+.contact-footer-note{
+  margin-top:2.8rem;
+  font-family:var(--mono);
+  font-size:.6rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--dim);
+  display:flex;
+  gap:.8rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.contact-sep{color:var(--border)}
+
+/* ── SCROLL REVEAL ANIMATIONS ── */
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .65s cubic-bezier(.22,.68,0,1.2), transform .65s cubic-bezier(.22,.68,0,1.2);
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+.reveal-delay-1{transition-delay:.08s}
+.reveal-delay-2{transition-delay:.16s}
+.reveal-delay-3{transition-delay:.24s}
+.reveal-delay-4{transition-delay:.32s}
+.reveal-delay-5{transition-delay:.40s}
+
+/* ── HERO LOAD ANIMATION ── */
+@keyframes heroFadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hero-eyebrow{animation:heroFadeUp .7s .1s both}
+.hero-name{animation:heroFadeUp .7s .25s both}
+.hero-tagline{animation:heroFadeUp .7s .4s both}
+.hero-cta{animation:heroFadeUp .7s .55s both}
+.hero-stats{animation:heroFadeUp .7s .65s both}
+
+/* ── VENN DIAGRAM ANIMATION ── */
+@keyframes vennFade{
+  from{opacity:0;transform:scale(.93)}
+  to{opacity:1;transform:scale(1)}
+}
+.hero-graphic{animation:vennFade .9s .4s both}
+
+/* ── STAT BAR COUNTER ANIMATION ── */
+@keyframes statPulse{
+  0%{opacity:0;transform:scale(.85)}
+  60%{transform:scale(1.04)}
+  100%{opacity:1;transform:scale(1)}
+}
+.stat-val,.sb-val,.aum-number,.pm-stat-val{animation:statPulse .5s both}
+
+/* ── TIMELINE ITEM ANIMATION ── */
+.tl-item{
+  opacity:0;
+  transform:translateX(-16px);
+  transition:opacity .55s ease, transform .55s ease;
+}
+.tl-item.visible{opacity:1;transform:translateX(0)}
+
+/* ── DEAL CARD HOVER REFINEMENT ── */
+.deal{transition:background .2s, transform .2s, box-shadow .2s}
+.deal:hover{background:#13161a;transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
+
+/* ── FOCUS COL HOVER ── */
+.focus-col{
+  transition:opacity .2s;
+  padding:1.5rem;
+  margin:-1.5rem;
+  border-radius:2px;
+}
+.focus-cols:hover .focus-col{opacity:.5}
+.focus-cols:hover .focus-col:hover{opacity:1}
+
+/* ── NAV ACTIVE INDICATOR ── */
+.nav-links a{position:relative}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  bottom:-4px;
+  left:0;right:0;
+  height:1px;
+  background:var(--accent);
+  transform:scaleX(0);
+  transition:transform .2s;
+}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+
+/* ── SMOOTH SECTION ENTRY BACKGROUNDS ── */
+section{
+  transition:background .3s ease;
 }
 
 
-.lang-switcher{display:flex;align-items:center;gap:.5rem;margin-left:1.8rem}
-.lang-btn{background:none;border:none;cursor:pointer;font-size:1.15rem;padding:.15rem .2rem;opacity:.35;transition:opacity .2s;line-height:1}
-.lang-btn:hover{opacity:.75}
-.lang-btn.active{opacity:1}
+
+/* ── SCROLL PROGRESS BAR ── */
+#scroll-progress{
+  position:fixed;
+  top:0;left:0;
+  height:2px;
+  background:linear-gradient(to right, var(--accent), var(--green));
+  width:0%;
+  z-index:200;
+  transition:width .1s linear;
+  pointer-events:none;
+}
+
+/* ── SECTION NUMBER DECORATION ── */
+.s-tag{counter-increment:none}
+
+/* ── RESEARCH CARD REVEAL ── */
+.research-card{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .55s ease, transform .55s ease;
+}
+.research-card.visible{opacity:1;transform:translateY(0)}
+.research-card:nth-child(2){transition-delay:.14s}
+
+/* ── EDU ENTRY REVEAL ── */
+.edu-entry{
+  opacity:0;
+  transform:translateX(-14px);
+  transition:opacity .5s ease, transform .5s ease;
+}
+.edu-entry.visible{opacity:1;transform:translateX(0)}
+.edu-entry:nth-child(2){transition-delay:.1s}
+.edu-entry:nth-child(3){transition-delay:.2s}
+
+/* ── STAT BAR ITEM STAGGER ── */
+.sb-item{
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .4s ease, transform .4s ease;
+}
+.sb-item.visible{opacity:1;transform:translateY(0)}
+
+/* ── COVER TABLE ROWS ── */
+.cov-row{
+  opacity:0;
+  transition:opacity .45s ease;
+}
+.cov-row.visible{opacity:1}
+
+/* ── SMOOTH NAV BACKGROUND ON SCROLL ── */
+nav{transition:background .3s ease, box-shadow .3s ease}
+nav.scrolled{background:rgba(11,12,14,.98);box-shadow:0 1px 0 var(--border)}
+
+/* ── FOOTER IMPROVEMENT ── */
+footer{
+  padding:2rem 3rem;
+}
+.ft-copy{
+  font-family:var(--mono);
+  font-size:.55rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--dim);
+}
+.pm-framework{margin:3rem 0 0}
+.pm-pipeline{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:stretch;margin:2rem 0 2.5rem}
+.pm-stage{background:var(--faint);border:1px solid var(--border);padding:1.6rem;position:relative}
+.pm-stage-num{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;margin-bottom:.6rem}
+.pm-stage-title{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--text);margin-bottom:1rem;line-height:1.2}
+.pm-stage-items{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.pm-stage-items li{font-family:var(--mono);font-size:.65rem;color:var(--muted);padding-left:.9rem;position:relative;line-height:1.55}
+.pm-stage-items li::before{content:'—';position:absolute;left:0;color:var(--dim);font-size:.6rem}
+.pm-stage-items li.hl{color:var(--accent)}
+.pm-stage-items li.hl::before{color:var(--accent)}
+.pm-arrow{display:flex;align-items:center;justify-content:center;padding:0 .7rem}
+.pm-ba{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;margin:0 0 2.5rem}
+.pm-ba-card{padding:1.4rem}
+.pm-ba-card.before{background:rgba(255,255,255,.02);border:1px solid var(--border)}
+.pm-ba-card.after{background:rgba(200,169,110,.05);border:1px solid rgba(200,169,110,.22)}
+.pm-ba-lbl{font-family:var(--mono);font-size:.57rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.75rem}
+.before .pm-ba-lbl{color:var(--dim)}
+.after .pm-ba-lbl{color:var(--accent)}
+.pm-ba-text{font-size:.9rem;color:var(--muted);line-height:1.72}
+.after .pm-ba-text{color:var(--sub)}
+.pm-stats{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border);padding-top:2rem}
+.pm-stat{text-align:center;border-right:1px solid var(--border)}
+.pm-stat:last-child{border-right:none}
+.pm-stat-val{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--accent)}
+.pm-stat-lbl{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+.pm-tools{border-top:1px solid rgba(200,169,110,.15);padding:1.6rem 0 0;margin-top:0}
+.pm-tools-hd{display:flex;align-items:baseline;gap:1.2rem;margin-bottom:1rem}
+.pm-tools-lbl{font-family:var(--mono);font-size:.57rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+.pm-tools-line{flex:1;height:1px;background:rgba(200,169,110,.15)}
+.pm-tools-grid{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center}
+.pm-tool{font-family:var(--mono);font-size:.65rem;letter-spacing:.06em;color:var(--accent);background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.22);padding:.38rem .85rem;white-space:nowrap}
 </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
 
 <nav>
-  <div style="display:flex;align-items:center;gap:1rem">
-    <a href="#hero" class="nav-logo">Joao Victor Creste</a>
-    <div class="lang-switcher">
-      <button class="lang-btn active" data-lang="en" title="English">🇺🇸</button>
-      <button class="lang-btn" data-lang="fr" title="Français">🇫🇷</button>
-      <button class="lang-btn" data-lang="pt" title="Português">🇧🇷</button>
-    </div>
-  </div>
+  <a href="#hero" class="nav-logo">Joao Victor Creste</a>
   <ul class="nav-links">
-    <li><a href="#about" data-i18n="nav.profile">Profile</a></li>
-    <li><a href="#education" data-i18n="nav.education">Education</a></li>
-    <li><a href="#experience" data-i18n="nav.career">Career</a></li>
-    <li><a href="#deals" data-i18n="nav.ma">M&amp;A</a></li>
-    <li><a href="#coverage" data-i18n="nav.coverage">Capital Markets</a></li>
-    <li><a href="#portfolio" data-i18n="nav.pm">PM</a></li>
-    <li><a href="#focus" data-i18n="nav.focus">Focus</a></li>
-    <li><a href="#projects" data-i18n="nav.projects">More things I've built</a></li>
-    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    <li><a href="#about">Profile</a></li>
+    <li><a href="#experience">Career</a></li>
+    <li><a href="#deals">M&amp;A</a></li>
+    <li><a href="#coverage">Equity Research</a></li>
+    <li><a href="#portfolio">Portfolio Management</a></li>
+    <li><a href="#focus">Next Steps</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
-
+  <button class="nav-mobile-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.getElementById('mobile-menu').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div id="mobile-menu" class="mobile-menu">
+  <a href="#about" onclick="document.getElementById('mobile-menu').classList.remove('open');document.querySelector('.nav-mobile-toggle').classList.remove('open')">Profile</a>
+  <a href="#experience" onclick="document.getElementById('mobile-menu').classList.remove('open');document.querySelector('.nav-mobile-toggle').classList.remove('open')">Career</a>
+  <a href="#deals" onclick="document.getElementById('mobile-menu').classList.remove('open');document.querySelector('.nav-mobile-toggle').classList.remove('open')">M&amp;A</a>
+  <a href="#coverage" onclick="document.getElementById('mobile-menu').classList.remove('open');document.querySelector('.nav-mobile-toggle').classList.remove('open')">Equity Research</a>
+  <a href="#portfolio" onclick="document.getElementById('mobile-menu').classList.remove('open');document.querySelector('.nav-mobile-toggle').classList.remove('open')">Portfolio Management</a>
+  <a href="#focus" onclick="document.getElementById('mobile-menu').classList.remove('open');document.querySelector('.nav-mobile-toggle').classList.remove('open')">Next Steps</a>
+  <a href="#contact" onclick="document.getElementById('mobile-menu').classList.remove('open');document.querySelector('.nav-mobile-toggle').classList.remove('open')">Contact</a>
+</div>
 
 <section id="hero">
   <div class="hero-vline"></div>
   <div class="hero-left">
-    <p class="hero-eyebrow" data-i18n="hero.eyebrow">Engineer · Financier · Energy Advocate</p>
+    <p class="hero-eyebrow">Engineer · Financier · Energy</p>
     <h1 class="hero-name">Joao Victor<br><em>Creste</em></h1>
-    <p class="hero-tagline">Electrical engineer by education. Financier by experience. Convinced that the <strong>energy transition is the defining challenge of our generation</strong> — and that meeting it requires integrating deep technical knowledge, financial discipline, and the analytical power of data and AI.</p>
+    <p class="hero-tagline">From electrical engineering to renewable energy M&amp;A, equity research, and portfolio management — built at the intersection of <strong>energy, finance, and technology</strong>.</p>
     <div class="hero-cta">
-      <a href="#experience" class="btn btn-primary" data-i18n="hero.btn1">View Experience</a>
-      <a href="#contact" class="btn btn-ghost" data-i18n="hero.btn2">Get in Touch</a>
+      <a href="#experience" class="btn btn-primary">View Experience</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
     </div>
   </div>
   <div class="hero-right">
@@ -345,18 +650,18 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
     </svg>
   </div>
   <div class="hero-stats">
-    <div style="text-align:right"><div class="stat-val">5</div><div class="stat-lbl" data-i18n="hero.stat1">Countries · Studied &amp; worked</div></div>
-    <div style="text-align:right"><div class="stat-val">3</div><div class="stat-lbl" data-i18n="hero.stat2">M&amp;A deals closed</div></div>
-    <div style="text-align:right"><div class="stat-val">50+ GW</div><div class="stat-lbl" data-i18n="hero.stat3">Pipeline evaluated</div></div>
-    <div style="text-align:right"><div class="stat-val">$1B+</div><div class="stat-lbl" data-i18n="hero.stat4">AUM managed</div></div>
-    <div style="text-align:right"><div class="stat-val">20+</div><div class="stat-lbl" data-i18n="hero.stat5">Investment memos</div></div>
+    <div style="text-align:right"><div class="stat-val">5</div><div class="stat-lbl">Countries · Studied &amp; worked</div></div>
+    <div style="text-align:right"><div class="stat-val">3</div><div class="stat-lbl">M&amp;A deals closed</div></div>
+    <div style="text-align:right"><div class="stat-val">50+ GW</div><div class="stat-lbl">Pipeline evaluated</div></div>
+    <div style="text-align:right"><div class="stat-val">$1B+</div><div class="stat-lbl">AUM managed</div></div>
+    <div style="text-align:right"><div class="stat-val">20+</div><div class="stat-lbl">Investment memos</div></div>
   </div>
 </section>
 
 <section id="about">
   <div class="si">
-    <p class="s-tag" data-i18n="about.tag">Profile</p>
-    <h2 class="s-title">An unusual <em>intersection</em></h2>
+    <p class="s-tag reveal">Profile</p>
+    <h2 class="s-title reveal reveal-delay-1">An unusual <em>intersection</em></h2>
     <div class="about-grid">
       <div class="about-text">
         <p>I am an Italian-Brazilian engineer educated in France and Brazil, currently completing an MBA at ESCP Business School across Paris and London. Raised in a family of academics, I have always been drawn to first-principles thinking — the habit of understanding not just <strong>what</strong> is happening, but <strong>why</strong> and <strong>what it implies</strong>.</p>
@@ -364,165 +669,340 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
         <p>I am convinced that the <strong>energy transition is the defining challenge of our generation, and that it cannot be solved by engineers or financiers working in isolation.</strong> What it demands is people who understand both the technical complexity of energy systems and the financial logic that drives capital allocation — and who can harness data and AI to make better decisions under uncertainty. That convergence is where I want to operate.</p>
         <p>Outside of work, I compose music — eight years of conservatory-level piano studies. I also build tools: <em>Forager</em>, an interactive mapping platform for solar, wind, and infrastructure assets, started as a side project and has since become a useful real-world instrument.</p>
         <div class="lang-list">
-          <div class="lang-item"><span class="lang-name">Portuguese</span><span class="lang-lvl" data-i18n="lang.bilingual">Bilingual</span></div>
-          <div class="lang-item"><span class="lang-name">English</span><span class="lang-lvl" data-i18n="lang.bilingual">Bilingual</span></div>
-          <div class="lang-item"><span class="lang-name">French</span><span class="lang-lvl" data-i18n="lang.fluent">Fluent</span></div>
-          <div class="lang-item"><span class="lang-name">Italian</span><span class="lang-lvl" data-i18n="lang.fluent">Fluent</span></div>
-          <div class="lang-item"><span class="lang-name">Spanish</span><span class="lang-lvl" data-i18n="lang.intermediate">Intermediate</span></div>
+          <div class="lang-item"><span class="lang-name">Portuguese</span><span class="lang-lvl">Bilingual</span></div>
+          <div class="lang-item"><span class="lang-name">English</span><span class="lang-lvl">Bilingual</span></div>
+          <div class="lang-item"><span class="lang-name">French</span><span class="lang-lvl">Fluent</span></div>
+          <div class="lang-item"><span class="lang-name">Italian</span><span class="lang-lvl">Fluent</span></div>
+          <div class="lang-item"><span class="lang-name">Spanish</span><span class="lang-lvl">Intermediate</span></div>
         </div>
       </div>
       <div class="sidebar">
         <div class="skill-group">
-          <p class="skill-lbl" data-i18n="skills.technical">Technical Skills</p>
-          <p class="skill-list">Python, R, SQL, JavaScript, MATLAB, C++, VBA, GIS</p>
+          <p class="skill-lbl">Data Analysis</p>
+          <p class="skill-list">Tableau, PowerBI, SQL, MATLAB, GIS</p>
         </div>
         <div class="skill-group">
-          <p class="skill-lbl" data-i18n="skills.finance">Finance &amp; Markets</p>
-          <p class="skill-list">Bloomberg Terminal, Pitchbook, FactSet, Tableau, PowerBI</p>
+          <p class="skill-lbl">Programming</p>
+          <p class="skill-list">Python, R, JavaScript, C++, VBA</p>
         </div>
         <div class="skill-group">
-          <p class="skill-lbl" data-i18n="skills.ai">AI Skills</p>
+          <p class="skill-lbl">Finance</p>
+          <p class="skill-list">Bloomberg Terminal, Pitchbook, FactSet</p>
+        </div>
+        <div class="skill-group">
+          <p class="skill-lbl">AI</p>
           <p class="skill-list">Prompt Engineering, Agentic AI, Supervised Learning, Unsupervised Learning</p>
         </div>
         <div class="skill-group">
-          <p class="skill-lbl" data-i18n="skills.domain">Domain Expertise</p>
+          <p class="skill-lbl">Domain Expertise</p>
           <p class="skill-list domain">Energy Transition, Green Hydrogen, Solar / Wind M&amp;A, Infrastructure PE, Equity Research, Portfolio Management</p>
         </div>
         <div class="map-wrap">
-          <p class="map-lbl" data-i18n="about.based">Currently Based</p>
+          <p class="map-lbl">Currently Based</p>
           <svg viewBox="0 0 160 215" xmlns="http://www.w3.org/2000/svg" style="width:37.5%;display:block;margin:.6rem auto 0">
-            <defs>
-              <filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.038" numOctaves="3" result="noise" seed="5"/>
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
-              </filter>
-            </defs>
 
-            <!-- Ireland — faint dashed, context only -->
-            <path d="M28,88 C26,86 23,85 22,88 C21,91 22,95 21,98 C20,101 18,103 18,107
-                     C18,111 20,114 20,118 C20,121 18,124 19,127 C20,130 23,131 24,134
-                     C25,137 24,141 26,143 C28,145 31,144 33,146 C35,145 36,142 37,139
-                     C38,136 40,134 40,131 C40,128 38,125 38,122 C38,119 40,116 39,113
-                     C38,110 35,108 34,105 C33,102 34,99 33,96 C32,93 30,91 28,88 Z"
-              fill="none" stroke="#222629" stroke-width="0.8" stroke-dasharray="2.5,2.5"
-              stroke-linejoin="round" filter="url(#sketchy)"/>
+            <!-- Ireland — faint context, no filter -->
+            <path d="M22,91 C20,88 18,88 17,91 C16,95 17,99 16,103
+                     C15,107 13,110 14,114 C15,118 17,121 17,125
+                     C17,129 15,132 16,135 C17,138 20,139 21,142
+                     C23,145 21,149 24,151 C26,153 29,151 31,151
+                     C33,150 34,147 35,144 C36,141 38,138 38,135
+                     C38,132 36,129 36,126 C36,123 38,120 37,117
+                     C36,114 34,112 33,109 C32,106 33,102 32,99
+                     C31,96 29,93 27,91 Z"
+              fill="none" stroke="#252930" stroke-width="0.8" stroke-linejoin="round"/>
 
-            <!-- Northern Ireland -->
-            <path d="M52,82 C49,81 46,81 45,84 C44,87 45,90 44,93 C46,94 49,93 51,94 C53,93 53,90 54,87 C54,85 53,83 52,82 Z"
-              fill="none" stroke="#2e3340" stroke-width="1.1" stroke-linejoin="round"
-              filter="url(#sketchy)"/>
+            <!-- Northern Ireland — small block -->
+            <path d="M52,84 C49,83 46,83 45,86 C44,89 45,92 44,95
+                     C46,96 49,95 51,96 C53,95 54,92 54,89 C54,86 53,84 52,84 Z"
+              fill="none" stroke="#2e3340" stroke-width="1" stroke-linejoin="round"/>
 
-            <!-- Great Britain — sketched outline -->
+            <!-- Great Britain — accurate outline -->
+            <!-- Scotland: rugged NW coast, Firth of Forth indent, NE coast -->
+            <!-- England: East Anglia bulge, Thames Estuary, Kent, Sussex, Dorset -->
+            <!-- Devon/Cornwall peninsula, Welsh coast, Mersey, Solway Firth -->
             <path d="
-              M88,6
-              C85,7 81,8 78,10 C75,12 74,15 72,18
-              C70,21 67,22 65,25 C63,28 64,32 62,35
-              C60,38 57,39 56,43 C55,47 56,51 55,55
-              C53,59 50,61 49,65 C48,69 49,73 48,77
-              C47,81 44,84 44,88 C44,92 46,96 46,100
-              C46,104 44,107 44,111 C44,115 46,118 46,122
-              C46,126 44,129 45,132 C46,135 49,137 50,140
-              C51,143 50,147 52,149 C54,151 57,150 60,152
-              C62,153 63,156 66,157 C69,158 72,156 75,157
-              C78,158 79,161 82,161 C85,161 87,158 90,158
-              C93,158 95,160 98,159 C101,158 102,155 104,153
-              C106,151 109,150 110,147 C111,144 109,141 110,138
-              C111,135 114,133 114,129 C114,125 112,122 112,118
-              C112,114 114,111 113,107 C112,103 109,101 108,97
-              C107,93 108,90 107,86 C106,82 103,80 102,76
-              C101,72 102,68 100,65 C98,62 95,61 93,58
-              C91,55 91,51 89,48 C87,45 84,44 83,41
-              C82,38 83,34 81,31 C79,28 76,27 75,24
-              C74,21 75,17 73,15 C71,13 68,13 67,10
-              C70,8 79,6 88,6 Z"
-              fill="none" stroke="#3a3e47" stroke-width="1.4"
-              stroke-linejoin="round" stroke-linecap="round"
-              filter="url(#sketchy)"/>
+              M91,7
+              C88,7 84,9 81,11 C78,13 76,17 74,20
+              C71,23 68,24 66,28 C64,31 65,35 63,38
+              C61,42 58,43 57,47 C56,51 57,55 56,59
+              C54,63 51,65 50,69 C49,73 50,77 49,81
+              C48,86 45,88 45,93 C45,97 47,101 47,105
+              C47,109 45,112 45,116 C45,120 47,123 48,127
+              C49,130 48,134 50,137 C52,140 55,140 57,143
+              C59,146 58,150 61,152 C64,154 67,153 70,154
+              C73,155 75,158 78,159 C81,160 84,158 87,159
+              C90,160 93,163 96,163 C99,163 101,160 104,159
+              C107,158 110,158 112,155 C114,152 113,149 114,146
+              C115,143 118,141 118,137 C118,133 116,130 116,126
+              C116,122 118,119 117,115 C116,111 113,109 112,105
+              C111,101 112,97 111,93 C110,89 107,87 106,83
+              C105,79 106,75 104,72 C102,69 99,67 97,64
+              C95,61 95,57 93,54 C91,51 88,50 87,47
+              C86,44 87,40 85,37 C83,34 80,33 79,30
+              C78,27 79,23 77,21 C75,18 72,17 70,14
+              C73,10 83,8 91,7 Z"
+              fill="rgba(255,255,255,.025)" stroke="#3d4250" stroke-width="1.4"
+              stroke-linejoin="round" stroke-linecap="round"/>
 
-            <!-- London pin — green -->
-            <circle cx="96" cy="128" r="3.8" fill="#3d9970" opacity=".95"/>
-            <circle cx="96" cy="128" r="7.5" fill="none" stroke="#3d9970" stroke-width=".9" opacity=".4"/>
-            <circle cx="96" cy="128" r="12" fill="none" stroke="#3d9970" stroke-width=".5" opacity=".18"/>
+            <!-- London pin -->
+            <circle cx="97" cy="131" r="3.5" fill="#3d9970" opacity=".95"/>
+            <circle cx="97" cy="131" r="7" fill="none" stroke="#3d9970" stroke-width=".8" opacity=".4"/>
+            <circle cx="97" cy="131" r="11" fill="none" stroke="#3d9970" stroke-width=".4" opacity=".18"/>
 
             <!-- London label -->
-            <text x="106" y="132" font-family="'DM Mono',monospace" font-size="8.5"
-              fill="#3d9970" opacity=".92" letter-spacing="1.2">London</text>
+            <text x="107" y="135" font-family="'DM Mono',monospace" font-size="8.5"
+              fill="#3d9970" opacity=".92" letter-spacing="1">London</text>
 
             <!-- Bottom label -->
-            <text x="80" y="204" font-family="'DM Mono',monospace" font-size="6.8"
-              fill="#3a3e47" letter-spacing="1" text-anchor="middle">ELIGIBLE · EU &amp; UK</text>
+            <text x="80" y="205" font-family="'DM Mono',monospace" font-size="6.5"
+              fill="#8a9099" letter-spacing="1" text-anchor="middle">ELIGIBLE · EU &amp; UK</text>
           </svg>
         </div>
         <div class="map-wrap" style="margin-top:2.4rem">
-          <p class="map-lbl" data-i18n="about.been">Where I have been</p>
+          <p class="map-lbl">Where I have lived</p>
           <svg viewBox="60 55 780 430" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;margin-top:.8rem">
-            <defs>
-              <filter id="sk2" x="-2%" y="-2%" width="104%" height="104%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" result="noise" seed="8"/>
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
-              </filter>
-            </defs>
 
-            <!-- South America -->
-            <path d="M295,160 C292,155 287,152 283,154 C279,156 278,162 274,165 C270,168 265,167 262,171 C259,175 260,182 257,187 C254,192 248,194 246,200 C244,206 247,213 245,219 C243,225 237,228 236,235 C235,242 239,249 238,256 C237,263 231,268 231,275 C231,282 237,288 237,295 C237,302 231,307 232,314 C233,321 240,325 241,332 C242,339 237,345 238,352 C239,359 246,363 247,370 C248,377 243,383 245,390 C247,397 255,400 256,407 C257,414 252,420 254,427 C256,434 264,436 265,443 C266,450 261,457 263,464 L285,470 C290,464 294,457 298,450 C302,443 304,435 307,428 C310,421 315,416 317,409 C319,402 317,394 319,387 C321,380 327,375 328,368 C329,361 325,354 326,347 C327,340 333,335 333,328 C333,321 327,315 328,308 C329,301 336,297 336,290 C336,283 330,277 331,270 C332,263 339,259 339,252 C339,245 333,240 334,233 C335,226 342,222 341,215 C340,208 333,205 332,198 C331,191 336,185 334,178 C332,171 325,169 323,162 C321,155 324,147 321,141 C318,135 311,133 308,128 C305,123 306,115 302,111 C299,107 294,108 291,105 C288,102 288,96 285,93 C283,91 280,95 279,99 C278,103 280,108 279,113 C278,118 274,121 274,126 C274,131 277,136 277,141 C277,146 274,151 274,156 C274,159 277,161 280,162 Z"
-              fill="none" stroke="#2a2f38" stroke-width="1" stroke-linejoin="round" filter="url(#sk2)"/>
+            <!-- ── SOUTH AMERICA — accurate outline ── -->
+            <path d="M263,130 C261,127 259,125 256,126 C253,127 252,131 250,134
+                     C248,137 245,138 243,142 C241,146 242,151 240,155
+                     C238,159 234,161 233,165 C232,169 234,174 233,178
+                     C232,182 229,185 228,189 C227,193 229,198 228,202
+                     C227,206 223,209 223,214 C223,219 227,223 227,228
+                     C227,233 223,236 223,241 C223,246 227,250 228,255
+                     C229,260 226,265 228,270 C230,275 235,277 236,282
+                     C237,287 234,293 236,298 C238,303 244,305 246,310
+                     C248,315 245,322 248,327 C251,332 258,333 260,339
+                     C262,345 258,352 262,357 C266,362 274,362 277,368
+                     C280,374 277,382 281,387 C285,392 293,393 296,399
+                     C299,405 296,413 300,418 C304,423 312,423 315,429
+                     C318,435 315,443 319,448 L335,452 C337,446 338,439 341,433
+                     C344,427 349,423 351,417 C353,411 351,403 353,397
+                     C355,391 361,387 362,381 C363,375 359,369 360,363
+                     C361,357 368,353 368,347 C368,341 362,336 363,330
+                     C364,324 371,320 371,314 C371,308 364,303 365,297
+                     C366,291 374,288 373,282 C372,276 364,273 363,267
+                     C362,261 368,255 366,249 C364,243 356,241 355,235
+                     C354,229 360,223 358,217 C356,211 348,209 347,203
+                     C346,197 352,191 350,185 C348,179 340,177 338,171
+                     C336,165 340,158 337,152 C334,146 326,145 323,139
+                     C320,133 323,124 319,119 C316,114 309,113 306,109
+                     C303,105 304,99 300,96 C297,93 292,94 289,92
+                     C286,90 286,84 283,82 C280,80 276,83 274,87
+                     C272,91 274,97 273,101 C272,105 269,107 268,111
+                     C267,115 269,120 268,124 C267,128 264,130 263,130 Z"
+              fill="none" stroke="#2a2f38" stroke-width="1.1" stroke-linejoin="round"/>
 
-            <!-- Europe -->
-            <path d="M650,80 C648,77 644,75 641,77 C638,79 638,84 635,87 C632,90 628,90 626,94 C624,98 626,104 623,108 C620,112 615,113 613,118 C611,123 613,130 610,134 C607,138 602,139 600,144 C598,149 600,156 597,160 C594,164 589,165 587,170 C585,175 587,182 584,186 C581,190 576,191 574,196 C572,201 574,208 571,212 C568,216 563,217 561,222 C559,227 561,234 558,238 C555,242 550,242 548,247 C546,252 548,259 545,263 L600,263 C603,258 605,252 609,248 C613,244 619,243 622,238 C625,233 624,226 628,222 C632,218 638,218 641,213 C644,208 643,201 647,197 C651,193 657,193 660,188 C663,183 662,176 666,172 C670,168 676,168 679,163 C682,158 681,151 685,147 C689,143 695,143 698,138 C701,133 700,126 703,122 C706,118 712,118 714,113 C716,108 714,101 717,97 C720,93 726,93 728,88 C730,83 728,76 730,72 L700,68 C697,72 694,76 690,79 C686,82 681,82 677,85 C673,88 671,94 667,96 C663,98 658,96 655,99 C652,102 652,108 649,110 C647,112 644,110 642,107 C640,104 641,99 639,96 C637,93 634,92 632,90 Z"
-              fill="none" stroke="#2a2f38" stroke-width="1" stroke-linejoin="round" filter="url(#sk2)"/>
+            <!-- ── EUROPE — accurate simplified outline ── -->
+            <!-- Includes Scandinavian peninsula, Iberian peninsula, Italian boot -->
+            <path d="M593,68 C591,66 588,65 586,67 C584,69 585,73 583,76
+                     C581,79 578,80 576,83 C574,86 575,91 573,94
+                     C571,97 568,99 567,103 C566,107 568,112 566,116
+                     C564,120 561,122 560,126 C559,130 561,135 559,139
+                     C557,143 554,145 553,149 C552,153 554,158 552,162
+                     C550,166 546,168 545,172 C544,176 546,181 545,185
+                     C544,189 540,192 539,196 C538,200 540,205 539,209
+                     C538,213 534,216 534,220 C534,224 537,228 537,232
+                     L590,232 C592,228 594,223 597,219 C600,215 605,213 607,209
+                     C609,205 608,199 611,196 C614,193 619,193 622,189
+                     C625,185 624,179 627,176 C630,173 636,173 638,169
+                     C640,165 639,159 642,156 C645,153 651,153 653,149
+                     C655,145 654,139 657,135 C660,131 666,131 668,127
+                     C670,123 668,117 671,113 C674,109 680,109 682,105
+                     C684,101 682,95 684,91 C686,87 691,86 692,82
+                     C693,78 691,73 692,69 L660,65
+                     C658,69 655,72 651,75 C647,78 642,78 639,81
+                     C636,84 635,90 631,92 C627,94 622,92 619,95
+                     C616,98 616,104 612,106 C608,108 603,106 600,109
+                     C598,111 596,115 594,118 C596,114 596,108 594,105
+                     C592,102 589,103 587,106 C585,109 586,114 584,117 Z"
+              fill="none" stroke="#2a2f38" stroke-width="1.1" stroke-linejoin="round"/>
 
-            <!-- UK -->
-            <path d="M598,95 C595,90 591,88 588,91 C585,94 586,101 583,105 C580,109 576,110 574,115 C572,120 574,127 571,131 C568,135 563,136 561,141 C559,146 561,153 558,157 C555,161 550,162 549,167 C548,172 551,178 549,183 C547,188 542,190 541,195 C540,200 543,206 541,211 C539,216 534,218 534,223 C534,228 539,232 538,237 C537,242 532,245 532,250 L550,252 C553,247 555,241 558,236 C561,231 566,228 568,223 C570,218 568,211 571,207 C574,203 580,203 582,198 C584,193 582,186 585,182 C588,178 594,178 596,173 C598,168 596,161 599,157 C602,153 608,153 610,148 C612,143 610,136 613,132 C616,128 622,128 624,123 C626,118 624,111 626,107 C628,103 633,102 634,97 C635,92 632,86 629,83 C626,80 621,81 618,84 C615,87 615,93 612,95 C609,97 605,95 602,98 Z"
-              fill="none" stroke="#2a2f38" stroke-width="1" stroke-linejoin="round" filter="url(#sk2)"/>
+            <!-- Scandinavia -->
+            <path d="M655,63 C657,58 661,55 665,57 C669,59 670,64 674,66
+                     C678,68 683,66 686,69 C689,72 688,78 691,81
+                     C694,84 699,84 701,88 C703,92 701,98 703,102
+                     C705,106 710,108 711,112 C712,116 709,121 710,125
+                     C711,129 715,131 716,135 C717,139 714,144 715,148
+                     C716,152 720,154 720,158 L710,158
+                     C709,154 707,150 705,147 C703,144 699,143 698,140
+                     C697,137 699,133 697,130 C695,127 691,127 689,124
+                     C687,121 688,116 685,114 C682,112 678,114 675,112
+                     C672,110 672,105 669,103 C666,101 662,102 659,100
+                     C656,98 655,94 652,93 C649,92 646,95 643,94
+                     C640,93 638,90 636,88 C634,86 631,86 630,83
+                     C629,80 631,76 630,73 C629,70 626,68 625,65
+                     C627,62 635,61 643,62 C647,63 651,63 655,63 Z"
+              fill="none" stroke="#2a2f38" stroke-width="0.9" stroke-linejoin="round"/>
 
-            <!-- Italy -->
-            <path d="M685,140 C683,136 679,135 677,138 C675,141 676,147 673,151 C670,155 665,156 664,161 C663,166 666,172 664,177 C662,182 657,184 656,189 C655,194 658,200 656,205 C654,210 649,212 648,217 C647,222 650,228 648,233 C646,238 641,240 641,245 C641,250 646,254 645,259 C644,264 639,267 639,272 C639,277 644,280 644,285 L660,283 C662,278 663,272 666,267 C669,262 674,260 676,255 C678,250 676,243 679,239 C682,235 688,235 690,230 C692,225 690,218 693,214 C696,210 702,210 704,205 C706,200 704,193 707,189 C710,185 716,185 718,180 C720,175 718,168 720,164 C722,160 727,159 728,154 C729,149 727,142 728,137 L710,133 C708,138 706,143 702,146 C698,149 693,148 690,151 C687,154 687,160 684,162 C681,164 677,162 675,159 C673,156 674,150 672,147 Z"
-              fill="none" stroke="#2a2f38" stroke-width="1" stroke-linejoin="round" filter="url(#sk2)"/>
+            <!-- UK (Great Britain) — accurate -->
+            <path d="M548,87 C546,84 542,83 540,86 C538,89 539,94 537,98
+                     C535,102 532,104 531,108 C530,112 531,117 530,121
+                     C529,125 527,128 526,132 C525,136 526,141 525,145
+                     C524,149 522,152 521,156 C520,160 521,165 520,169
+                     C519,173 516,175 515,179 C514,183 515,188 514,192
+                     C513,196 511,199 511,203 C511,207 513,211 513,215
+                     C513,219 511,222 511,226 L527,228
+                     C528,224 529,220 531,216 C533,212 537,210 538,206
+                     C539,202 537,197 539,193 C541,189 546,188 548,184
+                     C550,180 548,175 550,171 C552,167 557,166 559,162
+                     C561,158 559,153 562,149 C565,145 570,145 572,141
+                     C574,137 573,131 576,127 C579,123 584,123 586,119
+                     C588,115 586,109 589,106 C592,103 597,104 599,101
+                     C601,98 600,93 601,90 C603,87 607,87 608,84
+                     C609,81 607,77 605,74 C602,72 598,74 595,76
+                     C592,78 591,83 588,85 C585,87 582,85 579,88
+                     C576,91 576,97 573,99 C570,101 566,99 563,102
+                     C561,104 560,108 558,111 C560,107 561,102 559,99
+                     C557,96 554,97 552,100 C550,103 551,108 549,111 Z"
+              fill="none" stroke="#2e3340" stroke-width="1.1" stroke-linejoin="round"/>
 
-            <!-- Netherlands -->
-            <path d="M638,107 C636,104 632,103 630,106 C628,109 629,115 626,118 C623,121 619,121 618,125 C617,129 619,135 617,139 C615,143 610,144 609,148 L625,150 C627,145 629,140 633,137 C637,134 643,134 645,129 C647,124 645,117 647,113 C649,109 654,109 655,104 C656,99 653,93 650,91 C647,89 643,92 641,95 C639,98 639,104 638,107 Z"
-              fill="none" stroke="#2a2f38" stroke-width="1" stroke-linejoin="round" filter="url(#sk2)"/>
+            <!-- Ireland -->
+            <path d="M510,105 C508,102 505,102 504,105 C503,108 504,113 503,117
+                     C502,121 500,124 500,128 C500,132 502,136 501,140
+                     C500,144 498,147 498,151 C498,155 500,159 499,163
+                     L513,164 C514,160 514,156 515,152 C516,148 518,145 518,141
+                     C518,137 516,133 516,129 C516,125 518,121 517,117
+                     C516,113 514,110 513,107 C512,104 511,107 510,105 Z"
+              fill="none" stroke="#252930" stroke-width="0.8" stroke-linejoin="round"/>
 
-            <!-- Africa faint -->
-            <path d="M640,270 C637,267 633,267 631,270 C629,273 630,279 628,283 C626,287 621,289 620,294 C619,299 622,305 620,310 C618,315 613,317 612,323 C611,329 614,335 613,341 C612,347 607,351 607,357 C607,363 612,368 611,374 C610,380 605,384 605,390 C605,396 610,400 610,406 C610,412 605,416 606,422 C607,428 613,431 614,437 C615,443 610,448 611,454 C612,460 618,463 619,469 L655,470 C658,464 660,457 663,451 C666,445 671,441 673,435 C675,429 673,422 675,416 C677,410 683,407 684,401 C685,395 683,388 685,382 C687,376 693,373 694,367 C695,361 692,354 693,348 C694,342 700,339 700,333 C700,327 695,322 695,316 C695,310 700,306 700,300 C700,294 695,289 695,283 C695,277 700,273 700,267 L660,264 C657,268 655,273 651,276 C647,279 642,279 640,283 C638,287 639,293 637,296 Z"
-              fill="none" stroke="#232830" stroke-width="0.8" stroke-linejoin="round" filter="url(#sk2)"/>
+            <!-- Iberian Peninsula (Spain + Portugal) -->
+            <path d="M534,185 C532,182 528,181 526,184 C524,187 525,192 523,196
+                     C521,200 517,202 516,206 C515,210 517,215 515,219
+                     C513,223 509,225 508,229 C507,233 509,238 507,242
+                     C505,246 501,248 500,252 C499,256 501,261 499,265
+                     C497,269 493,271 492,275 C491,279 493,284 491,288
+                     C489,292 485,294 484,298 L520,298
+                     C522,294 524,289 526,285 C528,281 532,279 533,275
+                     C534,271 532,266 534,262 C536,258 540,256 541,252
+                     C542,248 540,243 542,239 C544,235 548,233 549,229
+                     C550,225 548,220 550,216 C552,212 556,210 557,206
+                     C558,202 556,197 558,193 C560,189 564,188 565,184
+                     C566,180 564,175 562,172 C559,169 555,171 552,173
+                     C549,175 548,180 545,182 C542,184 538,183 536,186 Z"
+              fill="none" stroke="#2a2f38" stroke-width="1" stroke-linejoin="round"/>
 
-            <!-- North America faint -->
-            <path d="M80,80 C83,76 88,74 92,76 C96,78 97,84 101,87 C105,90 111,89 114,93 C117,97 116,104 120,108 C124,112 130,113 133,118 C136,123 134,131 138,135 C142,139 148,139 151,144 C154,149 152,157 156,161 C160,165 166,165 169,170 C172,175 170,183 174,187 C178,191 184,191 187,196 C190,201 188,209 192,213 C196,217 202,217 205,222 C208,227 206,235 210,239 C214,243 220,243 222,248 C224,253 222,261 226,265 L270,268 C272,263 273,257 276,252 C279,247 284,244 286,239 C288,234 287,227 290,222 C293,217 299,215 301,210 C303,205 301,198 304,193 C307,188 313,187 315,182 C317,177 315,170 318,165 C321,160 327,159 329,154 C331,149 329,142 332,137 C335,132 341,131 342,126 C343,121 341,114 343,109 C345,104 351,103 352,98 C353,93 350,87 348,83 C346,79 341,79 338,76 C335,73 335,68 331,66 L220,60 C218,64 215,68 211,71 C207,74 202,74 198,77 C194,80 192,86 188,88 C184,90 179,88 175,91 C171,94 171,100 167,102 C163,104 158,102 155,105 C152,108 152,114 149,116 C146,118 142,116 139,119 C136,122 137,128 134,130 C131,132 127,130 124,133 C121,136 122,142 119,145 C116,148 111,148 109,152 C107,156 109,162 107,166 C105,170 100,171 98,175 C96,179 98,185 96,189 C94,193 89,194 88,198 L95,203 C98,198 100,192 104,189 C108,186 114,186 116,181 C118,176 116,169 119,165 C122,161 128,161 130,156 C132,151 130,144 133,140 C136,136 142,136 144,131 C146,126 144,119 147,115 C150,111 156,111 158,106 C160,101 158,94 161,90 C164,86 170,86 172,81 Z"
-              fill="none" stroke="#232830" stroke-width="0.8" stroke-linejoin="round" filter="url(#sk2)"/>
+            <!-- Italy (boot shape) -->
+            <path d="M627,168 C625,165 622,164 620,167 C618,170 619,175 617,179
+                     C615,183 611,185 611,189 C611,193 614,197 613,201
+                     C612,205 608,208 608,212 C608,216 611,219 610,223
+                     C609,227 605,229 605,233 C605,237 608,240 608,244
+                     C608,248 605,251 605,255 C605,259 608,262 608,266
+                     C608,270 604,273 604,277 L618,274
+                     C619,270 620,266 622,262 C624,258 628,256 629,252
+                     C630,248 628,243 630,239 C632,235 637,234 638,230
+                     C639,226 637,221 638,217 C639,213 643,211 643,207
+                     C643,203 640,199 640,195 C640,191 643,188 643,184
+                     C643,180 640,177 639,174 C638,171 636,170 634,170
+                     C632,170 630,172 628,171 Z"
+              fill="none" stroke="#2a2f38" stroke-width="1" stroke-linejoin="round"/>
+
+            <!-- France outline -->
+            <path d="M550,162 C548,159 544,158 542,161 C540,164 541,169 539,173
+                     C537,177 533,179 532,183 C531,187 533,192 531,196
+                     C529,200 525,202 524,206 C523,210 525,215 523,219
+                     L558,219 C559,215 560,211 562,207 C564,203 568,201 569,197
+                     C570,193 568,188 570,184 C572,180 576,178 577,174
+                     C578,170 576,165 578,161 C580,157 584,156 585,152
+                     C586,148 584,143 582,140 C579,137 575,138 572,140
+                     C569,142 568,147 565,149 C562,151 558,150 556,153
+                     C554,156 555,160 552,162 Z"
+              fill="none" stroke="#2a2f38" stroke-width="1" stroke-linejoin="round"/>
+
+            <!-- Netherlands small -->
+            <path d="M600,141 C598,138 595,138 594,141 C593,144 594,148 593,152
+                     C592,156 590,158 590,162 L603,162
+                     C604,158 604,154 605,150 C606,146 608,143 608,139
+                     C606,137 602,139 600,141 Z"
+              fill="none" stroke="#2a2f38" stroke-width="0.9" stroke-linejoin="round"/>
+
+            <!-- Africa — clean simplified outline -->
+            <path d="M600,237 C597,234 593,234 591,237 C589,240 591,245 589,249
+                     C587,253 583,255 582,260 C581,265 584,270 583,275
+                     C582,280 578,283 577,288 C576,293 579,299 578,304
+                     C577,309 573,312 572,317 C571,322 574,328 574,333
+                     C574,338 571,342 571,347 C571,352 574,356 574,361
+                     C574,366 570,370 571,375 C572,380 576,383 577,388
+                     C578,393 575,399 577,404 C579,409 585,411 587,416
+                     C589,421 586,428 589,433 C592,438 599,439 601,445
+                     C603,451 600,458 603,463 L627,465
+                     C629,460 630,454 633,449 C636,444 641,441 643,436
+                     C645,431 643,424 645,419 C647,414 652,411 653,406
+                     C654,401 651,395 653,390 C655,385 660,383 661,378
+                     C662,373 659,367 660,362 C661,357 666,354 666,349
+                     C666,344 661,340 661,335 C661,330 666,326 665,321
+                     C664,316 658,313 657,308 C656,303 659,297 657,292
+                     C655,287 649,285 648,280 C647,275 650,269 648,264
+                     C646,259 640,258 639,253 C638,248 641,242 639,237
+                     L600,237 Z"
+              fill="none" stroke="#222730" stroke-width="0.8" stroke-linejoin="round"/>
+
+            <!-- North America faint context -->
+            <path d="M80,72 C83,68 88,66 93,68 C98,70 100,76 105,79
+                     C110,82 116,81 121,85 C126,89 126,96 131,100
+                     C136,104 143,104 147,109 C151,114 149,122 154,127
+                     C159,132 166,132 170,138 C174,144 172,152 177,158
+                     C182,164 189,164 193,170 C197,176 195,185 200,191
+                     C205,197 212,197 216,203 C220,209 218,218 223,224
+                     L265,226 C267,220 268,213 272,208 C276,203 282,201 285,196
+                     C288,191 286,183 290,178 C294,173 300,172 303,167
+                     C306,162 304,154 307,149 C310,144 317,143 319,138
+                     C321,133 318,125 321,120 C324,115 331,114 333,109
+                     C335,104 332,96 334,91 C336,86 342,84 343,79
+                     C344,74 341,68 339,64 C336,60 330,60 327,57
+                     C324,54 323,48 319,46 L215,58
+                     C213,62 211,66 207,69 C203,72 198,72 194,75
+                     C190,78 188,84 184,87 C180,90 175,88 171,91
+                     C167,94 167,101 163,104 C159,107 154,105 150,108
+                     C146,111 145,118 141,121 C137,124 132,122 128,125
+                     C124,128 123,135 119,138 C115,141 110,140 107,143
+                     C104,146 104,153 100,156 C96,159 91,158 88,162 L88,168
+                     C91,163 94,158 98,155 C102,152 107,152 110,148
+                     C113,144 112,137 116,134 C120,131 126,132 129,128
+                     C132,124 131,117 135,114 C139,111 145,112 148,109
+                     C151,106 152,100 156,97 C160,94 165,95 168,92
+                     C171,89 171,83 175,80 Z"
+              fill="none" stroke="#222730" stroke-width="0.8" stroke-linejoin="round"/>
+
+            <!-- ── CITY DOTS ── -->
 
             <!-- São Paulo -->
-            <circle cx="288" cy="382" r="14" fill="#c8a96e" opacity=".06"/>
-            <circle cx="288" cy="382" r="8"  fill="#c8a96e" opacity=".15"/>
+            <circle cx="288" cy="382" r="13" fill="#c8a96e" opacity=".06"/>
+            <circle cx="288" cy="382" r="7.5" fill="#c8a96e" opacity=".14"/>
             <circle cx="288" cy="382" r="3.5" fill="#c8a96e" opacity=".95"/>
 
             <!-- Natal -->
-            <circle cx="342" cy="275" r="12" fill="#c8a96e" opacity=".06"/>
-            <circle cx="342" cy="275" r="7"  fill="#c8a96e" opacity=".15"/>
-            <circle cx="342" cy="275" r="3"  fill="#c8a96e" opacity=".95"/>
+            <circle cx="338" cy="272" r="11" fill="#c8a96e" opacity=".06"/>
+            <circle cx="338" cy="272" r="6.5" fill="#c8a96e" opacity=".14"/>
+            <circle cx="338" cy="272" r="3" fill="#c8a96e" opacity=".95"/>
 
             <!-- London -->
-            <circle cx="582" cy="148" r="13" fill="#c8a96e" opacity=".06"/>
-            <circle cx="582" cy="148" r="7.5" fill="#c8a96e" opacity=".15"/>
-            <circle cx="582" cy="148" r="3.2" fill="#c8a96e" opacity=".95"/>
+            <circle cx="540" cy="153" r="12" fill="#c8a96e" opacity=".06"/>
+            <circle cx="540" cy="153" r="7" fill="#c8a96e" opacity=".14"/>
+            <circle cx="540" cy="153" r="3.2" fill="#c8a96e" opacity=".95"/>
 
             <!-- Paris -->
-            <circle cx="618" cy="163" r="13" fill="#c8a96e" opacity=".06"/>
-            <circle cx="618" cy="163" r="7.5" fill="#c8a96e" opacity=".15"/>
-            <circle cx="618" cy="163" r="3.2" fill="#c8a96e" opacity=".95"/>
+            <circle cx="574" cy="172" r="12" fill="#c8a96e" opacity=".06"/>
+            <circle cx="574" cy="172" r="7" fill="#c8a96e" opacity=".14"/>
+            <circle cx="574" cy="172" r="3.2" fill="#c8a96e" opacity=".95"/>
 
             <!-- Eindhoven -->
-            <circle cx="635" cy="143" r="11" fill="#c8a96e" opacity=".06"/>
-            <circle cx="635" cy="143" r="6.5" fill="#c8a96e" opacity=".15"/>
-            <circle cx="635" cy="143" r="2.8" fill="#c8a96e" opacity=".95"/>
+            <circle cx="594" cy="155" r="10" fill="#c8a96e" opacity=".06"/>
+            <circle cx="594" cy="155" r="6" fill="#c8a96e" opacity=".14"/>
+            <circle cx="594" cy="155" r="2.8" fill="#c8a96e" opacity=".95"/>
 
             <!-- Bassano del Grappa -->
-            <circle cx="668" cy="162" r="11" fill="#c8a96e" opacity=".06"/>
-            <circle cx="668" cy="162" r="6.5" fill="#c8a96e" opacity=".15"/>
-            <circle cx="668" cy="162" r="2.8" fill="#c8a96e" opacity=".95"/>
+            <circle cx="627" cy="179" r="10" fill="#c8a96e" opacity=".06"/>
+            <circle cx="627" cy="179" r="6" fill="#c8a96e" opacity=".14"/>
+            <circle cx="627" cy="179" r="2.8" fill="#c8a96e" opacity=".95"/>
+
+            <!-- Madrid -->
+            <circle cx="550" cy="200" r="10" fill="#c8a96e" opacity=".06"/>
+            <circle cx="550" cy="200" r="6" fill="#c8a96e" opacity=".14"/>
+            <circle cx="550" cy="200" r="2.8" fill="#c8a96e" opacity=".95"/>
 
           </svg>
-          <p style="font-family:var(--serif);font-size:1rem;font-weight:300;color:var(--sub);line-height:2;margin-top:1rem;text-align:center">Brazil &nbsp;·&nbsp; France &nbsp;·&nbsp; Netherlands &nbsp;·&nbsp; Italy &nbsp;·&nbsp; United Kingdom</p>
+          <p style="font-family:var(--serif);font-size:1rem;font-weight:300;color:var(--sub);line-height:2;margin-top:1rem;text-align:center">Brazil &nbsp;·&nbsp; France &nbsp;·&nbsp; Netherlands &nbsp;·&nbsp; Italy &nbsp;·&nbsp; United Kingdom &nbsp;·&nbsp; Spain</p>
         </div>
       </div>
     </div>
@@ -531,8 +1011,8 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
 
 <section id="education">
   <div class="si">
-    <p class="s-tag" data-i18n="edu.tag">Academic Formation</p>
-    <h2 class="s-title">Built on <em>rigour</em></h2>
+    <p class="s-tag reveal">Academic Formation</p>
+    <h2 class="s-title reveal reveal-delay-1">Built on <em>rigour</em></h2>
     <div class="edu-list">
 
       <div class="edu-entry">
@@ -575,10 +1055,32 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
   </div>
 </section>
 
+<section id="research">
+  <div class="si">
+    <p class="s-tag reveal">Research Work</p>
+    <h2 class="s-title reveal reveal-delay-1">Academic <em>research</em></h2>
+    <div class="research-grid">
+
+      <div class="research-card">
+        <p class="research-tag">Computer Vision · Robotics</p>
+        <h3 class="research-title">Indoor Environment Mapping Using RGB-D Cameras</h3>
+        <p class="research-body">RGB-D cameras are systems capable of capturing RGB images along with distance measurements, pixel by pixel, and can be used to build dense 3D maps. The goal of the project was to study the use of these cameras in indoor environment mapping by robots, in order to develop a system that autonomously creates a detailed map of the studied area. Frame alignment algorithms for environment mapping were evaluated, with special attention to their accuracy and efficiency in predetermined scenarios.</p>
+      </div>
+
+      <div class="research-card">
+        <p class="research-tag">Reinforcement Learning · Smart Grid</p>
+        <h3 class="research-title">Coordination of Electric Vehicle Charging through Multiagent Reinforcement Learning</h3>
+        <p class="research-body">The increasing adoption of plug-in electric vehicles (PEVs) presents significant challenges to residential power distribution grids, including transformer overloads and undesirable demand peaks caused by uncoordinated home charging. This work proposed <strong>MASCO</strong> (MultiAgent Selfish-COllaborative architecture), a distributed multiagent reinforcement learning framework for coordinating PEV charging in residential neighborhoods. Each agent autonomously learns both a selfish policy — optimising its own objectives such as minimising electricity costs and maintaining battery charge — and collaborative policies that account for the goals of neighbouring agents. A cooperation criterion based on W-Learning dynamically arbitrates between selfish and collaborative behaviour at each decision step. Experiments simulating a 15-house neighbourhood demonstrated that MASCO significantly reduced daily transformer overloads compared to an always-charging baseline, while maintaining battery charge levels above 99.9% in most configurations.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <section id="experience">
   <div class="si">
-    <p class="s-tag" data-i18n="exp.tag">Career</p>
-    <h2 class="s-title">Where I have <em>been</em></h2>
+    <p class="s-tag reveal">Career</p>
+    <h2 class="s-title reveal reveal-delay-1">Where I have <em>been</em></h2>
     <div class="tl">
       <div class="tl-item">
         <div class="tl-dot"></div>
@@ -640,14 +1142,14 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
 
 <section id="deals">
   <div class="si">
-    <p class="s-tag" data-i18n="deals.tag">M&amp;A Projects</p>
-    <h2 class="s-title">Deals, <em>end-to-end</em></h2>
-    <p class="deals-intro">In my M&amp;A buy-side experience, I was directly involved in the origination, negotiation, and closing of three renewable energy projects in Brazil — two wind acquisitions and one solar complex. All three assets are now operational, collectively representing <strong>~BRL 1.2 billion</strong> in total investment.</p>
+    <p class="s-tag reveal">M&amp;A Projects</p>
+    <h2 class="s-title reveal reveal-delay-1">Deals, <em>end-to-end</em></h2>
+    <p class="deals-intro reveal reveal-delay-2">Through my buy-side M&A experience, I played a direct role in the origination, negotiation, and successful closing of three renewable energy projects in Brazil — two wind farms and one solar complex. These assets are now fully operational and account for roughly <strong>232 million USD</strong> in aggregate investment. Across these transactions, I led or supported key workstreams including financial modelling, negotiation of SPAs and offtake agreements, and end-to-end project coordination. I was also actively engaged with public-sector stakeholders at both the state and federal levels, contributing to the regulatory and institutional efforts required to bring the projects to life.</p>
     <div class="stat-bar">
-      <div class="sb-item"><div class="sb-val">3</div><div class="sb-lbl" data-i18n="deals.stat1">Projects closed &amp; operational</div></div>
-      <div class="sb-item"><div class="sb-val">251.8 MW</div><div class="sb-lbl" data-i18n="deals.stat2">Combined installed capacity</div></div>
-      <div class="sb-item"><div class="sb-val">~$232M</div><div class="sb-lbl" data-i18n="deals.stat3">Combined total investment (USD)</div></div>
-      <div class="sb-item"><div class="sb-val">20 yr</div><div class="sb-lbl" data-i18n="deals.stat4">PPA tenors across all assets</div></div>
+      <div class="sb-item"><div class="sb-val">3</div><div class="sb-lbl">Projects closed &amp; operational</div></div>
+      <div class="sb-item"><div class="sb-val">251.8 MW</div><div class="sb-lbl">Combined installed capacity</div></div>
+      <div class="sb-item"><div class="sb-val">~$232M</div><div class="sb-lbl">Combined total investment (USD)</div></div>
+      <div class="sb-item"><div class="sb-val">20 yr</div><div class="sb-lbl">PPA tenors across all assets</div></div>
     </div>
 
     <div class="deal">
@@ -675,7 +1177,6 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
       <div class="deal-body">
         <div class="deal-metrics">
           <div class="dm"><span class="dm-k">Capacity</span><span class="dm-v">92.3 MW</span></div>
-          <div class="dm"><span class="dm-k">Turbines</span><span class="dm-v">17 × Siemens Gamesa SG 3.55-132</span></div>
           <div class="dm"><span class="dm-k">Offtaker</span><span class="dm-v">Cemig GT · 20-yr private PPA</span></div>
           <div class="dm"><span class="dm-k">Total Investment</span><span class="dm-v">BRL 829M (~USD 154M)*</span></div>
           <div class="dm"><span class="dm-k">Ownership</span><span class="dm-v">Total Eren 90% / Vila Energia 10%</span></div>
@@ -683,16 +1184,17 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
         </div>
         <div class="deal-narr">
           <div>
-            <p class="narr-lbl" data-i18n="deals.overview">Transaction Overview</p>
+            <p class="narr-lbl">Transaction Overview</p>
             <p class="narr-body">Terra Santa was Total Eren's first wind asset in Brazil, developed in partnership with Vila Energia Renovável. Structured with a bilateral 20-year private PPA with Cemig GT — a creditworthy state-owned offtaker — the project provided long-term revenue visibility for project finance. Construction began late 2019; commercial operation commenced February 2022, marking a pivotal diversification of Total Eren's Brazilian portfolio beyond solar.</p>
           </div>
           <div>
-            <p class="narr-lbl" data-i18n="deals.myrole">My Role</p>
+            <p class="narr-lbl">My Role</p>
             <ul class="narr-list">
               <li>Originated the opportunity within the 50+ GW pipeline database I built for Total Eren Brazil and recommended the acquisition to Paris.</li>
               <li>Led bilateral PPA negotiation and all transaction documentation from NBO through binding MOU to shareholders' and shares purchase agreements.</li>
               <li>Coordinated due diligence workstreams with legal, technical, and financial advisors across French and Brazilian teams.</li>
-              <li>Represented Total Eren in partner negotiations with Vila Energia to establish the 90/10 joint ownership structure.</li>
+              <li>Led financial modelling and debt financing negotiations with private and public lenders.</li>
+              <li>Represented Total Eren in partner negotiations with Vila Energia to establish the 90/10 joint ownership structure, including negotiation of shareholders agreement.</li>
             </ul>
           </div>
         </div>
@@ -723,12 +1225,12 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
       </div>
       <div class="deal-body">
         <div class="deal-metrics">
-          <div class="dm"><span class="dm-k">Capacity</span><span class="dm-v">67.5 MW (Filgueira I + II)</span></div>
-          <div class="dm"><span class="dm-k">Structure</span><span class="dm-v">Two SPEs · EOL Maral I &amp; II</span></div>
+          <div class="dm"><span class="dm-k">Capacity</span><span class="dm-v">67.5 MW</span></div>
           <div class="dm"><span class="dm-k">Offtaker</span><span class="dm-v">Cemig GT · 20-yr private PPA</span></div>
           <div class="dm"><span class="dm-k">Vendor</span><span class="dm-v">Voltalia SA (EPA: VLTSA)</span></div>
           <div class="dm"><span class="dm-k">Ownership</span><span class="dm-v">Total Eren 100%</span></div>
           <div class="dm"><span class="dm-k">Regulatory</span><span class="dm-v">CADE cleared · no restrictions</span></div>
+          <div class="dm"><span class="dm-k">Commissioned</span><span class="dm-v">2022</span></div>
         </div>
         <div class="deal-narr">
           <div>
@@ -739,8 +1241,7 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
             <p class="narr-lbl">My Role</p>
             <ul class="narr-list">
               <li>Identified Maral within the proprietary pipeline database and recommended it to Paris as a strategic pre-construction entry into wind.</li>
-              <li>Led buy-side negotiation with Voltalia Brazil from initial NBO through final shares purchase and shareholders' agreements.</li>
-              <li>Managed CADE regulatory filing coordination with external legal counsel, ensuring a clean unconditional clearance.</li>
+              <li>Led buy-side negotiation with Voltalia Brazil from initial NBO through final shares purchase agreement.</li>
               <li>Structured the 100% ownership approach, assessing and rejecting partnership options to maintain full control for Total Eren.</li>
             </ul>
           </div>
@@ -773,12 +1274,12 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
       </div>
       <div class="deal-body">
         <div class="deal-metrics">
-          <div class="dm"><span class="dm-k">Capacity</span><span class="dm-v">90 MW (3 × 30 MW units)</span></div>
+          <div class="dm"><span class="dm-k">Capacity</span><span class="dm-v">90 MW</span></div>
           <div class="dm"><span class="dm-k">Offtake</span><span class="dm-v">CCEE · 20-yr PPA (reserve auction 2014)</span></div>
           <div class="dm"><span class="dm-k">Total Investment</span><span class="dm-v">BRL 350M (~USD 78M)</span></div>
           <div class="dm"><span class="dm-k">Project Finance</span><span class="dm-v">BRL 280M · 17-yr infra debentures</span></div>
           <div class="dm"><span class="dm-k">Debt Investor</span><span class="dm-v">Kinea Investimentos (100%)</span></div>
-          <div class="dm"><span class="dm-k">Impact</span><span class="dm-v">Powers ~83,000 Brazilian homes</span></div>
+          <div class="dm"><span class="dm-k">Commissioned</span><span class="dm-v">2019</span></div>
         </div>
         <div class="deal-narr">
           <div>
@@ -803,9 +1304,9 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
 
 <section id="coverage">
   <div class="si">
-    <p class="s-tag" data-i18n="cov.tag">Equity Research Coverage</p>
-    <h2 class="s-title">Companies I <em>studied</em></h2>
-    <p class="cov-intro">As an equity analyst, I covered the US technology sector with a focus on high-growth, disruptive businesses. My research methodology went <strong>beyond standard DCF modelling</strong> — I read founder biographies, ran channel checks with customers, engaged directly with management teams, and built thesis-driven memos from first principles. The portfolio I managed held <strong>10 positions drawn from this 30+ company universe</strong>. <strong>A few examples of complete investment opportunities include:</strong></p>
+    <p class="s-tag reveal">Equity Research Coverage</p>
+    <h2 class="s-title reveal reveal-delay-1">Companies I <em>studied</em></h2>
+    <p class="cov-intro reveal reveal-delay-2">As an equity analyst, I covered the <strong>US technology sector with a focus on high-growth, disruptive businesses</strong>. My <strong>research methodology went beyond standard DCF modelling</strong> — I read founder biographies, ran channel checks with customers, engaged directly with management teams, and built thesis-driven memos from first principles. The portfolio I managed held 10 positions drawn from this 30+ company universe.<br>A few examples of complete investment opportunities include:</p>
 
     <div class="cov-table">
 
@@ -863,6 +1364,7 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
         </div>
         <div class="cov-names">
           <div class="co-name">CrowdStrike</div>
+          <div class="co-name">Palo Alto Networks</div>
           <div class="co-name">SentinelOne</div>
         </div>
       </div>
@@ -900,101 +1402,154 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
 
 <section id="portfolio">
   <div class="si">
-    <p class="s-tag" data-i18n="pm.tag">Portfolio Management</p>
-    <h2 class="s-title">Capital at <em>work</em></h2>
-    <p class="pm-intro">As portfolio manager of a MFO, I was responsible for the offshore investment book — designing and managing portfolios for 70+ families across global equities, fixed income, and alternative assets in the US and Europe.</p>
+    <p class="s-tag reveal">Portfolio Management</p>
+    <h2 class="s-title reveal reveal-delay-1">Capital at <em>work</em></h2>
+    <p class="pm-intro reveal reveal-delay-2">As portfolio manager of a MFO, I was responsible for the offshore investment book — designing and managing portfolios for 70+ families across global equities, fixed income, and alternative assets in the US and Europe.</p>
 
     <div class="pm-grid">
 
       <!-- Left: AUM + Allocation visual -->
       <div>
-        <p class="pm-visual-label" data-i18n="pm.aum">Capital Under Management</p>
+        <p class="pm-visual-label">Capital Under Management</p>
         <div class="aum-block">
           <div class="aum-number">$300M+</div>
-          <div class="aum-sub" data-i18n="pm.aumsub">Offshore AUM · Directly Managed</div>
+          <div class="aum-sub">Offshore AUM · Directly Managed</div>
           <div class="aum-families">Across 70+ families and wealth structures</div>
         </div>
 
-        <p class="pm-visual-label" data-i18n="pm.alloclbl">Asset Allocation Approach</p>
-        <div class="alloc-cols">
-          <div class="bar-block">
-            <div class="bar-lbl-top">40/60</div>
-            <div class="bar-sublbl" data-i18n="pm.conservative">Conservative</div>
-            <div class="vbar">
-              <div class="vseg alt" style="height:10%"></div>
-              <div class="vseg de"  style="height:50%"></div>
-              <div class="vseg eq"  style="height:40%"></div>
-            </div>
-          </div>
-          <div class="bar-arrow">
-            <div class="bar-arrow-line"></div>
-            <div class="bar-arrow-txt" data-i18n="pm.range">range</div>
-            <div class="bar-arrow-line"></div>
-          </div>
-          <div class="bar-block">
-            <div class="bar-lbl-top">60/40</div>
-            <div class="bar-sublbl" data-i18n="pm.growth">Growth</div>
-            <div class="vbar">
-              <div class="vseg alt" style="height:10%"></div>
-              <div class="vseg de"  style="height:30%"></div>
-              <div class="vseg eq"  style="height:60%"></div>
-            </div>
-          </div>
-        </div>
-        <div class="alloc-legend">
-          <div class="alloc-item">
-            <div class="alloc-dot" style="background:var(--accent)"></div>
-            <div><div class="alloc-name" data-i18n="pm.equities">Equities</div><div class="alloc-desc">Global stocks · ETFs · Factor strategies</div></div>
-          </div>
-          <div class="alloc-item">
-            <div class="alloc-dot" style="background:var(--green)"></div>
-            <div><div class="alloc-name" data-i18n="pm.fi">Fixed Income</div><div class="alloc-desc">Sovereign · Corporate · EM Debt</div></div>
-          </div>
-          <div class="alloc-item">
-            <div class="alloc-dot" style="background:#4a7fa5"></div>
-            <div><div class="alloc-name" data-i18n="pm.alt">Alternatives</div><div class="alloc-desc">Hedge funds · Private credit · Real assets</div></div>
-          </div>
-        </div>
-        <p class="alloc-caption">Each portfolio was tailored to the family's risk profile, liquidity needs, and time horizon — typically ranging between a 40/60 and 60/40 equity-to-fixed income balance, with alternatives allocated according to sophistication and appetite.</p>
       </div>
 
       <!-- Right: Two highlights -->
       <div class="pm-story">
         <div class="story-item">
           <div class="story-num">01</div>
-          <div class="story-ttl" data-i18n="pm.story1.ttl">Built the analytical framework from scratch</div>
+          <div class="story-ttl">Built the analytical framework from scratch</div>
           <p class="story-body">The offshore book had no systematic evaluation infrastructure when I joined. I designed and coded a proprietary screening tool covering 2,000+ ETFs, mutual funds, and hedge funds — combining quantitative scoring (risk-adjusted returns, drawdown, factor exposures) with qualitative diligence. What had been a manual, judgment-driven process became a <strong>data-driven framework that could be consistently applied across the entire book</strong>.</p>
         </div>
         <div class="story-div"></div>
         <div class="story-item">
           <div class="story-num">02</div>
-          <div class="story-ttl" data-i18n="pm.story2.ttl">Deployed strategic portfolios at scale</div>
+          <div class="story-ttl">Deployed strategic portfolios at scale</div>
           <p class="story-body">Using the framework, I implemented tailored strategic portfolios for each family — calibrated to their risk profile, liquidity needs, currency exposure, and time horizon. Beyond strategic allocation, I managed tactical positioning in response to market conditions, adjusting weights across equities, fixed income, and alternatives across <strong>$300M+ in offshore capital serving 70+ families</strong>.</p>
         </div>
       </div>
 
-    </div>
+    </div><!-- end pm-grid -->
+
+    <!-- ── The Innovation Framework ── -->
+    <div class="pm-framework">
+      <p class="s-tag" style="margin-bottom:1rem">A new way to approach wealth management</p>
+      <h3 style="font-family:var(--serif);font-size:clamp(1.5rem,2.2vw,2rem);font-weight:300;color:var(--text);margin-bottom:.3rem">A data-driven framework, <em style="color:var(--accent);font-style:italic">built from scratch</em></h3>
+
+      <div class="pm-pipeline">
+
+        <div class="pm-stage">
+          <p class="pm-stage-num">I</p>
+          <p class="pm-stage-title">Opportunity<br>Identification</p>
+          <ul class="pm-stage-items">
+            <li class="hl">Systematic screening of 2,000+ funds</li>
+            <li class="hl">Custom Python &amp; R scoring models</li>
+            <li>ETFs, mutual funds &amp; hedge funds</li>
+            <li>Risk-adjusted return ranking</li>
+            <li>Factor exposure mapping</li>
+          </ul>
+        </div>
+
+        <div class="pm-arrow">
+          <svg width="26" height="14" viewBox="0 0 26 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.45">
+            <path d="M0 7H20M16 2L24 7L16 12" stroke="#c8a96e" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="pm-stage">
+          <p class="pm-stage-num">II</p>
+          <p class="pm-stage-title">Investment<br>Analysis</p>
+          <ul class="pm-stage-items">
+            <li class="hl">Quantitative + qualitative diligence</li>
+            <li class="hl">Drawdown &amp; volatility analytics</li>
+            <li>Manager track record review</li>
+            <li>Liquidity &amp; structure analysis</li>
+            <li>Benchmark comparison tools</li>
+          </ul>
+        </div>
+
+        <div class="pm-arrow">
+          <svg width="26" height="14" viewBox="0 0 26 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.45">
+            <path d="M0 7H20M16 2L24 7L16 12" stroke="#c8a96e" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="pm-stage">
+          <p class="pm-stage-num">III</p>
+          <p class="pm-stage-title">Portfolio<br>Construction</p>
+          <ul class="pm-stage-items">
+            <li class="hl">Risk-return optimisation per family</li>
+            <li class="hl">Dynamic tactical positioning</li>
+            <li>Currency exposure calibration</li>
+            <li>Liquidity-horizon matching</li>
+            <li>Continuous rebalancing logic</li>
+          </ul>
+        </div>
+
+      </div><!-- end pipeline -->
+
+      <div class="pm-ba">
+        <div class="pm-ba-card before">
+          <p class="pm-ba-lbl">Before</p>
+          <p class="pm-ba-text">Manual, judgment-driven process. No evaluation infrastructure. Decisions made case-by-case with no repeatable framework across the offshore book.</p>
+        </div>
+        <div class="pm-ba-card after">
+          <p class="pm-ba-lbl">After</p>
+          <p class="pm-ba-text">Proprietary data-driven framework — coded from scratch — consistently applied across all portfolios. Analytical rigour previously reserved for institutional desks, brought to a family office.</p>
+        </div>
+      </div>
+
+      <div class="pm-stats">
+        <div class="pm-stat"><div class="pm-stat-val">2,000+</div><div class="pm-stat-lbl">Funds in screening universe</div></div>
+        <div class="pm-stat"><div class="pm-stat-val">$300M+</div><div class="pm-stat-lbl">Offshore AUM managed</div></div>
+        <div class="pm-stat"><div class="pm-stat-val">70+</div><div class="pm-stat-lbl">Families served</div></div>
+      </div>
+      <div class="pm-tools">
+        <div class="pm-tools-hd">
+          <div class="pm-tools-line"></div>
+          <span class="pm-tools-lbl">Back-office infrastructure levers</span>
+          <div class="pm-tools-line"></div>
+        </div>
+        <div class="pm-tools-grid">
+          <div class="pm-tool">Bloomberg Terminal</div>
+          <div class="pm-tool">BQuant</div>
+          <div class="pm-tool">FactSet</div>
+          <div class="pm-tool">Python</div>
+          <div class="pm-tool">R</div>
+          <div class="pm-tool">SQL</div>
+          <div class="pm-tool">Tableau</div>
+          <div class="pm-tool">LaTeX</div>
+        </div>
+      </div>
+
+    </div><!-- end pm-framework -->
+
   </div>
 </section>
 
 <section id="focus">
   <div class="si">
-    <p class="s-tag" data-i18n="focus.tag">What I care about</p>
-    <h2 class="s-title">Three domains, <em>one thesis</em></h2>
+    <p class="s-tag reveal">What I care about</p>
+    <h2 class="s-title reveal reveal-delay-1">Three domains, <em>one thesis</em></h2>
     <div class="focus-cols">
-      <div class="focus-col">
+      <div class="focus-col reveal reveal-delay-1">
         <div class="focus-num">I</div>
-        <div class="focus-ttl" data-i18n="focus.1.ttl">Energy Transition</div>
+        <div class="focus-ttl">Energy Transition</div>
         <p class="focus-desc">The energy transition is the defining infrastructure challenge of our generation — a full rewiring of how the world produces and consumes energy. I have worked across its value chain: closing renewable energy M&A in Brazil, assessing green hydrogen feasibility, and studying the capital structures that make large-scale clean energy projects bankable.</p>
       </div>
-      <div class="focus-col">
+      <div class="focus-col reveal reveal-delay-2">
         <div class="focus-num">II</div>
-        <div class="focus-ttl" data-i18n="focus.2.ttl">Technology &amp; AI</div>
+        <div class="focus-ttl">Technology &amp; AI</div>
         <p class="focus-desc">I covered 30+ high-growth technology companies as an equity analyst, and I have built data tools — from GIS mapping platforms to automated fund screening systems — that convert raw information into decisions. AI will not replace decision-makers, but the decision-makers of tomorrow will be the ones who know how to work with it.</p>
       </div>
-      <div class="focus-col">
+      <div class="focus-col reveal reveal-delay-3">
         <div class="focus-num">III</div>
-        <div class="focus-ttl" data-i18n="focus.3.ttl">Finance &amp; Capital Allocation</div>
+        <div class="focus-ttl">Finance &amp; Capital Allocation</div>
         <p class="focus-desc">Capital determines which technologies get built and which transitions happen. I have been on both sides — allocating capital across global markets as a portfolio manager, and deploying it into real assets as an M&A practitioner. Finance is not a support function for the energy transition; it is a core driver of it.</p>
       </div>
     </div>
@@ -1006,24 +1561,24 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
 
 <section id="projects">
   <div class="si">
-    <p class="s-tag" data-i18n="proj.tag">Ventures &amp; Side Projects</p>
-    <h2 class="s-title">Things I <em>built</em></h2>
+    <p class="s-tag reveal">Ventures &amp; Side Projects</p>
+    <h2 class="s-title reveal reveal-delay-1">Things I <em>built</em></h2>
     <div class="proj-cols">
-      <div class="proj-col">
-        <p class="proj-kicker" data-i18n="proj.brasa.kicker">Community · Co-founded in Paris</p>
+      <div class="proj-col reveal reveal-delay-1">
+        <p class="proj-kicker">Community · Co-founded in Paris</p>
         <h3 class="proj-name">BRASA Europe</h3>
         <p class="proj-desc">BRASA — the Brazilian Student Association — is a network connecting Brazilian students and young professionals across top universities and cities worldwide. I co-founded the European chapter in Paris, building a community from scratch for Brazilians studying and working across Europe. The network spans multiple cities and serves as a platform for professional exchange, mentorship, and cross-border connection.</p>
         <p class="proj-tags">Co-founder, Paris, Community Building, Brazilian Diaspora</p>
       </div>
-      <div class="proj-col">
-        <p class="proj-kicker" data-i18n="proj.forager.kicker">Infrastructure Intelligence Tool</p>
+      <div class="proj-col reveal reveal-delay-2">
+        <p class="proj-kicker">Infrastructure Intelligence Tool</p>
         <h3 class="proj-name">Forager</h3>
         <p class="proj-desc">An interactive mapping platform for solar, wind, and infrastructure assets. Born from a data-science approach I pioneered at Total Eren — where mapping 50+ GW of renewable opportunities in Brazil transformed M&amp;A pipeline quality — Forager generalises that methodology into a usable product. Still live; added material value in subsequent roles.</p>
         <p class="proj-tags">GIS, JavaScript, Renewable Energy, M&amp;A</p>
         <a href="https://joaocreste.github.io/forager/" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.9rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;opacity:.8;transition:opacity .2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.8'">↗ View Forager</a>
       </div>
-      <div class="proj-col">
-        <p class="proj-kicker" data-i18n="proj.music.kicker">Music · Personal Practice</p>
+      <div class="proj-col reveal reveal-delay-3">
+        <p class="proj-kicker">Music · Personal Practice</p>
         <h3 class="proj-name">A Lot of Music</h3>
         <p class="proj-desc">I have studied piano for eight years at conservatory level — an education in precision, patience, and the discipline of building something complex over a long period of time. I still play regularly and compose my own pieces. Music is not a side interest; it is the counterweight to everything analytical in my life, and the place where I think most freely.</p>
         <p class="proj-tags">Piano, Composition, Conservatory, 8 Years</p>
@@ -1034,292 +1589,65 @@ footer{border-top:1px solid var(--border);padding:1.8rem 3rem;display:flex;align
 
 <section id="contact">
   <div class="contact-wrap">
-    <p class="s-tag" style="justify-content:center" data-i18n="nav.contact">Contact</p>
+    <p class="s-tag" style="justify-content:center">Contact</p>
     <h2 class="contact-ttl">Let's start a <em>conversation</em></h2>
-    <p class="contact-sub">Open to conversations about infrastructure PE, energy transition, research collaboration, and entrepreneurial ventures. Based in London, operating internationally.</p>
+    <p class="contact-sub">Open to conversations about infrastructure PE, energy transition, equity research, and entrepreneurial ventures at the intersection of energy and technology. Based in London, operating internationally.</p>
     <div class="contact-links">
-      <a href="/cdn-cgi/l/email-protection#e08a8f818fce839285939485a0858495ce85938390ce8595" class="c-link">✉ Email</a>
+      <a href="/cdn-cgi/l/email-protection#e08a8f818fce839285939485a0858495ce85938390ce8595" class="c-link c-link-primary">✉ Email me</a>
       <a href="https://www.linkedin.com/in/joaocreste/" target="_blank" class="c-link">↗ LinkedIn</a>
+      <a href="https://joaocreste.github.io/forager/" target="_blank" class="c-link">↗ Forager</a>
     </div>
+    <div class="contact-phones">
+      <a href="tel:+447417400683" class="phone-link">
+        <span class="phone-flag">
+          <!-- UK flag -->
+          <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+            <rect width="60" height="40" fill="#012169"/>
+            <!-- White diagonals -->
+            <line x1="0" y1="0" x2="60" y2="40" stroke="#fff" stroke-width="8"/>
+            <line x1="60" y1="0" x2="0" y2="40" stroke="#fff" stroke-width="8"/>
+            <!-- Red diagonals -->
+            <line x1="0" y1="0" x2="60" y2="40" stroke="#C8102E" stroke-width="4.5"/>
+            <line x1="60" y1="0" x2="0" y2="40" stroke="#C8102E" stroke-width="4.5"/>
+            <!-- White cross -->
+            <rect x="24" y="0" width="12" height="40" fill="#fff"/>
+            <rect x="0" y="14" width="60" height="12" fill="#fff"/>
+            <!-- Red cross -->
+            <rect x="26" y="0" width="8" height="40" fill="#C8102E"/>
+            <rect x="0" y="16" width="60" height="8" fill="#C8102E"/>
+          </svg>
+        </span>
+        <span class="phone-num">+44 7417 400683</span>
+      </a>
+      <div class="phone-divider"></div>
+      <a href="tel:+33768316752" class="phone-link">
+        <span class="phone-flag">
+          <!-- France flag -->
+          <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+            <rect width="20" height="40" fill="#002395"/>
+            <rect x="20" width="20" height="40" fill="#fff"/>
+            <rect x="40" width="20" height="40" fill="#ED2939"/>
+          </svg>
+        </span>
+        <span class="phone-num">+33 7 68 31 67 52</span>
+      </a>
+    </div>
+
   </div>
 </section>
 
 <footer>
   <span class="ft-name">Joao Victor Creste</span>
+  <span class="ft-copy">© 2025</span>
   <span class="ft-note">London · Paris · São Paulo</span>
 </footer>
 
 
-<script>
-const I18N = {
-en: {
-  "nav.profile":"Profile","nav.education":"Education","nav.career":"Career",
-  "nav.ma":"M&A","nav.coverage":"Capital Markets","nav.pm":"PM",
-  "nav.focus":"Focus","nav.projects":"More things I've built","nav.contact":"Contact",
-  "hero.eyebrow":"Engineer · Financier · Energy Advocate",
-  "hero.btn1":"View Experience","hero.btn2":"Get in Touch",
-  "hero.stat1":"Countries · Studied & worked","hero.stat2":"M&A deals closed",
-  "hero.stat3":"Pipeline evaluated","hero.stat4":"AUM managed","hero.stat5":"Investment memos",
-  "about.tag":"Profile","about.based":"Currently Based","about.been":"Where I have been",
-  "lang.bilingual":"Bilingual","lang.fluent":"Fluent","lang.intermediate":"Intermediate",
-  "skills.technical":"Technical Skills","skills.finance":"Finance & Markets",
-  "skills.ai":"AI Skills","skills.domain":"Domain Expertise",
-  "edu.tag":"Academic Formation",
-  "exp.tag":"Career",
-  "deals.tag":"M&A Projects","deals.stat1":"Projects closed & operational",
-  "deals.stat2":"Combined installed capacity","deals.stat3":"Combined total investment (USD)",
-  "deals.stat4":"PPA tenors across all assets","deals.overview":"Transaction Overview","deals.myrole":"My Role",
-  "cov.tag":"Equity Research Coverage",
-  "pm.tag":"Portfolio Management","pm.aum":"Capital Under Management",
-  "pm.aumsub":"Offshore AUM · Directly Managed","pm.alloclbl":"Asset Allocation Approach",
-  "pm.conservative":"Conservative","pm.range":"range","pm.growth":"Growth",
-  "pm.equities":"Equities","pm.fi":"Fixed Income","pm.alt":"Alternatives",
-  "pm.story1.ttl":"Built the analytical framework from scratch",
-  "pm.story2.ttl":"Deployed strategic portfolios at scale",
-  "focus.tag":"What I care about","focus.thesis.tag":"The thesis",
-  "focus.1.ttl":"Energy Transition","focus.2.ttl":"Technology & AI",
-  "focus.3.ttl":"Finance & Capital Allocation",
-  "proj.tag":"Ventures & Side Projects",
-  "proj.brasa.kicker":"Community · Co-founded in Paris",
-  "proj.forager.kicker":"Infrastructure Intelligence Tool",
-  "proj.music.kicker":"Music · Personal Practice",
-},
-fr: {
-  "nav.profile":"Profil","nav.education":"Formation","nav.career":"Parcours",
-  "nav.ma":"M&A","nav.coverage":"Marchés de Capitaux","nav.pm":"Gestion Port.",
-  "nav.focus":"Convictions","nav.projects":"Ce que j'ai construit","nav.contact":"Contact",
-  "hero.eyebrow":"Ingénieur · Financier · Défenseur de l'Énergie",
-  "hero.btn1":"Voir le Parcours","hero.btn2":"Me Contacter",
-  "hero.stat1":"Pays · Études & travail","hero.stat2":"Transactions M&A conclues",
-  "hero.stat3":"Pipeline évalué","hero.stat4":"AUM géré","hero.stat5":"Mémos d'investissement",
-  "about.tag":"Profil","about.based":"Basé à","about.been":"Où j'ai été",
-  "lang.bilingual":"Bilingue","lang.fluent":"Courant","lang.intermediate":"Intermédiaire",
-  "skills.technical":"Compétences Techniques","skills.finance":"Finance & Marchés",
-  "skills.ai":"Compétences IA","skills.domain":"Expertise Sectorielle",
-  "edu.tag":"Formation Académique",
-  "exp.tag":"Parcours",
-  "deals.tag":"Projets M&A","deals.stat1":"Projets clôturés & opérationnels",
-  "deals.stat2":"Capacité installée cumulée","deals.stat3":"Investissement total combiné (USD)",
-  "deals.stat4":"Durées PPA sur tous les actifs","deals.overview":"Aperçu de la Transaction","deals.myrole":"Mon Rôle",
-  "cov.tag":"Couverture Recherche Actions",
-  "pm.tag":"Gestion de Portefeuille","pm.aum":"Capital Sous Gestion",
-  "pm.aumsub":"AUM Offshore · Géré Directement","pm.alloclbl":"Approche d'Allocation d'Actifs",
-  "pm.conservative":"Conservateur","pm.range":"plage","pm.growth":"Croissance",
-  "pm.equities":"Actions","pm.fi":"Obligations","pm.alt":"Alternatifs",
-  "pm.story1.ttl":"Framework analytique construit de zéro",
-  "pm.story2.ttl":"Portefeuilles stratégiques déployés à grande échelle",
-  "focus.tag":"Ce qui me passionne","focus.thesis.tag":"La thèse",
-  "focus.1.ttl":"Transition Énergétique","focus.2.ttl":"Technologie & IA",
-  "focus.3.ttl":"Finance & Allocation du Capital",
-  "proj.tag":"Projets & Initiatives",
-  "proj.brasa.kicker":"Communauté · Co-fondé à Paris",
-  "proj.forager.kicker":"Outil d'Intelligence Infrastructure",
-  "proj.music.kicker":"Musique · Pratique Personnelle",
-},
-pt: {
-  "nav.profile":"Perfil","nav.education":"Formação","nav.career":"Carreira",
-  "nav.ma":"M&A","nav.coverage":"Mercados de Capitais","nav.pm":"Gest. Port.",
-  "nav.focus":"Convicções","nav.projects":"O que construí","nav.contact":"Contato",
-  "hero.eyebrow":"Engenheiro · Financista · Defensor da Energia",
-  "hero.btn1":"Ver Experiência","hero.btn2":"Entrar em Contato",
-  "hero.stat1":"Países · Estudou & trabalhou","hero.stat2":"Transações M&A fechadas",
-  "hero.stat3":"Pipeline avaliado","hero.stat4":"AUM gerido","hero.stat5":"Memos de investimento",
-  "about.tag":"Perfil","about.based":"Baseado em","about.been":"Onde já estive",
-  "lang.bilingual":"Bilíngue","lang.fluent":"Fluente","lang.intermediate":"Intermediário",
-  "skills.technical":"Habilidades Técnicas","skills.finance":"Finanças & Mercados",
-  "skills.ai":"Habilidades em IA","skills.domain":"Expertise de Domínio",
-  "edu.tag":"Formação Acadêmica",
-  "exp.tag":"Carreira",
-  "deals.tag":"Projetos de M&A","deals.stat1":"Projetos fechados & operacionais",
-  "deals.stat2":"Capacidade instalada combinada","deals.stat3":"Investimento total combinado (USD)",
-  "deals.stat4":"Prazos de PPA em todos os ativos","deals.overview":"Visão Geral da Transação","deals.myrole":"Meu Papel",
-  "cov.tag":"Cobertura de Research de Ações",
-  "pm.tag":"Gestão de Portfólio","pm.aum":"Capital Sob Gestão",
-  "pm.aumsub":"AUM Offshore · Gerido Diretamente","pm.alloclbl":"Abordagem de Alocação de Ativos",
-  "pm.conservative":"Conservador","pm.range":"faixa","pm.growth":"Crescimento",
-  "pm.equities":"Ações","pm.fi":"Renda Fixa","pm.alt":"Alternativos",
-  "pm.story1.ttl":"Framework analítico construído do zero",
-  "pm.story2.ttl":"Portfólios estratégicos implantados em escala",
-  "focus.tag":"O que me move","focus.thesis.tag":"A tese",
-  "focus.1.ttl":"Transição Energética","focus.2.ttl":"Tecnologia & IA",
-  "focus.3.ttl":"Finanças & Alocação de Capital",
-  "proj.tag":"Projetos & Iniciativas",
-  "proj.brasa.kicker":"Comunidade · Co-fundado em Paris",
-  "proj.forager.kicker":"Ferramenta de Inteligência em Infraestrutura",
-  "proj.music.kicker":"Música · Prática Pessoal",
-}
-};
-
-// Long-form html translations
-const HTML_EN = {
-  "hero.tagline": "Electrical engineer by education. Financier by experience. Convinced that the <strong>energy transition is the defining challenge of our generation</strong> — and that meeting it requires integrating deep technical knowledge, financial discipline, and the analytical power of data and AI.",
-  "about.title": "An unusual <em>intersection</em>",
-  "about.p1": "I am an Italian-Brazilian engineer educated in France and Brazil, currently completing an MBA at ESCP Business School across Paris and London. Raised in a family of academics, I have always been drawn to first-principles thinking — the habit of understanding not just <strong>what</strong> is happening, but <strong>why</strong> and <strong>what it implies</strong>.",
-  "about.p2": "My career has followed an unusual arc: from electrical engineering and applied research, to M&A and greenfield development in renewable energy, to equity research covering high-growth technology companies, to portfolio management at a multi-family office. Each chapter has been different in function, but unified by a consistent pull toward the same three domains — energy, finance, and the analytical tools that connect them.",
-  "about.p3": "I am convinced that the <strong>energy transition is the defining challenge of our generation, and that it cannot be solved by engineers or financiers working in isolation.</strong> What it demands is people who understand both the technical complexity of energy systems and the financial logic that drives capital allocation — and who can harness data and AI to make better decisions under uncertainty. That convergence is where I want to operate.",
-  "about.p4": "Outside of work, I compose music — eight years of conservatory-level piano studies. I also build tools: <em>Forager</em>, an interactive mapping platform for solar, wind, and infrastructure assets, started as a side project and has since become a useful real-world instrument.",
-  "edu.title": "Built on <em>rigour</em>",
-  "exp.title": "Where I have <em>been</em>",
-  "deals.title": "Deals, <em>end-to-end</em>",
-  "deals.intro": "In my M&A buy-side experience, I was directly involved in the origination, negotiation, and closing of three renewable energy projects in Brazil — two wind acquisitions and one solar complex. All three assets are now operational, collectively representing <strong>~BRL 1.2 billion</strong> in total investment.",
-  "cov.title": "Companies I <em>studied</em>",
-  "cov.intro": "As an equity analyst, I covered the US technology sector with a focus on high-growth, disruptive businesses. My research methodology went <strong>beyond standard DCF modelling</strong> — I read founder biographies, ran channel checks with customers, engaged directly with management teams, and built thesis-driven memos from first principles. The portfolio I managed held <strong>10 positions drawn from this 30+ company universe</strong>. <strong>A few examples of complete investment opportunities include:</strong>",
-  "pm.title": "Capital at <em>work</em>",
-  "pm.intro": "As portfolio manager of a MFO, I was responsible for the offshore investment book — designing and managing portfolios for <strong>70+ families</strong> across global equities, fixed income, and alternative assets in the US and Europe.",
-  "pm.families": "Across 70+ families and wealth structures",
-  "pm.story1.body": "The offshore book had no systematic evaluation infrastructure when I joined. I designed and coded a proprietary screening tool covering 2,000+ ETFs, mutual funds, and hedge funds — combining quantitative scoring (risk-adjusted returns, drawdown, factor exposures) with qualitative diligence. What had been a manual, judgment-driven process became a <strong>data-driven framework that could be consistently applied across the entire book</strong>.",
-  "pm.story2.body": "Using the framework, I implemented tailored strategic portfolios for each family — calibrated to their risk profile, liquidity needs, currency exposure, and time horizon. Beyond strategic allocation, I managed tactical positioning in response to market conditions, adjusting weights across equities, fixed income, and alternatives across <strong>$300M+ in offshore capital serving 70+ families</strong>.",
-  "pm.alloc.caption": "Each portfolio was tailored to the family's risk profile, liquidity needs, and time horizon — typically ranging between a 40/60 and 60/40 equity-to-fixed income balance, with alternatives allocated according to sophistication and appetite.",
-  "focus.title": "Three domains, <em>one thesis</em>",
-  "focus.1.desc": "The energy transition is the defining infrastructure challenge of our generation — a full rewiring of how the world produces and consumes energy. I have worked across its value chain: closing renewable energy M&A in Brazil, assessing green hydrogen feasibility, and studying the capital structures that make large-scale clean energy projects bankable.",
-  "focus.2.desc": "I covered 30+ high-growth technology companies as an equity analyst, and I have built data tools — from GIS mapping platforms to automated fund screening systems — that convert raw information into decisions. AI will not replace decision-makers, but the decision-makers of tomorrow will be the ones who know how to work with it.",
-  "focus.3.desc": "Capital determines which technologies get built and which transitions happen. I have been on both sides — allocating capital across global markets as a portfolio manager, and deploying it into real assets as an M&A practitioner. Finance is not a support function for the energy transition; it is a core driver of it.",
-  "focus.thesis": "To tackle the energy transition in a world shaped by AI, <strong>we must bring together technical and financial knowledge to make the right decisions. Will the decision-makers be AIs? No — but the people behind them will be the ones who understand both the complexity of energy systems and the logic of capital.</strong> That is the convergence I am building toward.",
-  "proj.title": "Things I <em>built</em>",
-  "proj.brasa.desc": "BRASA — the Brazilian Student Association — is a network connecting Brazilian students and young professionals across top universities and cities worldwide. I co-founded the European chapter in Paris, building a community from scratch for Brazilians studying and working across Europe.",
-  "proj.forager.desc": "An interactive mapping platform for solar, wind, and infrastructure assets. Born from a data-science approach I pioneered at Total Eren — where mapping 50+ GW of renewable opportunities in Brazil transformed M&A pipeline quality — Forager generalises that methodology into a usable product. Still live; added material value in subsequent roles.",
-  "proj.music.desc": "I have studied piano for eight years at conservatory level — an education in precision, patience, and the discipline of building something complex over a long period of time. I still play regularly and compose my own pieces. Music is not a side interest; it is the counterweight to everything analytical in my life.",
-  "contact.title": "Let's start a <em>conversation</em>",
-  "contact.sub": "Open to conversations about infrastructure PE, energy transition, research collaboration, and entrepreneurial ventures. Based in London, operating internationally.",
-};
-
-const HTML_FR = {
-  "hero.tagline": "Ingénieur électricien par formation. Financier par expérience. Convaincu que la <strong>transition énergétique est le défi fondamental de notre génération</strong> — et que le relever exige d'intégrer une expertise technique approfondie, une discipline financière rigoureuse, et la puissance analytique des données et de l'IA.",
-  "about.title": "Une <em>intersection</em> singulière",
-  "about.p1": "Je suis un ingénieur italo-brésilien formé en France et au Brésil, actuellement en MBA à l'ESCP Business School entre Paris et Londres. Élevé dans une famille d'universitaires, j'ai toujours été attiré par la pensée de premier principe — l'habitude de comprendre non seulement <strong>ce qui</strong> se passe, mais <strong>pourquoi</strong> et <strong>ce que cela implique</strong>.",
-  "about.p2": "Mon parcours a suivi une trajectoire singulière : du génie électrique et de la recherche appliquée, au M&A et au développement greenfield dans les énergies renouvelables, à la recherche actions sur les entreprises technologiques à forte croissance, jusqu'à la gestion de portefeuille dans un multi-family office. Chaque chapitre a été différent dans sa fonction, mais tous unifiés par une même attraction — l'énergie, la finance, et les outils analytiques qui les relient.",
-  "about.p3": "Je suis convaincu que la <strong>transition énergétique est le défi fondamental de notre génération, et qu'il ne peut être résolu ni par des ingénieurs ni par des financiers travaillant en silo.</strong> Ce qu'il exige, ce sont des personnes qui comprennent à la fois la complexité technique des systèmes énergétiques et la logique financière qui oriente l'allocation du capital — et qui savent exploiter les données et l'IA pour décider dans l'incertitude. C'est cette convergence là où je veux opérer.",
-  "about.p4": "En dehors du travail, je compose de la musique — huit années d'études de piano au conservatoire. Je développe aussi des outils : <em>Forager</em>, une plateforme cartographique interactive pour les actifs solaires, éoliens et d'infrastructure.",
-  "edu.title": "Construit sur la <em>rigueur</em>",
-  "exp.title": "Là où j'ai <em>été</em>",
-  "deals.title": "Transactions, <em>de bout en bout</em>",
-  "deals.intro": "Dans mon expérience M&A en buy-side, j'ai été directement impliqué dans l'origination, la négociation et la clôture de trois projets d'énergie renouvelable au Brésil — deux acquisitions éoliennes et un complexe solaire. Les trois actifs sont opérationnels, représentant collectivement <strong>~1,2 milliard BRL</strong> d'investissement total.",
-  "cov.title": "Entreprises que j'ai <em>analysées</em>",
-  "cov.intro": "En tant qu'analyste actions, j'ai couvert le secteur technologique américain avec un focus sur les entreprises à forte croissance et disruptives. Ma méthodologie allait <strong>au-delà du DCF standard</strong> — lectures de biographies, vérifications terrain, rencontres avec les directions. Le portefeuille géré comptait <strong>10 positions tirées de cet univers de 30+ entreprises</strong>. Quelques exemples :",
-  "pm.title": "Capital en <em>action</em>",
-  "pm.intro": "En tant que gestionnaire de portefeuille d'un MFO, j'étais responsable du livre d'investissement offshore — concevant et gérant des portefeuilles pour <strong>70+ familles</strong> en actions mondiales, obligations et actifs alternatifs aux États-Unis et en Europe.",
-  "pm.families": "Pour 70+ familles et structures patrimoniales",
-  "pm.story1.body": "Le portefeuille offshore ne disposait d'aucune infrastructure d'évaluation systématique à mon arrivée. J'ai conçu et codé un outil de sélection propriétaire couvrant 2 000+ ETFs, fonds et hedge funds. Ce qui était manuel est devenu un <strong>cadre data-driven applicable de manière cohérente à l'ensemble du portefeuille</strong>.",
-  "pm.story2.body": "J'ai mis en œuvre des portefeuilles stratégiques personnalisés pour chaque famille, calibrés selon leur profil de risque, liquidité et horizon temporel. Au-delà de l'allocation stratégique, j'ai géré le positionnement tactique sur <strong>plus de 300 millions USD d'actifs offshore pour 70+ familles</strong>.",
-  "pm.alloc.caption": "Chaque portefeuille était personnalisé selon le profil de risque, les besoins de liquidité et l'horizon temporel — oscillant généralement entre 40/60 et 60/40 actions-obligations, avec une allocation aux alternatifs selon sophistication et appétit.",
-  "focus.title": "Trois domaines, <em>une thèse</em>",
-  "focus.1.desc": "La transition énergétique est le défi infrastructure fondamental de notre génération — un recâblage complet de la façon dont le monde produit et consomme l'énergie. J'ai travaillé sur l'ensemble de sa chaîne de valeur : M&A renouvelable au Brésil, faisabilité hydrogène vert, structures de financement de projets.",
-  "focus.2.desc": "J'ai couvert 30+ entreprises technologiques à forte croissance en tant qu'analyste, et j'ai construit des outils data — de plateformes SIG à des systèmes automatisés de sélection de fonds. L'IA ne remplacera pas les décideurs, mais les décideurs de demain seront ceux qui savent travailler avec elle.",
-  "focus.3.desc": "Le capital détermine quelles technologies sont construites et quelles transitions ont lieu. J'ai été des deux côtés — allocataire de capital sur les marchés mondiaux et déployeur d'actifs réels en M&A. La finance n'est pas un support pour la transition énergétique ; elle en est un moteur essentiel.",
-  "focus.thesis": "Pour relever le défi de la transition énergétique dans un monde façonné par l'IA, <strong>nous devons réunir expertise technique et financière pour prendre les bonnes décisions. Les décideurs seront-ils des IA ? Non — mais les personnes derrière elles seront celles qui comprennent à la fois la complexité des systèmes énergétiques et la logique du capital.</strong> C'est cette convergence que je construis.",
-  "proj.title": "Ce que j'ai <em>construit</em>",
-  "proj.brasa.desc": "BRASA — la Brazilian Student Association — connecte étudiants et jeunes professionnels brésiliens dans les meilleures universités et villes du monde. J'ai co-fondé le chapitre européen à Paris, construisant une communauté de zéro pour les Brésiliens en Europe.",
-  "proj.forager.desc": "Une plateforme de cartographie interactive pour actifs solaires, éoliens et d'infrastructure. Née d'une approche data-science initiée chez Total Eren, Forager généralise cette méthodologie en produit utilisable. Toujours en ligne.",
-  "proj.music.desc": "J'ai étudié le piano pendant huit ans au conservatoire — formation en précision et patience. Je joue et compose encore régulièrement. La musique est le contrepoids de tout ce qui est analytique dans ma vie.",
-  "contact.title": "Commençons une <em>conversation</em>",
-  "contact.sub": "Ouvert aux conversations sur le PE en infrastructure, la transition énergétique, la collaboration en recherche et les projets entrepreneuriaux. Basé à Londres, portée internationale.",
-};
-
-const HTML_PT = {
-  "hero.tagline": "Engenheiro elétrico por formação. Financista por experiência. Convicto de que a <strong>transição energética é o desafio definidor da nossa geração</strong> — e que enfrentá-lo exige integrar conhecimento técnico profundo, disciplina financeira e o poder analítico dos dados e da IA.",
-  "about.title": "Uma <em>interseção</em> incomum",
-  "about.p1": "Sou um engenheiro ítalo-brasileiro formado na França e no Brasil, atualmente cursando um MBA na ESCP Business School entre Paris e Londres. Criado em uma família de acadêmicos, sempre fui atraído pelo pensamento de primeiros princípios — o hábito de entender não apenas <strong>o que</strong> está acontecendo, mas <strong>por que</strong> e <strong>o que isso implica</strong>.",
-  "about.p2": "Minha carreira seguiu um arco incomum: da engenharia elétrica e pesquisa aplicada, ao M&A e desenvolvimento greenfield em energias renováveis, à análise de ações em empresas de tecnologia de alto crescimento, até a gestão de portfólio em um multi-family office. Cada capítulo foi diferente em função, mas todos unificados por uma atração constante pelos mesmos três domínios — energia, finanças e as ferramentas analíticas que os conectam.",
-  "about.p3": "Estou convicto de que a <strong>transição energética é o desafio fundamental da nossa geração, e que ele não pode ser resolvido por engenheiros ou financistas trabalhando isolados.</strong> O que ele exige são pessoas que compreendam tanto a complexidade técnica dos sistemas energéticos quanto a lógica financeira que orienta a alocação de capital — e que saibam usar dados e IA para tomar melhores decisões sob incerteza. É nessa convergência que quero atuar.",
-  "about.p4": "Fora do trabalho, componho música — oito anos de estudos de piano em nível de conservatório. Também desenvolvo ferramentas: <em>Forager</em>, uma plataforma de mapeamento interativo para ativos solares, eólicos e de infraestrutura.",
-  "edu.title": "Construído sobre o <em>rigor</em>",
-  "exp.title": "Onde já <em>estive</em>",
-  "deals.title": "Transações, <em>de ponta a ponta</em>",
-  "deals.intro": "Na minha experiência de M&A buy-side, estive diretamente envolvido na originação, negociação e fechamento de três projetos de energia renovável no Brasil — duas aquisições eólicas e um complexo solar. Os três ativos estão operacionais, representando coletivamente <strong>~BRL 1,2 bilhão</strong> em investimento total.",
-  "cov.title": "Empresas que <em>estudei</em>",
-  "cov.intro": "Como analista de ações, cobri o setor de tecnologia americano com foco em empresas de alto crescimento e disruptivas. Minha metodologia foi <strong>além do DCF padrão</strong> — li biografias de fundadores, fiz channel checks, me reuni com equipes de gestão. O portfólio gerenciado tinha <strong>10 posições desse universo de 30+ empresas</strong>. Alguns exemplos:",
-  "pm.title": "Capital em <em>ação</em>",
-  "pm.intro": "Como gestor de portfólio de um MFO, era responsável pelo livro de investimentos offshore — desenhando e gerenciando portfólios para <strong>70+ famílias</strong> em ações globais, renda fixa e ativos alternativos nos EUA e Europa.",
-  "pm.families": "Para 70+ famílias e estruturas patrimoniais",
-  "pm.story1.body": "O livro offshore não tinha infraestrutura de avaliação sistemática quando entrei. Desenhei e codifiquei uma ferramenta proprietária cobrindo 2.000+ ETFs, fundos e hedge funds. O que era manual se tornou um <strong>framework orientado por dados aplicável de forma consistente em todo o livro</strong>.",
-  "pm.story2.body": "Implementei portfólios estratégicos personalizados para cada família, calibrados por perfil de risco, liquidez e horizonte. Além da alocação estratégica, gerenciei o posicionamento tático em mais de <strong>US$ 300M em capital offshore para 70+ famílias</strong>.",
-  "pm.alloc.caption": "Cada portfólio era personalizado por perfil de risco, liquidez e horizonte — tipicamente variando entre 40/60 e 60/40 de ações para renda fixa, com alternativos conforme sofisticação e apetite.",
-  "focus.title": "Três domínios, <em>uma tese</em>",
-  "focus.1.desc": "A transição energética é o desafio de infraestrutura fundamental da nossa geração — uma reconfiguração completa de como o mundo produz e consome energia. Trabalhei em sua cadeia de valor: M&A renovável no Brasil, viabilidade de hidrogênio verde, estruturas de financiamento de projetos.",
-  "focus.2.desc": "Cobri 30+ empresas de tecnologia de alto crescimento como analista e construí ferramentas de dados — de plataformas GIS a sistemas automatizados de triagem de fundos. A IA não substituirá os tomadores de decisão, mas os de amanhã serão os que sabem trabalhar com ela.",
-  "focus.3.desc": "O capital determina quais tecnologias são construídas e quais transições acontecem. Estive nos dois lados — alocando capital nos mercados globais como gestor de portfólio e implantando em ativos reais como praticante de M&A. Finanças não é suporte para a transição energética; é um motor central dela.",
-  "focus.thesis": "Para enfrentar a transição energética num mundo moldado pela IA, <strong>precisamos reunir conhecimento técnico e financeiro para tomar as decisões certas. Os tomadores de decisão serão IAs? Não — mas as pessoas por trás delas serão as que entendem tanto a complexidade dos sistemas energéticos quanto a lógica do capital.</strong> É essa convergência que estou construindo.",
-  "proj.title": "O que eu <em>construí</em>",
-  "proj.brasa.desc": "BRASA — a Brazilian Student Association — conecta estudantes e jovens profissionais brasileiros nas melhores universidades e cidades do mundo. Cofundei o capítulo europeu em Paris, construindo uma comunidade do zero para brasileiros na Europa.",
-  "proj.forager.desc": "Uma plataforma de mapeamento interativo para ativos solares, eólicos e de infraestrutura. Nascida de uma abordagem de ciência de dados desenvolvida na Total Eren, o Forager generaliza essa metodologia em produto utilizável. Ainda em uso.",
-  "proj.music.desc": "Estudei piano por oito anos em nível de conservatório — formação em precisão e paciência. Ainda toco e componho regularmente. Música é o contrapeso de tudo que é analítico na minha vida.",
-  "contact.title": "Vamos começar uma <em>conversa</em>",
-  "contact.sub": "Aberto a conversas sobre PE em infraestrutura, transição energética, colaboração em pesquisa e projetos empreendedores. Baseado em Londres, atuando internacionalmente.",
-};
-
-// HTML-keyed elements selector map
-const HTML_SELECTORS = {
-  "hero.tagline":     {sel:".hero-tagline",        html:true},
-  "about.title":      {sel:"#about .s-title",       html:true},
-  "about.p1":         {sel:"#about .about-text p:nth-child(1)", html:true},
-  "about.p2":         {sel:"#about .about-text p:nth-child(2)", html:true},
-  "about.p3":         {sel:"#about .about-text p:nth-child(3)", html:true},
-  "about.p4":         {sel:"#about .about-text p:nth-child(4)", html:true},
-  "edu.title":        {sel:"#education .s-title",   html:true},
-  "exp.title":        {sel:"#experience .s-title",  html:true},
-  "deals.title":      {sel:"#deals .s-title",       html:true},
-  "deals.intro":      {sel:".deals-intro",          html:true},
-  "cov.title":        {sel:"#coverage .s-title",    html:true},
-  "cov.intro":        {sel:".cov-intro",            html:true},
-  "pm.title":         {sel:"#portfolio .s-title",   html:true},
-  "pm.intro":         {sel:".pm-intro",             html:true},
-  "pm.families":      {sel:".aum-families",         html:false},
-  "pm.story1.body":   {sel:".pm-story .story-item:first-child .story-body", html:true},
-  "pm.story2.body":   {sel:".pm-story .story-item:last-child .story-body",  html:true},
-  "pm.alloc.caption": {sel:".alloc-caption",        html:false},
-  "focus.title":      {sel:"#focus .s-title",       html:true},
-  "focus.1.desc":     {sel:".focus-col:nth-child(1) .focus-desc", html:false},
-  "focus.2.desc":     {sel:".focus-col:nth-child(2) .focus-desc", html:false},
-  "focus.3.desc":     {sel:".focus-col:nth-child(3) .focus-desc", html:false},
-  "focus.thesis":     {sel:"#focus .focus-cols + div p", html:false},
-  "proj.title":       {sel:"#projects .s-title",    html:true},
-  "proj.brasa.desc":  {sel:".proj-col:nth-child(1) .proj-desc", html:false},
-  "proj.forager.desc":{sel:".proj-col:nth-child(2) .proj-desc", html:false},
-  "proj.music.desc":  {sel:".proj-col:nth-child(3) .proj-desc", html:false},
-  "contact.title":    {sel:".contact-ttl",          html:true},
-  "contact.sub":      {sel:".contact-sub",          html:false},
-};
-
-function applyLang(lang) {
-  const t  = I18N[lang]  || I18N.en;
-  const th = lang==='fr' ? HTML_FR : lang==='pt' ? HTML_PT : HTML_EN;
-
-  // Simple text keys via data-i18n
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const k = el.getAttribute('data-i18n');
-    if (t[k] !== undefined) el.textContent = t[k];
-  });
-
-  // HTML keys via selector map
-  Object.keys(HTML_SELECTORS).forEach(k => {
-    const cfg = HTML_SELECTORS[k];
-    const val = th[k];
-    if (!val) return;
-    const el = document.querySelector(cfg.sel);
-    if (!el) return;
-    if (cfg.html) el.innerHTML = val;
-    else el.textContent = val;
-  });
-
-  // Flag buttons
-  document.querySelectorAll('.lang-btn').forEach(b =>
-    b.classList.toggle('active', b.dataset.lang === lang)
-  );
-  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
-  localStorage.setItem('jc-lang', lang);
-}
-
-document.querySelectorAll('.lang-btn').forEach(btn =>
-  btn.addEventListener('click', () => applyLang(btn.dataset.lang))
-);
-
-applyLang(localStorage.getItem('jc-lang') || 'en');
-</script>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── Active nav link on scroll ──
   const secs = document.querySelectorAll('section[id]');
   const links = document.querySelectorAll('.nav-links a');
-  
   const navObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if(e.isIntersecting){
@@ -1330,6 +1658,155 @@ applyLang(localStorage.getItem('jc-lang') || 'en');
     });
   }, {threshold:0.3});
   secs.forEach(s => navObs.observe(s));
+
+  // ── Scroll reveal for .reveal elements ──
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // ── Timeline item reveal ──
+  const tlObs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if(e.isIntersecting){
+        setTimeout(() => {
+          e.target.classList.add('visible');
+        }, 80 * [...document.querySelectorAll('.tl-item')].indexOf(e.target));
+        tlObs.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.1});
+  document.querySelectorAll('.tl-item').forEach(el => tlObs.observe(el));
+
+  // ── Deal card staggered reveal ──
+  const dealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.style.opacity = '0';
+        e.target.style.transform = 'translateY(20px)';
+        e.target.style.transition = 'opacity .5s ease, transform .5s ease';
+        const idx = [...document.querySelectorAll('.deal')].indexOf(e.target);
+        setTimeout(() => {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }, idx * 100);
+        dealObs.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.05});
+  document.querySelectorAll('.deal').forEach(el => {
+    el.style.opacity = '0';
+    dealObs.observe(el);
+  });
+
+  // ── Animated number counters ──
+  function animateCounter(el, target, suffix, duration) {
+    const isDecimal = target !== Math.floor(target);
+    let start = null;
+    const step = (ts) => {
+      if(!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const val = eased * target;
+      el.textContent = (isDecimal ? val.toFixed(1) : Math.floor(val)) + suffix;
+      if(progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        const el = e.target;
+        const raw = el.dataset.count;
+        const suffix = el.dataset.suffix || '';
+        if(raw) animateCounter(el, parseFloat(raw), suffix, 1200);
+        counterObs.unobserve(el);
+      }
+    });
+  }, {threshold:0.5});
+
+  // Mark stat values for counter animation
+  document.querySelectorAll('.stat-val').forEach(el => {
+    const txt = el.textContent.trim();
+    const map = {'5':'5','3':'3','50+ GW':null,'$1B+':null,'20+':'20'};
+    if(txt === '5'){el.dataset.count='5';el.dataset.suffix='';counterObs.observe(el);}
+    else if(txt === '3'){el.dataset.count='3';el.dataset.suffix='';counterObs.observe(el);}
+    else if(txt === '20+'){el.dataset.count='20';el.dataset.suffix='+';counterObs.observe(el);}
+  });
+
+  // ── Close mobile menu on nav click ──
+  document.querySelectorAll('.mobile-menu a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.remove('open');
+      document.querySelector('.nav-mobile-toggle').classList.remove('open');
+    });
+  });
+
+  // ── Scroll progress bar ──
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (scrolled / total * 100) + '%';
+    // Nav background on scroll
+    document.querySelector('nav').classList.toggle('scrolled', scrolled > 20);
+  }, {passive:true});
+
+  // ── Research card reveal ──
+  const rcObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('visible'); rcObs.unobserve(e.target); }
+    });
+  }, {threshold:0.1});
+  document.querySelectorAll('.research-card').forEach(el => rcObs.observe(el));
+
+  // ── Education entry reveal ──
+  const eduObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('visible'); eduObs.unobserve(e.target); }
+    });
+  }, {threshold:0.1});
+  document.querySelectorAll('.edu-entry').forEach(el => eduObs.observe(el));
+
+  // ── Stat bar items stagger ──
+  const sbObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        const items = e.target.querySelectorAll('.sb-item');
+        items.forEach((item, i) => {
+          setTimeout(() => item.classList.add('visible'), i * 80);
+        });
+        sbObs.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.1});
+  document.querySelectorAll('.stat-bar').forEach(el => sbObs.observe(el));
+
+  // ── Coverage rows fade in ──
+  const covObs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if(e.isIntersecting){
+        const idx = [...document.querySelectorAll('.cov-row')].indexOf(e.target);
+        setTimeout(() => e.target.classList.add('visible'), idx * 60);
+        covObs.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.05});
+  document.querySelectorAll('.cov-row').forEach(el => covObs.observe(el));
+
+  // ── Close mobile menu on ESC ──
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){
+      document.getElementById('mobile-menu').classList.remove('open');
+      document.querySelector('.nav-mobile-toggle').classList.remove('open');
+    }
+  });
 </script>
 
 </body>
